@@ -1,14 +1,26 @@
-import Link from "next/link";
+"use client";
 
-const LINKS = [
-  { label: "Booking",       href: "/book" },
-  { label: "Our Works",     href: "/our-work" },
-  { label: "Gift Vouchers", href: "/gift-vouchers" },
-  { label: "About",         href: "/#about" },
-];
+import { useTranslations, useLocale } from "next-intl";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 
-export default function Footer() {
+export default function Footer({ instagramUrl }: { instagramUrl?: string | null }) {
+  const t = useTranslations("footer");
+  const nav = useTranslations("nav");
+  const locale = useLocale();
+  const pathname = usePathname();
+  const router = useRouter();
   const year = new Date().getFullYear();
+
+  const LINKS = [
+    { label: nav("booking"),      href: "/book" },
+    { label: nav("ourWork"),      href: "/our-work" },
+    { label: nav("giftVouchers"), href: "/gift-vouchers" },
+    { label: nav("about"),        href: "/#about" },
+  ];
+
+  function switchLocale(nextLocale: string) {
+    router.push(pathname, { locale: nextLocale });
+  }
 
   return (
     <footer style={{ backgroundColor: "#e5e4d2" }}>
@@ -32,7 +44,7 @@ export default function Footer() {
 
           {/* Right */}
           <div className="flex items-center justify-end gap-5">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+            <a href={instagramUrl ?? "https://instagram.com"} target="_blank" rel="noopener noreferrer"
               className="text-[#221c14] font-bold text-[14px] hover:opacity-50 transition-opacity">
               Instagram
             </a>
@@ -43,10 +55,25 @@ export default function Footer() {
         </div>
 
         {/* Copyright bar */}
-        <div className="px-10 py-4">
+        <div className="px-10 py-4 flex items-center justify-between">
           <p className="text-[#221c14]/50 font-bold text-[12px] tracking-[1px]">
-            © {year} Publikacija. Visos teisės saugomos.
+            © {year} Publikacija. {t("rights")}
           </p>
+          <div className="flex items-center gap-1 text-[14px] font-bold tracking-[2px]">
+            <button
+              onClick={() => switchLocale("lt")}
+              className={`pb-0.5 transition-colors ${locale === "lt" ? "text-[#221c14] border-b-2 border-[#221c14]" : "text-[#221c14]/40 border-b-2 border-transparent hover:text-[#221c14]"}`}
+            >
+              LT
+            </button>
+            <span className="text-[#221c14]/20 mx-1.5">/</span>
+            <button
+              onClick={() => switchLocale("en")}
+              className={`pb-0.5 transition-colors ${locale === "en" ? "text-[#221c14] border-b-2 border-[#221c14]" : "text-[#221c14]/40 border-b-2 border-transparent hover:text-[#221c14]"}`}
+            >
+              EN
+            </button>
+          </div>
         </div>
       </div>
 
@@ -79,10 +106,20 @@ export default function Footer() {
           <p className="text-white/30 font-bold text-[12px]">
             © {year} Publikacija
           </p>
-          <div className="flex gap-3 text-[13px] font-bold text-white/40">
-            <button className="text-white">LT</button>
+          <div className="flex gap-3 text-[13px] font-bold tracking-[2px]">
+            <button
+              onClick={() => switchLocale("lt")}
+              className={`pb-0.5 transition-colors ${locale === "lt" ? "text-white border-b-2 border-white" : "text-white/40 border-b-2 border-transparent hover:text-white"}`}
+            >
+              LT
+            </button>
             <span className="text-white/20">/</span>
-            <button>EN</button>
+            <button
+              onClick={() => switchLocale("en")}
+              className={`pb-0.5 transition-colors ${locale === "en" ? "text-white border-b-2 border-white" : "text-white/40 border-b-2 border-transparent hover:text-white"}`}
+            >
+              EN
+            </button>
           </div>
         </div>
       </div>

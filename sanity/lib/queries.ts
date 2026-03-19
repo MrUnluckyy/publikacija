@@ -50,6 +50,15 @@ export const aboutQuery = groq`*[_type == "about"][0] {
   established
 }`;
 
+// ─── Featured video ────────────────────────────────────────────────────────────
+export const featuredVideoQuery = groq`*[_type == "studioVideo" && featured == true][0] {
+  _id,
+  title,
+  label,
+  "video": video.asset->{ playbackId, status },
+  poster
+}`;
+
 // ─── Reviews ───────────────────────────────────────────────────────────────────
 export const reviewsQuery = groq`*[_type == "review" && featured == true] | order(order asc) {
   _id,

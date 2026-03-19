@@ -1,20 +1,35 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import MuxPlayer from "@mux/mux-player-react";
+import { useTranslations } from "next-intl";
 import type { HeroData } from "@/sanity/types";
 import { urlFor } from "@/sanity/lib/image";
 
-const SERVICES = [
-  { label: "Tattoos",        href: "/our-work" },
-  { label: "Linocut prints", href: "/our-work" },
-  { label: "Workshops",      href: "/book" },
-];
-
 export default function Hero({ data }: { data?: HeroData | null }) {
+  const t = useTranslations("hero");
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    if (sessionStorage.getItem("preloader:shown")) {
+      setReady(true);
+      return;
+    }
+    const handler = () => setReady(true);
+    window.addEventListener("preloader:done", handler);
+    return () => window.removeEventListener("preloader:done", handler);
+  }, []);
+
   const video = data?.backgroundVideo?.playbackId ? data.backgroundVideo : null;
   const image = data?.heroImage ?? null;
+
+  const SERVICES = [
+    { label: t("service1"), href: "/our-work" },
+    { label: t("service2"), href: "/our-work" },
+    { label: t("service3"), href: "/book" },
+  ];
 
   return (
     <section
@@ -27,36 +42,33 @@ export default function Hero({ data }: { data?: HeroData | null }) {
         <motion.div
           className="flex flex-col justify-between px-5 md:px-10 py-12 md:py-16 border-b-2 md:border-b-0 md:border-r-2 border-[#221c14]"
           initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 2.0 }}
+          animate={{ opacity: ready ? 1 : 0 }}
+          transition={{ duration: 0.5 }}
         >
           <div>
             <motion.h1
               className="text-[#221c14] font-extrabold leading-[1.1em] mb-10"
               style={{ fontSize: "clamp(3.2rem, 7vw, 6.5rem)" }}
               initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1], delay: 2.05 }}
+              animate={{ y: ready ? 0 : 30, opacity: ready ? 1 : 0 }}
+              transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1], delay: 0.05 }}
             >
-              Publikacija<br />Tattoo
+              {t("title1")}<br />{t("title2")}
             </motion.h1>
 
             <motion.p
               className="text-[#221c14] font-bold leading-[1.65em] max-w-[540px]"
               style={{ fontSize: "clamp(1rem, 1.8vw, 1.2rem)" }}
               initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 2.2 }}
+              animate={{ opacity: ready ? 1 : 0, y: ready ? 0 : 16 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
             >
-              Publikacija Tattoo is not only a tattoo studio but a creative space
-              where different media and visions meet. We enjoy combining contemporary
-              ideas with traditions that carry their own history. From this fusion
-              emerge works that reveal the distinctive tone of our creative approach.
+              {t("body")}
             </motion.p>
           </div>
 
           {/* Bottom: optional media (video / image) */}
-          {(video || image) && (
+          {/* {(video || image) && (
             <motion.div
               className="mt-10 aspect-video relative overflow-hidden"
               initial={{ opacity: 0 }}
@@ -80,7 +92,7 @@ export default function Hero({ data }: { data?: HeroData | null }) {
                 />
               ) : null}
             </motion.div>
-          )}
+          )} */}
         </motion.div>
 
         {/* ── Right: services list ─────────────────────────── */}
@@ -91,8 +103,8 @@ export default function Hero({ data }: { data?: HeroData | null }) {
               href={svc.href}
               className="flex-1 flex items-center px-5 md:px-10 border-b-2 border-[#221c14] last:border-b-0 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200 group"
               initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 2.1 + i * 0.08 }}
+              animate={{ opacity: ready ? 1 : 0, x: ready ? 0 : 20 }}
+              transition={{ duration: 0.5, delay: 0.1 + i * 0.08 }}
             >
               <span
                 className="font-extrabold leading-none"

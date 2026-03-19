@@ -1,0 +1,213 @@
+{
+  "nav": {
+    "booking": "Registracija",
+    "ourWork": "Mūsų darbai",
+    "giftVouchers": "Dovanų kuponai",
+    "about": "Apie mus"
+  },
+  "hero": {
+    "title1": "Publikacija",
+    "title2": "Tattoo",
+    "body": "Publikacija Tattoo – tai ne tik tatuiruočių studija, bet ir kūrybinė erdvė, kurioje susitinka skirtingos medijos ir vizijos. Mums patinka derinti šiuolaikines idėjas su tradicijomis, turinčiomis savo istoriją. Iš šio susiliejimo gimsta darbai, atskleidžiantys mūsų kūrybinio požiūrio savitumą.",
+    "service1": "Tatuiruotės",
+    "service2": "Linorytai",
+    "service3": "Seminarai"
+  },
+  "services": {
+    "eyebrow1": "01",
+    "eyebrow2": "02",
+    "eyebrow3": "03",
+    "title1": "Tatuiruotė",
+    "title2": "Linorytai ir spaudos",
+    "title3": "Kūrybiniai seminarai",
+    "body1": "Kiekviena tatuiruotė prasideda nuo pokalbio. Kuriame individualius dizainus, pritaikytus jūsų odai, stiliui ir istorijai – nuo subtilių fine-line darbų iki ryškių tradicinių kūrinių. Jokių standartinių dizainų, jokių kompromisų.",
+    "body2": "Linorytai – tai rankomis raižyti reljefo spaudos atspaudai, šimtmečius senas, ypatingai apčiuopiamą rezultatą duodantis spaudos būdas. Kuriame ribotos laidos spaudos, menininko leidimus ir individualius užsakymus.",
+    "body3": "Atviri seminarai pradedantiesiems ir patyrusiems menininkams. Išmokite linorytų spaudos, tatuiruočių piešimo, arba praleiskite popietę kuriant kažką rankomis.",
+    "cta": "Registruotis"
+  },
+  "videoSection": {
+    "eyebrow": "Studija",
+    "heading": "Ten, kur rašalas susitinka su popieriumi",
+    "body": "Užeikite į Publikacija — erdvę, sukurtą lėtam, apgalvotam kūrimui. Kiekviena tatuiruotė ir kiekvienas atspaudas prasideda čia — nuo pokalbio, amato ir gilios pagarbos procesui.",
+    "cta": "Rezervuoti vizitą"
+  },
+  "marquee": {
+    "items": [
+      "Tatuiruotės Vilniuje",
+      "Tradicinės tatuiruotės",
+      "Abstrakčios tatuiruotės",
+      "Realistinės tatuiruotės",
+      "Dovanų kuponai",
+      "Nemokamos konsultacijos",
+      "Linorytai"
+    ]
+  },
+  "gallery": {
+    "eyebrow": "Pasirinkti darbai",
+    "heading": "Mūsų darbai",
+    "viewAll": "Peržiūrėti visus darbus"
+  },
+  "reviews": {
+    "eyebrow": "Ką sako klientai",
+    "heading": "Atsiliepimai"
+  },
+  "artists": {
+    "eyebrow": "Komanda",
+    "heading": "Susipažinkite su menininkais",
+    "lukasBio": "Meną suprantu kaip įgūdį, kurį reikia tobulinti kiekvieną dieną. Tatuiruotės ir linorytai yra mano raiškos formos – kupinos detalių, judėjimo ir veiksmo. Mėgstu stebėti gyvenimą mieste, savo aplinką ir atkreipti dėmesį į mažas detales, iš kurių susideda visuma.",
+    "artiomasBio": "Įkvėptas keistų ir gražių dalykų. Mano darbai jungia iliustratyviąją pasakojimo tradiciją su fine-line tikslumu – katės, personažai, tamsiosios botanikos ir visa tai, kas yra tarp jų."
+  },
+  "contact": {
+    "eyebrow": "Registracija",
+    "heading": "Susisiekite",
+    "bookHeading": "Rezervuoti sesiją",
+    "bookBody": "Pasiruošę pradėti savo projektą? Susisiekite ir aptarkite savo idėją. Nemokamos konsultacijos tatuiruotėms, spaudoms ir seminarams.",
+    "sendMessage": "Siųsti žinutę",
+    "replyTime": "info@publikacija.lt · Atsakome per 24 val.",
+    "findUs": "Raskite mus",
+    "studioLabel": "Studija",
+    "studioName": "Radio Lofts",
+    "studioAddress": "Kauno g. 30, Vilnius LT-03202",
+    "hoursLabel": "Darbo laikas",
+    "hoursValue": "Pr–Š, 10:00 – 19:00",
+    "socialLabel": "Socialiniai tinklai",
+    "instagram": "@publikacija",
+    "mapPlaceholder": "Kauno g. 30, Vilnius"
+  },
+  "footer": {
+    "rights": "Visos teisės saugomos."
+  },
+  "book": {
+    "eyebrow": "Registracija",
+    "heading": "Rezervuoti sesiją",
+    "intro": "Užpildykite žemiau esančią formą ir mes su jumis susisieksime per 24 valandas, kad aptartume jūsų projektą. Visos konsultacijos nemokamos.",
+    "nameLabel": "Vardas",
+    "namePlaceholder": "Jūsų vardas",
+    "emailLabel": "El. paštas",
+    "emailPlaceholder": "jusu@elpastas.lt",
+    "phoneLabel": "Telefonas",
+    "phonePlaceholder": "+370 600 00000",
+    "serviceLabel": "Paslauga",
+    "servicePlaceholder": "Pasirinkite paslaugą",
+    "messageLabel": "Jūsų idėja / žinutė",
+    "messagePlaceholder": "Papasakokite apie savo idėją, pageidaujamą stilių, dydį, vietą arba kitas detales…",
+    "required": "*",
+    "submit": "Siųsti užklausą",
+    "submitting": "Siunčiama…",
+    "successHeading": "Užklausa gauta",
+    "successBody": "Ačiū – susisieksime per 24 valandas, kad aptartume jūsų projektą.",
+    "replyTime": "Atsakome per 24 val. · info@publikacija.lt",
+    "services": [
+      "Tatuiruotė",
+      "Linorytas / Spauda",
+      "Seminaras",
+      "Dovanų kuponas"
+    ],
+    "studioLabel": "Studija",
+    "studioName": "Radio Lofts",
+    "studioAddress": "Kauno g. 30, Vilnius LT-03202",
+    "hoursLabel": "Darbo laikas",
+    "hoursValue": "Pr–Š, 10:00 – 19:00",
+    "emailLabel2": "El. paštas",
+    "whatToExpectLabel": "Ko tikėtis",
+    "expectations": [
+      "Nemokama pradinė konsultacija",
+      "Individualus dizainas kiekvienam klientui",
+      "Visiškai sterilios, saugios sąlygos",
+      "Keli pakeitimų etapai įtraukti",
+      "Teikiamos priežiūros rekomendacijos"
+    ],
+    "errorGeneral": "Kažkas nutiko. Parašykite mums tiesiogiai adresu info@publikacija.lt",
+    "tattooTitle": "Tatuiruotė",
+    "tattooDesc": "Rezervuokite konsultaciją arba sesiją individualiai tatuiruotei. Pradinė konsultacija nemokama.",
+    "printTitle": "Linorytai / Spauda",
+    "printDesc": "Užsakykite individualų linorytą arba aptarkite riboto tiražo seriją.",
+    "workshopTitle": "Seminaras",
+    "workshopDesc": "Prisijunkite prie grupinių spaudos ar tatuiruočių piešimo seminarų.",
+    "voucherTitle": "Dovanų kuponas",
+    "voucherDesc": "Įsigykite dovanų kuponą bet kokiai sumai – tinka visoms paslaugoms.",
+    "calHeading": "Pasirinkite datą ir laiką",
+    "workshopHeading": "Prisijunkite prie seminaro",
+    "workshopBody": "Mūsų seminarai vyksta grupėmis su ribotu vietų skaičiumi. Peržiūrėkite renginio informaciją ir rezervuokite vietą tiesiogiai per Luma.",
+    "workshopCta": "Registruotis per Luma",
+    "back": "Atgal"
+  },
+  "ourWork": {
+    "eyebrow": "Pasirinkti darbai",
+    "heading": "Mūsų darbai",
+    "filterAll": "Visi",
+    "filterTattoo": "Tatuiruotės",
+    "filterPrint": "Spaudos",
+    "empty": "Kol kas nieko nėra – užsukite vėliau."
+  },
+  "giftVouchers": {
+    "eyebrow": "Dovanų kuponai",
+    "heading": "Dovanų kuponai",
+    "intro": "Padovanokite tikrai asmenišką patirtį – individualią tatuiruotę, linorytų spaudą arba popietę seminarų širdyje Vilniuje. Kuponai negaliojimo laiko neturi.",
+    "howItWorks": "Kaip tai veikia",
+    "steps": [
+      {
+        "step": "01",
+        "title": "Pasirinkite sumą",
+        "body": "Pasirinkite vieną iš aukščiau esančių variantų arba paprašykite individualios sumos."
+      },
+      {
+        "step": "02",
+        "title": "Mes išsiunčiame kuponą",
+        "body": "Gražiai suprojektuotas skaitmeninis kuponas atkeliauja el. paštu, paruoštas įteikti."
+      },
+      {
+        "step": "03",
+        "title": "Gavėjas užsiregistruoja",
+        "body": "Jie pasirenka paslaugą ir datą – mes pasirūpiname likusiu."
+      }
+    ],
+    "readyHeading": "Pasiruošę padovanoti tobulą dovaną?",
+    "readyBody": "Susisiekite ir mes viską sutvarkysime.",
+    "orderVoucher": "Užsakyti kuponą",
+    "emailUs": "Rašyti el. laišką",
+    "getVoucher": "Gauti šį kuponą",
+    "vouchers": [
+      {
+        "amount": "€50",
+        "label": "Pradžiamokslis",
+        "description": "Puikiai tinka linorytų spaudai, seminaro sesijai arba kaip įnašas į nedidelę tatuiruotę.",
+        "ideal": [
+          "Linorytų spauda",
+          "Seminaro dalyvis",
+          "Nedidelės tatuiruotės įnašas"
+        ]
+      },
+      {
+        "amount": "€100",
+        "label": "Studija",
+        "description": "Solidi suma individualiai tatuiruotei arba pilnam seminarų ciklui.",
+        "ideal": [
+          "Vidutinė tatuiruotė",
+          "Seminarų ciklas",
+          "Spaudos užsakymas"
+        ]
+      },
+      {
+        "amount": "€200",
+        "label": "Firma",
+        "description": "Padengsite visą individualios tatuiruotės sesiją arba individualų spaudos projektą nuo pradžios iki pabaigos.",
+        "ideal": [
+          "Pilna tatuiruotės sesija",
+          "Individualus spaudos projektas",
+          "Keli vizitai"
+        ]
+      },
+      {
+        "amount": "Individuali",
+        "label": "Individuali suma",
+        "description": "Turite konkrečią sumą omenyje? Galime sukurti kuponą bet kokiai sumai, kurią pasirinksite.",
+        "ideal": [
+          "Bet kokia suma",
+          "Bet kokia paslauga",
+          "Bet kokia proga"
+        ]
+      }
+    ]
+  }
+}

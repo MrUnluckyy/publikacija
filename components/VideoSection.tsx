@@ -1,244 +1,143 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import MuxPlayer from "@mux/mux-player-react";
-import Image from "next/image";
-import type { VideoData } from "@/sanity/types";
-import { urlFor } from "@/sanity/lib/image";
+import type { MuxPlayerRefAttributes } from "@mux/mux-player-react";
+import type { MuxVideoAsset } from "@/sanity/types";
 
-// ─── Placeholder fallback labels ───────────────────────────────────────────────
+interface Props {
+  video: MuxVideoAsset | null | undefined;
+  label?: string | null;
+}
 
-const FALLBACK_VIDEOS: { label: string; featured: boolean }[] = [
-  { label: "Studio Tour — Publikacija 2024", featured: true },
-  { label: "The Tattooing Process", featured: false },
-  { label: "From Design to Print", featured: false },
-];
+export default function VideoSection({ video, label }: Props) {
+  const t = useTranslations("videoSection");
+  const playerRef = useRef<MuxPlayerRefAttributes>(null);
+  const [playing, setPlaying] = useState(true);
+  const [muted, setMuted] = useState(true);
 
-// ─── Single video tile ─────────────────────────────────────────────────────────
+  if (!video?.playbackId) return null;
 
-function VideoTile({
-  label,
-  playbackId,
-  poster,
-  large = false,
-}: {
-  label: string;
-  playbackId: string | null;
-  poster: VideoData["poster"];
-  large?: boolean;
-}) {
-  const [playing, setPlaying] = useState(false);
-  const [hovered, setHovered] = useState(false);
-
-  const aspectClass = large ? "aspect-[16/9] md:aspect-[21/9]" : "aspect-video";
-
-  if (playbackId) {
-    return (
-      <div
-        className={`relative overflow-hidden cursor-pointer group bg-[#0d0c0a] ${aspectClass}`}
-        onClick={() => setPlaying(true)}
-      >
-        {/* Poster image */}
-        {!playing && poster && (
-          <Image
-            src={urlFor(poster).width(1200).auto("format").url()}
-            alt={label}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 80vw"
-          />
-        )}
-
-        {playing ? (
-          <MuxPlayer
-            playbackId={playbackId}
-            autoPlay
-            style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
-          />
-        ) : (
-          <>
-            {/* Dark overlay */}
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-300" />
-
-            {/* Play button */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <motion.div
-                animate={{ scale: hovered ? 1.08 : 1 }}
-                transition={{ duration: 0.4 }}
-                onMouseEnter={() => setHovered(true)}
-                onMouseLeave={() => setHovered(false)}
-              >
-                <motion.div
-                  className="absolute inset-0 rounded-full border border-white/15"
-                  animate={{ scale: hovered ? [1, 1.5] : 1, opacity: hovered ? [0.5, 0] : 0.5 }}
-                  transition={{ duration: 1.2, repeat: hovered ? Infinity : 0 }}
-                />
-                <div className="w-16 h-16 rounded-full border border-white/30 flex items-center justify-center backdrop-blur-sm bg-white/5">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="white" className="ml-1">
-                    <polygon points="6,3 20,12 6,21" />
-                  </svg>
-                </div>
-              </motion.div>
-            </div>
-
-            {/* Info */}
-            <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 bg-gradient-to-t from-black/70 to-transparent flex items-end justify-between">
-              <div>
-                <p className="text-[#c8b89a] text-[9px] tracking-[0.4em] uppercase mb-1">Watch</p>
-                <p className="text-white text-sm md:text-base font-medium">{label}</p>
-              </div>
-            </div>
-          </>
-        )}
-      </div>
-    );
+  function togglePlay() {
+    const el = playerRef.current;
+    if (!el) return;
+    if (playing) { el.pause(); setPlaying(false); }
+    else { el.play(); setPlaying(true); }
   }
 
-  // Placeholder — no Mux video uploaded yet
-  return (
-    <PlaceholderTile label={label} large={large} />
-  );
-}
-
-function PlaceholderTile({ label, large }: { label: string; large: boolean }) {
-  const [hovered, setHovered] = useState(false);
-  const aspectClass = large ? "aspect-[16/9] md:aspect-[21/9]" : "aspect-video";
+  function toggleMute() {
+    const el = playerRef.current;
+    if (!el) return;
+    el.muted = !el.muted;
+    setMuted(el.muted);
+  }
 
   return (
-    <div
-      className={`relative overflow-hidden cursor-pointer group bg-[#0d0c0a] ${aspectClass}`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <div className="absolute inset-0 bg-gradient-to-br from-[#1f1b14] via-[#0f0e0c] to-[#1a1510]" />
+    <section className="border-b-2 border-[#221c14]" style={{ backgroundColor: "#e5e4d2" }}>
+      <div className="grid md:grid-cols-2">
 
-      <motion.div
-        className="absolute inset-0"
-        style={{ background: "radial-gradient(ellipse at 30% 60%, rgba(200,184,154,0.1) 0%, transparent 60%)" }}
-        animate={{ opacity: hovered ? 1 : 0.25 }}
-        transition={{ duration: 0.6 }}
-      />
-
-      <div
-        className="absolute inset-0 opacity-[0.035]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
-
-      <div className="absolute inset-0 flex items-center justify-center">
+        {/* Left: video */}
         <motion.div
-          className="relative flex items-center justify-center"
-          animate={{ scale: hovered ? 1.08 : 1 }}
-          transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
+          className="border-b-2 md:border-b-0 md:border-r-2 border-[#221c14] flex flex-col"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
         >
-          <motion.div
-            className="absolute w-20 h-20 rounded-full border border-white/15"
-            animate={{ scale: hovered ? [1, 1.5] : 1, opacity: hovered ? [0.5, 0] : 0.5 }}
-            transition={{ duration: 1.2, repeat: hovered ? Infinity : 0 }}
-          />
-          <div className="w-16 h-16 rounded-full border border-white/25 flex items-center justify-center backdrop-blur-sm bg-white/5">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="white" className="ml-1">
-              <polygon points="6,3 20,12 6,21" />
-            </svg>
+          {/* Player */}
+          <div className="relative aspect-[4/3] bg-[#221c14] overflow-hidden">
+            <MuxPlayer
+              ref={playerRef}
+              playbackId={video.playbackId}
+              streamType="on-demand"
+              autoPlay="muted"
+              muted
+              loop
+              playsInline
+              nohotkeys
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                "--controls": "none",
+              } as React.CSSProperties}
+            />
+          </div>
+
+          {/* Controls bar */}
+          <div className="border-t-2 border-[#221c14] px-5 md:px-8 py-4 flex items-center justify-between">
+            <button
+              onClick={togglePlay}
+              className="font-bold text-[13px] tracking-[2px] uppercase text-[#221c14] hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-2"
+            >
+              {playing ? (
+                <>
+                  <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor">
+                    <rect x="0" y="0" width="3" height="12" /><rect x="7" y="0" width="3" height="12" />
+                  </svg>
+                  Pause
+                </>
+              ) : (
+                <>
+                  <svg width="10" height="12" viewBox="0 0 24 24" fill="currentColor">
+                    <polygon points="6,3 20,12 6,21" />
+                  </svg>
+                  Play
+                </>
+              )}
+            </button>
+            <div className="flex items-center gap-5">
+              {label && (
+                <span className="text-[#221c14]/40 font-bold text-[12px] tracking-[1px] hidden md:block truncate max-w-[180px]">
+                  {label}
+                </span>
+              )}
+              <button
+                onClick={toggleMute}
+                className="font-bold text-[13px] tracking-[2px] uppercase text-[#221c14] hover:opacity-50 transition-opacity cursor-pointer"
+              >
+                {muted ? "Unmute" : "Mute"}
+              </button>
+            </div>
           </div>
         </motion.div>
-      </div>
 
-      <div className="absolute bottom-0 left-0 right-0 p-5 md:p-6 flex items-end justify-between bg-gradient-to-t from-black/70 to-transparent">
-        <div>
-          <p className="text-[#c8b89a] text-[9px] tracking-[0.4em] uppercase mb-1">Watch</p>
-          <p className="text-white text-sm md:text-base font-medium">{label}</p>
-        </div>
-        <span className="text-white/20 text-[9px] tracking-[0.25em] uppercase hidden sm:block">
-          Video · Placeholder
-        </span>
-      </div>
-    </div>
-  );
-}
-
-// ─── Section ───────────────────────────────────────────────────────────────────
-
-export default function VideoSection({ videos }: { videos?: VideoData[] | null }) {
-  const hasCmsData = videos && videos.length > 0;
-
-  const featured = hasCmsData ? videos.find((v) => v.featured) ?? videos[0] : null;
-  const secondary = hasCmsData ? videos.filter((v) => v !== featured).slice(0, 2) : [];
-
-  return (
-    <section className="bg-[#0f0e0c] py-20 md:py-32">
-      <div className="px-6 md:px-10">
-        <div className="max-w-[1400px] mx-auto space-y-4">
-          {/* Heading */}
-          <motion.div
-            className="mb-10"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.75, ease: [0.76, 0, 0.24, 1] }}
-          >
-            <p className="text-[10px] tracking-[0.4em] uppercase text-[#c8b89a] mb-3">Studio Life</p>
-            <h2 className="text-5xl md:text-7xl font-bold uppercase tracking-tight text-white leading-[0.88]">
-              Behind
-              <br />
-              The Work.
+        {/* Right: text */}
+        <motion.div
+          className="px-5 md:px-10 py-12 md:py-16 flex flex-col justify-between"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55, delay: 0.15 }}
+        >
+          <div>
+            <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[3px] uppercase mb-4">
+              {t("eyebrow")}
+            </p>
+            <h2
+              className="text-[#221c14] font-extrabold leading-[1.1em] mb-8"
+              style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)" }}
+            >
+              {t("heading")}
             </h2>
-          </motion.div>
-
-          {/* Hero video */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1], delay: 0.1 }}
-          >
-            {featured ? (
-              <VideoTile
-                label={featured.label}
-                playbackId={featured.video?.playbackId ?? null}
-                poster={featured.poster}
-                large
-              />
-            ) : (
-              <PlaceholderTile label={FALLBACK_VIDEOS[0].label} large />
-            )}
-          </motion.div>
-
-          {/* Secondary videos */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {hasCmsData
-              ? secondary.map((v, i) => (
-                  <motion.div
-                    key={v._id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.2 + i * 0.1 }}
-                  >
-                    <VideoTile
-                      label={v.label}
-                      playbackId={v.video?.playbackId ?? null}
-                      poster={v.poster}
-                    />
-                  </motion.div>
-                ))
-              : FALLBACK_VIDEOS.slice(1).map((v, i) => (
-                  <motion.div
-                    key={v.label}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1], delay: 0.2 + i * 0.1 }}
-                  >
-                    <PlaceholderTile label={v.label} large={false} />
-                  </motion.div>
-                ))}
+            <p className="text-[#221c14] font-bold text-[18px] leading-[1.65em] max-w-[480px]">
+              {t("body")}
+            </p>
           </div>
-        </div>
+
+          <div className="mt-10">
+            <a
+              href="/book"
+              className="inline-block border-2 border-[#221c14] text-[#221c14] font-bold text-[14px] tracking-[2px] uppercase px-8 py-4 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
+            >
+              {t("cta")}
+            </a>
+          </div>
+        </motion.div>
+
       </div>
     </section>
   );

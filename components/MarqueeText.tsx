@@ -1,18 +1,12 @@
 "use client";
 
-const ITEMS = [
-  "Tattoos in Vilnius",
-  "Traditional Tattoos",
-  "Abstract Tattoos",
-  "Realistic Tattoos",
-  "Gift Vouchers",
-  "Free Consultations",
-  "Linocuts",
-];
-
-const ALL = [...ITEMS, ...ITEMS];
+import { useTranslations } from "next-intl";
 
 export default function MarqueeText() {
+  const t = useTranslations("marquee");
+  const ITEMS = t.raw("items") as string[];
+  const ALL = [...ITEMS, ...ITEMS];
+
   return (
     <section
       className="border-b-2 border-[#221c14] overflow-hidden py-5 select-none"
