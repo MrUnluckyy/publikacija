@@ -63,7 +63,7 @@ export default function VideoSection({ video, label }: Props) {
                 width: "100%",
                 height: "100%",
                 "--controls": "none",
-              } as React.CSSProperties}
+              } as React.CSSProperties & Record<`--${string}`, string>}
             />
           </div>
 

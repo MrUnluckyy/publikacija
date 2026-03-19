@@ -26,6 +26,16 @@ export default function CalEmbed({ calLink }: CalEmbedProps) {
             "cal-text": "#221c14",
             "cal-text-emphasis": "#221c14",
           },
+          dark: {
+            "cal-brand": "#221c14",
+            "cal-brand-emphasis": "#221c14",
+            "cal-brand-text": "#e5e4d2",
+            "cal-bg": "#e5e4d2",
+            "cal-bg-emphasis": "#d5d4c2",
+            "cal-border": "#221c14",
+            "cal-text": "#221c14",
+            "cal-text-emphasis": "#221c14",
+          },
         },
       });
     })();
