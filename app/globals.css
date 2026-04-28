@@ -51,8 +51,8 @@ body {
 .marquee-right { animation: scroll-right 18s linear infinite; }
 
 /* ─── Gallery row scroll ─────────────────────────────── */
-.gallery-left  { animation: scroll-left  25s linear infinite; }
-.gallery-right { animation: scroll-right 25s linear infinite; }
+.gallery-left  { animation: scroll-left  90s linear infinite; }
+.gallery-right { animation: scroll-right 90s linear infinite; }
 
 .gallery-left:hover,
 .gallery-right:hover {

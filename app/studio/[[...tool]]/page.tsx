@@ -7,8 +7,20 @@
  */
 export { metadata, viewport } from "next-sanity/studio";
 
+import { redirect } from "next/navigation";
 import StudioWrapper from "./StudioWrapper";
 
-export default function StudioPage() {
+export default async function StudioPage({
+  params,
+}: {
+  params: Promise<{ tool?: string[] }>;
+}) {
+  const { tool } = await params;
+
+  // Redirect bare /studio to /studio/desk so the Studio never sees an empty tool
+  if (!tool || tool.length === 0) {
+    redirect("/studio/desk");
+  }
+
   return <StudioWrapper />;
 }

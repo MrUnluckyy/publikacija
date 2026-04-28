@@ -48,9 +48,6 @@ export default function Footer({ instagramUrl }: { instagramUrl?: string | null 
               className="text-[#221c14] font-bold text-[14px] hover:opacity-50 transition-opacity">
               Instagram
             </a>
-            <Link href="/terms" className="text-[#221c14] font-bold text-[14px] hover:opacity-50 transition-opacity">
-              Terms
-            </Link>
           </div>
         </div>
 
@@ -59,20 +56,25 @@ export default function Footer({ instagramUrl }: { instagramUrl?: string | null 
           <p className="text-[#221c14]/50 font-bold text-[12px] tracking-[1px]">
             © {year} Publikacija. {t("rights")}
           </p>
-          <div className="flex items-center gap-1 text-[14px] font-bold tracking-[2px]">
-            <button
-              onClick={() => switchLocale("lt")}
-              className={`pb-0.5 transition-colors ${locale === "lt" ? "text-[#221c14] border-b-2 border-[#221c14]" : "text-[#221c14]/40 border-b-2 border-transparent hover:text-[#221c14]"}`}
-            >
-              LT
-            </button>
-            <span className="text-[#221c14]/20 mx-1.5">/</span>
-            <button
-              onClick={() => switchLocale("en")}
-              className={`pb-0.5 transition-colors ${locale === "en" ? "text-[#221c14] border-b-2 border-[#221c14]" : "text-[#221c14]/40 border-b-2 border-transparent hover:text-[#221c14]"}`}
-            >
-              EN
-            </button>
+          <div className="flex items-center gap-5">
+            <Link href="/taisykles-ir-salygos" className="text-[#221c14]/50 font-bold text-[12px] tracking-[1px] hover:opacity-70 transition-opacity">
+              Terms
+            </Link>
+            <div className="flex items-center gap-1 text-[14px] font-bold tracking-[2px]">
+              <button
+                onClick={() => switchLocale("lt")}
+                className={`pb-0.5 transition-colors ${locale === "lt" ? "text-[#221c14] border-b-2 border-[#221c14]" : "text-[#221c14]/40 border-b-2 border-transparent hover:text-[#221c14]"}`}
+              >
+                LT
+              </button>
+              <span className="text-[#221c14]/20 mx-1.5">/</span>
+              <button
+                onClick={() => switchLocale("en")}
+                className={`pb-0.5 transition-colors ${locale === "en" ? "text-[#221c14] border-b-2 border-[#221c14]" : "text-[#221c14]/40 border-b-2 border-transparent hover:text-[#221c14]"}`}
+              >
+                EN
+              </button>
+            </div>
           </div>
         </div>
       </div>

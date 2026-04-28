@@ -23,7 +23,6 @@ import Navigation     from "@/components/Navigation";
 import Hero           from "@/components/Hero";
 import VideoSection   from "@/components/VideoSection";
 import Services       from "@/components/Services";
-import MarqueeText    from "@/components/MarqueeText";
 import Gallery        from "@/components/Gallery";
 import Reviews        from "@/components/Reviews";
 import Artists        from "@/components/Artists";
@@ -61,7 +60,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           eyebrow={settings?.galleryEyebrow}
           heading={settings?.galleryHeading}
         />
-        <MarqueeText items={settings?.marqueeItems} />
         <Reviews
           items={reviews}
           eyebrow={settings?.reviewsEyebrow}

@@ -150,7 +150,7 @@ export default function Gallery({ items, eyebrow, heading }: Props) {
                     {group.name}
                   </span>
                 </div>
-                <div className={`flex gap-3 ${animClass} w-max pb-6 pl-3`}>
+                <div className={`flex gap-3 ${animClass} w-max pb-6`}>
                   {doubled.map((item, i) => (
                     <SanityCard
                       key={`g${gi}-${item._id}-${i}`}
