@@ -8,14 +8,18 @@ export default defineType({
     defineField({
       name: "title",
       title: "Title",
-      type: "string",
+      type: "localeString",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
-      name: "subtitle",
-      title: "Subtitle",
-      type: "string",
-      description: 'e.g. "Custom Artistry" or "Premium Production"',
+      name: "description",
+      title: "Description",
+      type: "localeText",
+    }),
+    defineField({
+      name: "ctaLabel",
+      title: "CTA Button Label",
+      type: "localeString",
     }),
     defineField({
       name: "serviceType",
@@ -25,28 +29,11 @@ export default defineType({
         list: [
           { title: "Tattoo", value: "tattoo" },
           { title: "Print", value: "print" },
+          { title: "Workshop", value: "workshop" },
         ],
         layout: "radio",
       },
       validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "description",
-      title: "Description",
-      type: "text",
-      rows: 3,
-    }),
-    defineField({
-      name: "features",
-      title: "Feature Tags",
-      type: "array",
-      of: [{ type: "string" }],
-      description: "Short labels shown as tags (e.g. Fine Line, Blackwork)",
-    }),
-    defineField({
-      name: "ctaLabel",
-      title: "CTA Button Label",
-      type: "string",
     }),
     defineField({
       name: "image",
@@ -69,6 +56,9 @@ export default defineType({
     },
   ],
   preview: {
-    select: { title: "title", subtitle: "serviceType", media: "image" },
+    select: { titleLt: "title.lt", type: "serviceType", media: "image" },
+    prepare({ titleLt, type, media }) {
+      return { title: titleLt ?? "Service", subtitle: type, media };
+    },
   },
 });

@@ -2,28 +2,23 @@
 
 import { useTranslations } from "next-intl";
 
-export default function MarqueeText() {
+interface Props {
+  items?: string[] | null;
+}
+
+export default function MarqueeText({ items }: Props) {
   const t = useTranslations("marquee");
-  const ITEMS = t.raw("items") as string[];
-  const ALL = [...ITEMS, ...ITEMS];
+  const fallback = t.raw("items") as string[];
+  const list = items && items.length > 0 ? items : fallback;
 
   return (
     <section
-      className="border-b-2 border-[#221c14] overflow-hidden py-5 select-none"
+      className="border-b-2 border-[#221c14] px-5 md:px-10 py-4 select-none"
       style={{ backgroundColor: "#e5e4d2" }}
     >
-      <div className="flex w-max marquee-left">
-        {ALL.map((text, i) => (
-          <span
-            key={i}
-            className="flex items-center whitespace-nowrap text-[#221c14] font-extrabold leading-none px-8"
-            style={{ fontSize: "clamp(1.6rem, 3vw, 2.2rem)" }}
-          >
-            {text}
-            <span className="ml-8 text-[#221c14]/30 font-bold">/</span>
-          </span>
-        ))}
-      </div>
+      <p className="text-[#221c14]/40 font-bold text-[11px] tracking-[2px] uppercase leading-relaxed">
+        {list.join(" / ")}
+      </p>
     </section>
   );
 }

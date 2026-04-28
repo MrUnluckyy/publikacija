@@ -13,9 +13,11 @@
 /* ─── Base ───────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 body {
+  overflow-x: hidden;
   background-color: var(--bg);
   color: var(--text);
   font-family: var(--font-switzer), Helvetica, Arial, sans-serif;

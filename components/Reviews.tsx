@@ -85,42 +85,37 @@ const PLACEHOLDER_REVIEWS: ReviewData[] = [
   { _id: "p5", author: "Aistė R.", body: "The gift voucher was the perfect present. My partner used it for a custom tattoo and the whole process from booking to the final piece was seamless.", rating: 5, date: null },
 ];
 
-export default function Reviews({ items }: { items?: ReviewData[] | null }) {
+interface ReviewsProps {
+  items?: ReviewData[] | null;
+  eyebrow?: string | null;
+  heading?: string | null;
+}
+
+export default function Reviews({ items, eyebrow, heading }: ReviewsProps) {
   const t = useTranslations("reviews");
   const reviews = items && items.length > 0 ? items : PLACEHOLDER_REVIEWS;
+  const displayEyebrow = eyebrow ?? t("eyebrow");
+  const displayHeading = heading ?? t("heading");
 
   return (
     <section style={{ backgroundColor: "#e5e4d2" }} className="border-b-2 border-[#221c14]">
       <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+        <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[3px] uppercase mb-2">{displayEyebrow}</p>
+        <h2
+          className="text-[#221c14] font-extrabold leading-[1.1em]"
+          style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)" }}
         >
-          <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[3px] uppercase mb-2">{t("eyebrow")}</p>
-          <h2
-            className="text-[#221c14] font-extrabold leading-[1.1em]"
-            style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)" }}
-          >
-            {t("heading")}
-          </h2>
-        </motion.div>
+          {displayHeading}
+        </h2>
       </div>
 
-      <motion.div
-        className="overflow-x-auto"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-      >
+      <div className="overflow-x-auto">
         <div className="flex w-max divide-x-2 divide-[#221c14]">
           {reviews.map((r) => (
             <ReviewCard key={r._id} review={r} />
           ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

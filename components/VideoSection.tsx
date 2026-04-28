@@ -1,24 +1,30 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import MuxPlayer from "@mux/mux-player-react";
 import type { MuxPlayerRefAttributes } from "@mux/mux-player-react";
-import type { MuxVideoAsset } from "@/sanity/types";
+import type { MuxVideoAsset, VideoSectionData } from "@/sanity/types";
 
 interface Props {
   video: MuxVideoAsset | null | undefined;
+  content?: VideoSectionData | null;
   label?: string | null;
 }
 
-export default function VideoSection({ video, label }: Props) {
+export default function VideoSection({ video, content, label }: Props) {
   const t = useTranslations("videoSection");
   const playerRef = useRef<MuxPlayerRefAttributes>(null);
   const [playing, setPlaying] = useState(true);
   const [muted, setMuted] = useState(true);
 
   if (!video?.playbackId) return null;
+
+  // Sanity content takes priority; i18n is the fallback
+  const eyebrow  = content?.eyebrow  ?? t("eyebrow");
+  const heading  = content?.heading  ?? t("heading");
+  const body     = content?.body     ?? t("body");
+  const ctaLabel = content?.ctaLabel ?? t("cta");
 
   function togglePlay() {
     const el = playerRef.current;
@@ -38,15 +44,9 @@ export default function VideoSection({ video, label }: Props) {
     <section className="border-b-2 border-[#221c14]" style={{ backgroundColor: "#e5e4d2" }}>
       <div className="grid md:grid-cols-2">
 
-        {/* Left: video */}
-        <motion.div
-          className="border-b-2 md:border-b-0 md:border-r-2 border-[#221c14] flex flex-col"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-        >
-          {/* Player */}
+        {/* Left: video — border on static wrapper */}
+        <div className="border-b-2 md:border-b-0 md:border-r-2 border-[#221c14]">
+        <div className="flex flex-col">
           <div className="relative aspect-[4/3] bg-[#221c14] overflow-hidden">
             <MuxPlayer
               ref={playerRef}
@@ -103,28 +103,23 @@ export default function VideoSection({ video, label }: Props) {
               </button>
             </div>
           </div>
-        </motion.div>
+        </div>
+        </div>
 
         {/* Right: text */}
-        <motion.div
-          className="px-5 md:px-10 py-12 md:py-16 flex flex-col justify-between"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.55, delay: 0.15 }}
-        >
+        <div className="px-5 md:px-10 py-12 md:py-16 flex flex-col justify-between">
           <div>
             <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[3px] uppercase mb-4">
-              {t("eyebrow")}
+              {eyebrow}
             </p>
             <h2
               className="text-[#221c14] font-extrabold leading-[1.1em] mb-8"
               style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)" }}
             >
-              {t("heading")}
+              {heading}
             </h2>
             <p className="text-[#221c14] font-bold text-[18px] leading-[1.65em] max-w-[480px]">
-              {t("body")}
+              {body}
             </p>
           </div>
 
@@ -133,10 +128,10 @@ export default function VideoSection({ video, label }: Props) {
               href="/book"
               className="inline-block border-2 border-[#221c14] text-[#221c14] font-bold text-[14px] tracking-[2px] uppercase px-8 py-4 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
             >
-              {t("cta")}
+              {ctaLabel}
             </a>
           </div>
-        </motion.div>
+        </div>
 
       </div>
     </section>

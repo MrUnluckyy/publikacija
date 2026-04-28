@@ -68,7 +68,7 @@ export default function About({ data }: { data?: AboutData | null }) {
   const established = data?.established ?? "2019";
 
   return (
-    <section id="about" className="bg-[#e8e7d5] py-20 md:py-32 overflow-hidden">
+    <section id="about" className="bg-[#e5e4d2] border-b-2 border-[#221c14] py-20 md:py-32 overflow-hidden">
       <div className="px-6 md:px-10">
         <div className="max-w-[1400px] mx-auto grid md:grid-cols-2 gap-16 md:gap-24 items-center">
 
@@ -94,7 +94,7 @@ export default function About({ data }: { data?: AboutData | null }) {
               >
                 {heading}
                 <br />
-                <span className="italic text-[#a09888]" style={{ fontFamily: "var(--font-playfair)" }}>
+                <span className="italic text-[#a09888]">
                   {accentWord}
                 </span>
                 <br />

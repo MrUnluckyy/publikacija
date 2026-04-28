@@ -31,6 +31,13 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "artist",
+      title: "Artist",
+      type: "reference",
+      to: [{ type: "artist" }],
+      description: "Which artist created this piece",
+    }),
+    defineField({
       name: "featured",
       title: "Show on Homepage",
       type: "boolean",

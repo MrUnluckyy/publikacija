@@ -96,7 +96,9 @@ export default function WorkGallery({ items }: { items: PortfolioItemData[] }) {
                     />
                   )}
                   <div className="absolute inset-0 bg-[#221c14]/0 group-hover:bg-[#221c14]/30 transition-colors duration-300 flex items-end p-4 opacity-0 group-hover:opacity-100">
-                    <p className="text-white font-bold text-[12px] tracking-[2px] uppercase">{item.title}</p>
+                    <p className="text-white font-bold text-[12px] tracking-[2px] uppercase">
+                      {item.artistName ?? item.title}
+                    </p>
                   </div>
                 </motion.button>
               ))

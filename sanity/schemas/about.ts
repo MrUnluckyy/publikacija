@@ -13,21 +13,19 @@ export default defineType({
     defineField({
       name: "heading",
       title: "Main Heading",
-      type: "string",
+      type: "localeString",
       description: 'e.g. "Art in"',
     }),
     defineField({
       name: "accentWord",
       title: "Italic Accent Word",
-      type: "string",
-      description: 'Displayed in italic serif on the second line, e.g. "every"',
-      initialValue: "every",
+      type: "localeString",
+      description: 'Displayed in italic on the second line, e.g. "every"',
     }),
     defineField({
       name: "body",
       title: "Body Text",
-      type: "array",
-      of: [{ type: "block" }],
+      type: "localeBlock",
     }),
     defineField({
       name: "portrait",
@@ -43,19 +41,11 @@ export default defineType({
         {
           type: "object",
           fields: [
-            {
-              name: "value",
-              title: 'Value (e.g. "500+")',
-              type: "string",
-            },
-            {
-              name: "label",
-              title: 'Label (e.g. "Tattoos")',
-              type: "string",
-            },
+            { name: "value", title: 'Value (e.g. "500+")', type: "string" },
+            { name: "label", title: "Label", type: "localeString" },
           ],
           preview: {
-            select: { title: "value", subtitle: "label" },
+            select: { title: "value", subtitle: "label.lt" },
           },
         },
       ],

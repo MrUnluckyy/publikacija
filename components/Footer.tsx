@@ -15,7 +15,7 @@ export default function Footer({ instagramUrl }: { instagramUrl?: string | null 
     { label: nav("booking"),      href: "/book" },
     { label: nav("ourWork"),      href: "/our-work" },
     { label: nav("giftVouchers"), href: "/gift-vouchers" },
-    { label: nav("about"),        href: "/#about" },
+    { label: nav("about"),        href: "/apie-mus" },
   ];
 
   function switchLocale(nextLocale: string) {
@@ -26,7 +26,7 @@ export default function Footer({ instagramUrl }: { instagramUrl?: string | null 
     <footer style={{ backgroundColor: "#e5e4d2" }}>
 
       {/* ── Desktop ── */}
-      <div className="hidden md:block border-t-2 border-[#221c14]">
+      <div className="hidden md:block">
         <div className="grid grid-cols-3 items-center px-10 py-6 border-b-2 border-[#221c14]">
           {/* Logo */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -78,7 +78,7 @@ export default function Footer({ instagramUrl }: { instagramUrl?: string | null 
       </div>
 
       {/* ── Mobile ── */}
-      <div className="md:hidden border-t-2 border-[#221c14]" style={{ backgroundColor: "#211c15" }}>
+      <div className="md:hidden" style={{ backgroundColor: "#211c15" }}>
 
         {/* Logo row */}
         <div className="border-b-2 border-white/10 px-5 py-8">

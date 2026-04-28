@@ -18,7 +18,7 @@ export default function Navigation() {
     { label: t("booking"),      href: "/book" },
     { label: t("ourWork"),      href: "/our-work" },
     { label: t("giftVouchers"), href: "/gift-vouchers" },
-    { label: t("about"),        href: "/#about" },
+    { label: t("about"),        href: "/apie-mus" },
   ];
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function Navigation() {
         <div className="h-full grid grid-cols-2">
 
           {/* Left half: logo */}
-          <div className="flex items-center px-5 md:px-10 md:border-r-2 border-[#221c14]">
+          <div className="flex items-center px-5 md:px-10">
             <Link href="/" onClick={() => setMenuOpen(false)} aria-label="Publikacija – home">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -72,7 +72,7 @@ export default function Navigation() {
                 <Link
                   key={l.label}
                   href={l.href}
-                  className="text-[#221c14] text-[15px] font-bold hover:opacity-50 transition-opacity duration-150"
+                  className="text-[#221c14] text-[17px] font-bold hover:opacity-50 transition-opacity duration-150"
                 >
                   {l.label}
                 </Link>

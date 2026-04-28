@@ -97,7 +97,7 @@ export default function BookingClient({ labels, voucherHref }: Props) {
               selected === svc.id && showEmbed
                 ? "bg-[#221c14] text-[#e5e4d2]"
                 : "hover:bg-[#221c14] hover:text-[#e5e4d2]"
-            } [&:nth-child(even)]:md:border-r-0 [&:nth-child(n+3)]:border-b-0 [&:nth-child(n+3)]:md:border-b-2 [&:nth-child(4)]:border-b-0`}
+            } [&:nth-child(even)]:md:border-r-0`}
           >
             <div className="flex items-start justify-between gap-4">
               <div>

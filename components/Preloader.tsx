@@ -8,17 +8,19 @@ function dispatchReady() {
 }
 
 export default function Preloader() {
-  // Start visible so the video element is in the DOM when useEffect runs
-  const [visible, setVisible] = useState(true);
+  const [visible, setVisible] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // Already shown this session — hide immediately and unblock Nav/Hero
     if (sessionStorage.getItem("preloader:shown")) {
-      setVisible(false);
       dispatchReady();
       return;
     }
+    setVisible(true);
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
 
     const video = videoRef.current;
     if (!video) return;
@@ -31,7 +33,7 @@ export default function Preloader() {
 
     video.addEventListener("ended", dismiss);
     video.addEventListener("error", dismiss);
-    const fallback = setTimeout(dismiss, 4000);
+    const fallback = setTimeout(dismiss, 2500);
     video.play().catch(dismiss);
 
     return () => {
@@ -39,7 +41,7 @@ export default function Preloader() {
       video.removeEventListener("error", dismiss);
       clearTimeout(fallback);
     };
-  }, []);
+  }, [visible]);
 
   return (
     <AnimatePresence>
@@ -47,7 +49,7 @@ export default function Preloader() {
         <motion.div
           className="fixed inset-0 z-[100] overflow-hidden"
           exit={{ clipPath: "inset(0 0 100% 0)" }}
-          transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
+          transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
         >
           <video
             ref={videoRef}
