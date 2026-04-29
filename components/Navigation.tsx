@@ -72,7 +72,7 @@ export default function Navigation() {
                 <Link
                   key={l.label}
                   href={l.href}
-                  className="text-[#221c14] text-[17px] font-bold hover:opacity-50 transition-opacity duration-150"
+                  className="text-[#221c14] text-[19px] font-bold hover:opacity-50 transition-opacity duration-150"
                 >
                   {l.label}
                 </Link>

@@ -53,7 +53,7 @@ function StudioPortrait({ portrait }: { portrait: AboutData["portrait"] }) {
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
       <div className="absolute bottom-5 left-5">
-        <p className="text-white/30 text-[9px] tracking-[0.3em] uppercase">Studio · Vilnius</p>
+        <p className="text-white/30 text-[11px] tracking-[0.3em] uppercase">Studio · Vilnius</p>
       </div>
     </div>
   );
@@ -75,7 +75,7 @@ export default function About({ data }: { data?: AboutData | null }) {
           {/* Text */}
           <div>
             <motion.p
-              className="text-[10px] tracking-[0.4em] uppercase text-[#7a7060] mb-5"
+              className="text-[12px] tracking-[0.4em] uppercase text-[#7a7060] mb-5"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -86,7 +86,7 @@ export default function About({ data }: { data?: AboutData | null }) {
 
             <div className="overflow-hidden mb-8">
               <motion.h2
-                className="text-5xl md:text-6xl font-bold uppercase tracking-tight text-[#0f0e0c] leading-[0.88]"
+                className="text-6xl md:text-7xl font-bold uppercase tracking-tight text-[#0f0e0c] leading-[0.88]"
                 initial={{ y: "100%" }}
                 whileInView={{ y: 0 }}
                 viewport={{ once: true }}
@@ -103,7 +103,7 @@ export default function About({ data }: { data?: AboutData | null }) {
             </div>
 
             <motion.div
-              className="space-y-4 text-[#0f0e0c]/65 text-sm leading-relaxed mb-10"
+              className="space-y-4 text-[#0f0e0c]/65 text-[17px] leading-relaxed mb-10"
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -126,10 +126,10 @@ export default function About({ data }: { data?: AboutData | null }) {
             >
               {stats.map((s) => (
                 <div key={s.label}>
-                  <div className="text-2xl md:text-3xl font-bold text-[#0f0e0c] leading-none mb-1">
+                  <div className="text-3xl md:text-4xl font-bold text-[#0f0e0c] leading-none mb-1">
                     {s.value}
                   </div>
-                  <div className="text-[9px] tracking-[0.3em] uppercase text-[#7a7060]">{s.label}</div>
+                  <div className="text-[11px] tracking-[0.3em] uppercase text-[#7a7060]">{s.label}</div>
                 </div>
               ))}
             </motion.div>
@@ -148,7 +148,7 @@ export default function About({ data }: { data?: AboutData | null }) {
             <div className="absolute -bottom-5 -left-5 w-28 h-28 border border-[#c8b89a]/30 bg-[#c8b89a]/8 pointer-events-none" />
 
             <div className="absolute -top-4 -right-4 md:top-8 md:-right-8 bg-[#0f0e0c] text-white px-4 py-3">
-              <p className="text-[9px] tracking-[0.3em] uppercase text-[#c8b89a]">Est.</p>
+              <p className="text-[11px] tracking-[0.3em] uppercase text-[#c8b89a]">Est.</p>
               <p className="text-lg font-bold leading-none">{established}</p>
             </div>
           </motion.div>

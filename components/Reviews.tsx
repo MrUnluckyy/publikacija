@@ -38,7 +38,7 @@ function ReviewCard({ review }: { review: ReviewData }) {
           {expanded ? (
             <motion.p
               key="full"
-              className="text-[#221c14] font-bold text-[16px] leading-[1.65em]"
+              className="text-[#221c14] font-bold text-[18px] leading-[1.65em]"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
@@ -49,7 +49,7 @@ function ReviewCard({ review }: { review: ReviewData }) {
           ) : (
             <motion.p
               key="preview"
-              className="text-[#221c14] font-bold text-[16px] leading-[1.65em]"
+              className="text-[#221c14] font-bold text-[18px] leading-[1.65em]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -63,14 +63,14 @@ function ReviewCard({ review }: { review: ReviewData }) {
         {needsTruncation && (
           <button
             onClick={() => setExpanded((v) => !v)}
-            className="mt-3 text-[#221c14]/50 font-bold text-[12px] tracking-[2px] uppercase hover:text-[#221c14] transition-colors cursor-pointer"
+            className="mt-3 text-[#221c14]/50 font-bold text-[14px] tracking-[2px] uppercase hover:text-[#221c14] transition-colors cursor-pointer"
           >
             {expanded ? "Show less ↑" : "Read more ↓"}
           </button>
         )}
       </div>
 
-      <p className="text-[#221c14]/50 font-bold text-[12px] tracking-[2px] uppercase">
+      <p className="text-[#221c14]/50 font-bold text-[14px] tracking-[2px] uppercase">
         {review.author}
       </p>
     </div>
@@ -100,10 +100,10 @@ export default function Reviews({ items, eyebrow, heading }: ReviewsProps) {
   return (
     <section style={{ backgroundColor: "#e5e4d2" }} className="border-b-2 border-[#221c14]">
       <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-10">
-        <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[3px] uppercase mb-2">{displayEyebrow}</p>
+        <p className="text-[#221c14]/50 font-bold text-[14px] tracking-[3px] uppercase mb-2">{displayEyebrow}</p>
         <h2
           className="text-[#221c14] font-extrabold leading-[1.1em]"
-          style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)" }}
+          style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
         >
           {displayHeading}
         </h2>

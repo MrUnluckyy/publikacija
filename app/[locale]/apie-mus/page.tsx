@@ -50,12 +50,12 @@ export default async function AboutPage({
         {/* Tattoo care downloads */}
         <div className="border-b-2 border-[#221c14]">
           <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-10">
-            <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[3px] uppercase mb-2">
+            <p className="text-[#221c14]/50 font-bold text-[14px] tracking-[3px] uppercase mb-2">
               {isLt ? "Priežiūra" : "Aftercare"}
             </p>
             <h2
               className="text-[#221c14] font-extrabold leading-[1.1em]"
-              style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)" }}
+              style={{ fontSize: "clamp(2.2rem, 3.5vw, 3.2rem)" }}
             >
               {isLt ? "Tatuiruotės priežiūros instrukcija" : "Tattoo Aftercare Guide"}
             </h2>
@@ -65,17 +65,17 @@ export default async function AboutPage({
             {/* LT download */}
             <div className="border-b-2 md:border-b-0 md:border-r-2 border-[#221c14] px-5 md:px-10 py-12 flex flex-col gap-6">
               <div>
-                <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase mb-3">
+                <p className="text-[#221c14]/50 font-bold text-[14px] tracking-[2px] uppercase mb-3">
                   Lietuvių kalba
                 </p>
-                <p className="text-[#221c14] font-bold text-[16px] leading-[1.65em]">
+                <p className="text-[#221c14] font-bold text-[18px] leading-[1.65em]">
                   Kaip tinkamai prižiūrėti naują tatuiruotę — instrukcija lietuvių kalba.
                 </p>
               </div>
               <a
                 href="/assets/tattoo-care/TATUIRUOTESGYDYMAS-scaled.jpg"
                 download="Tatuiruotes-prieziura.jpg"
-                className="self-start border-2 border-[#221c14] text-[#221c14] font-bold text-[13px] tracking-[2px] uppercase px-6 py-3 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
+                className="self-start border-2 border-[#221c14] text-[#221c14] font-bold text-[14px] tracking-[2px] uppercase px-6 py-3 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
               >
                 ↓ Atsisiųsti
               </a>
@@ -84,17 +84,17 @@ export default async function AboutPage({
             {/* EN download */}
             <div className="px-5 md:px-10 py-12 flex flex-col gap-6">
               <div>
-                <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase mb-3">
+                <p className="text-[#221c14]/50 font-bold text-[14px] tracking-[2px] uppercase mb-3">
                   English
                 </p>
-                <p className="text-[#221c14] font-bold text-[16px] leading-[1.65em]">
+                <p className="text-[#221c14] font-bold text-[18px] leading-[1.65em]">
                   How to properly care for your new tattoo — instructions in English.
                 </p>
               </div>
               <a
                 href="/assets/tattoo-care/tattooaftercareEN-scaled.jpg"
                 download="Tattoo-aftercare.jpg"
-                className="self-start border-2 border-[#221c14] text-[#221c14] font-bold text-[13px] tracking-[2px] uppercase px-6 py-3 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
+                className="self-start border-2 border-[#221c14] text-[#221c14] font-bold text-[14px] tracking-[2px] uppercase px-6 py-3 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
               >
                 ↓ Download
               </a>

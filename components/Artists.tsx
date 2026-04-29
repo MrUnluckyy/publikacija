@@ -52,12 +52,12 @@ export default function Artists({ items, eyebrow, heading }: ArtistsProps) {
 
       {/* Section header */}
       <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-10">
-        <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[3px] uppercase mb-2">
+        <p className="text-[#221c14]/50 font-bold text-[15px] tracking-[3px] uppercase mb-2">
           {eyebrow ?? t("eyebrow")}
         </p>
         <h2
           className="text-[#221c14] font-extrabold leading-[1.1em]"
-          style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)" }}
+          style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
         >
           {heading ?? t("heading")}
         </h2>
@@ -73,12 +73,12 @@ export default function Artists({ items, eyebrow, heading }: ArtistsProps) {
             <div className="border-b-2 md:border-b-0 md:border-r-2 border-[#221c14] px-5 md:px-10 py-12 md:py-16 flex flex-col justify-center">
               <h3
                 className="text-[#221c14] font-extrabold leading-[1.05em] mb-2"
-                style={{ fontSize: "clamp(2.8rem, 5vw, 4.5rem)" }}
+                style={{ fontSize: "clamp(3.5rem, 6vw, 6rem)" }}
               >
                 {artist.name}
               </h3>
               {artist.role && (
-                <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase mt-3">
+                <p className="text-[#221c14]/50 font-bold text-[15px] tracking-[2px] uppercase mt-3">
                   {artist.role}
                 </p>
               )}
@@ -87,7 +87,7 @@ export default function Artists({ items, eyebrow, heading }: ArtistsProps) {
             {/* Right: bio + instagram */}
             <div className="px-5 md:px-10 py-12 md:py-16 flex flex-col justify-between">
               {artist.bio && (
-                <p className="text-[#221c14] font-bold text-[17px] leading-[1.65em] mb-8 max-w-[480px]">
+                <p className="text-[#221c14] font-bold text-[20px] leading-[1.65em] mb-8 max-w-[480px]">
                   {artist.bio}
                 </p>
               )}
@@ -96,7 +96,7 @@ export default function Artists({ items, eyebrow, heading }: ArtistsProps) {
                   href={artist.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-[#221c14] font-bold text-[14px] tracking-[2px] uppercase border-b-2 border-[#221c14] pb-1 w-fit hover:opacity-50 transition-opacity"
+                  className="inline-flex items-center gap-2 text-[#221c14] font-bold text-[15px] tracking-[2px] uppercase border-b-2 border-[#221c14] pb-1 w-fit hover:opacity-50 transition-opacity"
                 >
                   Instagram{" "}
                   {artist.instagramHandle && (

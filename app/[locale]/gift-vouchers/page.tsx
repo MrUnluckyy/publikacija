@@ -56,16 +56,16 @@ export default async function GiftVouchersPage({ params }: { params: Promise<{ l
 
         {/* Page header */}
         <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-10 md:py-16">
-          <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[3px] uppercase mb-2">
+          <p className="text-[#221c14]/50 font-bold text-[15px] tracking-[3px] uppercase mb-2">
             {eyebrow}
           </p>
           <h1
             className="text-[#221c14] font-extrabold leading-[1.1em] mb-6"
-            style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)" }}
+            style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
           >
             {heading}
           </h1>
-          <p className="text-[#221c14] font-bold text-[18px] leading-[1.65em] max-w-[560px]">
+          <p className="text-[#221c14] font-bold text-[22px] leading-[1.65em] max-w-[560px]">
             {intro}
           </p>
         </div>
@@ -89,22 +89,22 @@ export default async function GiftVouchersPage({ params }: { params: Promise<{ l
                     </div>
                   )}
                   <div className="px-5 md:px-10 py-12 md:py-14 flex flex-col flex-1">
-                    <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase mb-3">
+                    <p className="text-[#221c14]/50 font-bold text-[15px] tracking-[2px] uppercase mb-3">
                       {v.label}
                     </p>
                     <p
                       className="text-[#221c14] font-extrabold leading-none mb-6"
-                      style={{ fontSize: "clamp(2.4rem, 4vw, 3.2rem)" }}
+                      style={{ fontSize: "clamp(2.8rem, 4.5vw, 4rem)" }}
                     >
                       {v.amount}
                     </p>
-                    <p className="text-[#221c14] font-bold text-[16px] leading-[1.65em] mb-6 flex-1">
+                    <p className="text-[#221c14] font-bold text-[22px] leading-[1.65em] mb-6 flex-1">
                       {v.description}
                     </p>
                     {v.ideal && v.ideal.length > 0 && (
                       <ul className="space-y-2 mb-8">
                         {v.ideal.map((item) => (
-                          <li key={item} className="flex items-start gap-3 text-[#221c14]/60 font-bold text-[13px]">
+                          <li key={item} className="flex items-start gap-3 text-[#221c14]/60 font-bold text-[15px]">
                             <span className="mt-[7px] w-1 h-1 rounded-full bg-[#221c14]/40 flex-shrink-0" />
                             {item}
                           </li>
@@ -115,7 +115,7 @@ export default async function GiftVouchersPage({ params }: { params: Promise<{ l
                       amount={Math.round(parseFloat(v.amount.replace(/[^0-9.]/g, "")) * 100)}
                       description={`Publikacija Gift Voucher – ${v.label ?? v.amount}`}
                       label={getVoucherLabel}
-                      className="self-start border-2 border-[#221c14] text-[#221c14] font-bold text-[13px] tracking-[2px] uppercase px-6 py-3 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200 disabled:opacity-40"
+                      className="self-start border-2 border-[#221c14] text-[#221c14] font-bold text-[15px] tracking-[2px] uppercase px-6 py-3 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200 disabled:opacity-40"
                     />
                   </div>
                 </div>
@@ -125,21 +125,21 @@ export default async function GiftVouchersPage({ params }: { params: Promise<{ l
                   key={v.amount}
                   className="border-b-2 lg:border-b-0 lg:border-r-2 border-[#221c14] last:border-r-0 last:border-b-0 px-5 md:px-10 py-12 md:py-14 flex flex-col"
                 >
-                  <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase mb-3">
+                  <p className="text-[#221c14]/50 font-bold text-[15px] tracking-[2px] uppercase mb-3">
                     {v.label}
                   </p>
                   <p
                     className="text-[#221c14] font-extrabold leading-none mb-6"
-                    style={{ fontSize: "clamp(2.4rem, 4vw, 3.2rem)" }}
+                    style={{ fontSize: "clamp(2.8rem, 4.5vw, 4rem)" }}
                   >
                     {v.amount}
                   </p>
-                  <p className="text-[#221c14] font-bold text-[16px] leading-[1.65em] mb-6 flex-1">
+                  <p className="text-[#221c14] font-bold text-[22px] leading-[1.65em] mb-6 flex-1">
                     {v.description}
                   </p>
                   <ul className="space-y-2 mb-8">
                     {v.ideal.map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-[#221c14]/60 font-bold text-[13px]">
+                      <li key={item} className="flex items-start gap-3 text-[#221c14]/60 font-bold text-[15px]">
                         <span className="mt-[7px] w-1 h-1 rounded-full bg-[#221c14]/40 flex-shrink-0" />
                         {item}
                       </li>
@@ -149,7 +149,7 @@ export default async function GiftVouchersPage({ params }: { params: Promise<{ l
                     amount={Math.round(parseFloat(v.amount.replace(/[^0-9.]/g, "")) * 100)}
                     description={`Publikacija Gift Voucher – ${v.label ?? v.amount}`}
                     label={getVoucherLabel}
-                    className="self-start border-2 border-[#221c14] text-[#221c14] font-bold text-[13px] tracking-[2px] uppercase px-6 py-3 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200 disabled:opacity-40"
+                    className="self-start border-2 border-[#221c14] text-[#221c14] font-bold text-[15px] tracking-[2px] uppercase px-6 py-3 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200 disabled:opacity-40"
                   />
                 </div>
               ))}
@@ -158,7 +158,7 @@ export default async function GiftVouchersPage({ params }: { params: Promise<{ l
         {/* How it works */}
         <div className="border-b-2 border-[#221c14]">
           <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-10">
-            <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[3px] uppercase mb-2">
+            <p className="text-[#221c14]/50 font-bold text-[15px] tracking-[3px] uppercase mb-2">
               {howItWorksLabel}
             </p>
           </div>
@@ -172,10 +172,10 @@ export default async function GiftVouchersPage({ params }: { params: Promise<{ l
                   style={{ fontSize: "clamp(4rem, 8vw, 6rem)" }}>
                   {s.step}
                 </p>
-                <p className="text-[#221c14] font-extrabold text-[20px] leading-[1.2em] mb-3">
+                <p className="text-[#221c14] font-extrabold text-[22px] leading-[1.2em] mb-3">
                   {s.title}
                 </p>
-                <p className="text-[#221c14]/70 font-bold text-[16px] leading-[1.65em]">
+                <p className="text-[#221c14]/70 font-bold text-[22px] leading-[1.65em]">
                   {s.body}
                 </p>
               </div>
@@ -188,24 +188,24 @@ export default async function GiftVouchersPage({ params }: { params: Promise<{ l
           <div className="border-r-0 md:border-r-2 border-b-2 md:border-b-0 border-[#221c14] px-5 md:px-10 py-12 md:py-16">
             <h2
               className="text-[#221c14] font-extrabold leading-[1.1em] mb-4"
-              style={{ fontSize: "clamp(1.8rem, 3vw, 2.4rem)" }}
+              style={{ fontSize: "clamp(2.2rem, 3.5vw, 3.2rem)" }}
             >
               {readyHeading}
             </h2>
-            <p className="text-[#221c14]/70 font-bold text-[17px] leading-[1.65em]">
+            <p className="text-[#221c14]/70 font-bold text-[22px] leading-[1.65em]">
               {readyBody}
             </p>
           </div>
           <div className="px-5 md:px-10 py-12 md:py-16 flex flex-col md:flex-row items-start md:items-center gap-4">
             <Link
               href="/book"
-              className="border-2 border-[#221c14] text-[#221c14] font-bold text-[14px] tracking-[2px] uppercase px-8 py-4 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
+              className="border-2 border-[#221c14] text-[#221c14] font-bold text-[15px] tracking-[2px] uppercase px-8 py-4 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
             >
               {orderVoucherLabel}
             </Link>
             <a
               href={`mailto:info@publikacija.lt`}
-              className="border-2 border-[#221c14]/30 text-[#221c14] font-bold text-[14px] tracking-[2px] uppercase px-8 py-4 hover:border-[#221c14] transition-colors duration-200"
+              className="border-2 border-[#221c14]/30 text-[#221c14] font-bold text-[15px] tracking-[2px] uppercase px-8 py-4 hover:border-[#221c14] transition-colors duration-200"
             >
               {emailUsLabel}
             </a>

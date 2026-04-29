@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
@@ -16,20 +16,38 @@ const PLACEHOLDER_COLORS = [
 export default function WorkGallery({ items }: { items: PortfolioItemData[] }) {
   const t = useTranslations("ourWork");
 
-  type Filter = "all" | "tattoo" | "print";
-  const [active, setActive] = useState<Filter>("all");
+  const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [activeArtist, setActiveArtist] = useState<string>("all");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  const FILTERS: { key: Filter; label: string }[] = [
+  const CATEGORY_FILTERS = [
     { key: "all",    label: t("filterAll") },
     { key: "tattoo", label: t("filterTattoo") },
     { key: "print",  label: t("filterPrint") },
   ];
 
-  const filtered =
-    active === "all"
-      ? items
-      : items.filter((i) => i.category?.toLowerCase() === active);
+  // Derive unique artists from items, preserving order of first appearance
+  const artists = useMemo(() => {
+    const seen = new Set<string>();
+    const result: string[] = [];
+    for (const item of items) {
+      if (item.artistName && !seen.has(item.artistName)) {
+        seen.add(item.artistName);
+        result.push(item.artistName);
+      }
+    }
+    return result;
+  }, [items]);
+
+  const filtered = useMemo(() => {
+    return items.filter((item) => {
+      const categoryMatch =
+        activeCategory === "all" || item.category?.toLowerCase() === activeCategory;
+      const artistMatch =
+        activeArtist === "all" || item.artistName === activeArtist;
+      return categoryMatch && artistMatch;
+    });
+  }, [items, activeCategory, activeArtist]);
 
   const lightboxImages = filtered
     .filter((item) => item.image)
@@ -49,14 +67,14 @@ export default function WorkGallery({ items }: { items: PortfolioItemData[] }) {
 
   return (
     <>
-      {/* Filter tabs */}
+      {/* Category filters */}
       <div className="flex border-b-2 border-[#221c14]">
-        {FILTERS.map((f) => (
+        {CATEGORY_FILTERS.map((f) => (
           <button
             key={f.key}
-            onClick={() => setActive(f.key)}
+            onClick={() => setActiveCategory(f.key)}
             className={`font-bold text-[13px] tracking-[2px] uppercase px-6 md:px-10 py-5 border-r-2 border-[#221c14] last:border-r-0 transition-colors duration-200 cursor-pointer ${
-              active === f.key
+              activeCategory === f.key
                 ? "bg-[#221c14] text-[#e5e4d2]"
                 : "text-[#221c14] hover:bg-[#221c14] hover:text-[#e5e4d2]"
             }`}
@@ -65,6 +83,25 @@ export default function WorkGallery({ items }: { items: PortfolioItemData[] }) {
           </button>
         ))}
       </div>
+
+      {/* Artist filters — secondary, lightweight row */}
+      {artists.length > 1 && (
+        <div className="flex items-center gap-6 border-b-2 border-[#221c14] px-5 md:px-10 py-3">
+          {[{ key: "all", label: t("filterAll") }, ...artists.map((a) => ({ key: a, label: a }))].map((f) => (
+            <button
+              key={f.key}
+              onClick={() => setActiveArtist(f.key)}
+              className={`font-bold text-[11px] tracking-[3px] uppercase transition-colors duration-200 cursor-pointer pb-0.5 ${
+                activeArtist === f.key
+                  ? "text-[#221c14] border-b-2 border-[#221c14]"
+                  : "text-[#221c14]/35 border-b-2 border-transparent hover:text-[#221c14]"
+              }`}
+            >
+              {f.label}
+            </button>
+          ))}
+        </div>
+      )}
 
       {/* Grid */}
       <motion.div layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

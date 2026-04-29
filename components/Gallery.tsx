@@ -128,10 +128,10 @@ export default function Gallery({ items, eyebrow, heading }: Props) {
 
         {/* Header */}
         <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-10">
-          <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[3px] uppercase mb-2">{displayEyebrow}</p>
+          <p className="text-[#221c14]/50 font-bold text-[14px] tracking-[3px] uppercase mb-2">{displayEyebrow}</p>
           <h2
             className="text-[#221c14] font-extrabold leading-[1.1em]"
-            style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)" }}
+            style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
           >
             {displayHeading}
           </h2>
@@ -146,7 +146,7 @@ export default function Gallery({ items, eyebrow, heading }: Props) {
               <div key={group.name} className={gi > 0 ? "border-t-2 border-[#221c14]" : ""}>
                 {/* Artist label */}
                 <div className="px-5 md:px-10 pt-6 pb-2">
-                  <span className="text-[#221c14]/40 font-bold text-[12px] tracking-[3px] uppercase">
+                  <span className="text-[#221c14]/40 font-bold text-[13px] tracking-[3px] uppercase">
                     {group.name}
                   </span>
                 </div>
@@ -199,7 +199,7 @@ export default function Gallery({ items, eyebrow, heading }: Props) {
         <div className="px-5 md:px-10 mt-6 mb-10">
           <a
             href="/our-work"
-            className="inline-flex items-center gap-3 text-[#221c14] font-bold text-[15px] tracking-[2px] uppercase border-b-2 border-[#221c14] pb-1 hover:opacity-60 transition-opacity"
+            className="inline-flex items-center gap-3 text-[#221c14] font-bold text-[17px] tracking-[2px] uppercase border-b-2 border-[#221c14] pb-1 hover:opacity-60 transition-opacity"
           >
             {t("viewAll")} <span>→</span>
           </a>

@@ -29,12 +29,12 @@ export default async function OurWorkPage() {
 
         {/* Page header */}
         <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-10 md:py-16">
-          <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[3px] uppercase mb-2">
+          <p className="text-[#221c14]/50 font-bold text-[14px] tracking-[3px] uppercase mb-2">
             {t("eyebrow")}
           </p>
           <h1
             className="text-[#221c14] font-extrabold leading-[1.1em]"
-            style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)" }}
+            style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
           >
             {t("heading")}
           </h1>
