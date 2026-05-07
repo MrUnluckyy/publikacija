@@ -15,6 +15,11 @@ export type MuxVideoAsset = {
 };
 
 // ─── Documents ─────────────────────────────────────────────────────────────────
+
+export type AnnouncementBarData = {
+  enabled: boolean;
+  items: { text: string | null }[] | null;
+};
 // All text fields are pre-resolved for the requested locale by GROQ projections.
 // Components receive plain strings — no locale handling needed in components.
 
@@ -149,6 +154,15 @@ export type TermsPageData = {
     heading: string | null;
     body: PortableTextBlock[] | null;
   }[] | null;
+};
+
+export type NewsPostData = {
+  _id: string;
+  title: string | null;
+  excerpt: string | null;
+  date: string | null;
+  coverImage: SanityImage | null;
+  slug: string | null;
 };
 
 export type GiftVouchersPageData = {

@@ -24,7 +24,7 @@ export default async function OurWorkPage() {
   return (
     <>
       <Navigation />
-      <main style={{ backgroundColor: "#e5e4d2", paddingTop: 72 }}>
+      <main style={{ backgroundColor: "#e5e4d2", paddingTop: "calc(72px + var(--bar-h, 0px))" }}>
         <BackToHome />
 
         {/* Page header */}

@@ -44,7 +44,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
         <div className="px-5 md:px-10 py-12 md:py-16">
           <h3
             className="text-[#221c14] font-extrabold leading-[1.1em] mb-6"
-            style={{ fontSize: "clamp(2.2rem, 3.5vw, 3.2rem)" }}
+            style={{ fontSize: "clamp(1.8rem, 3vw, 2.4rem)" }}
           >
             {bookHeading}
           </h3>
@@ -69,7 +69,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
         <div className="px-5 md:px-10 py-12 md:py-16">
           <h3
             className="text-[#221c14] font-extrabold leading-[1.1em] mb-6"
-            style={{ fontSize: "clamp(2.2rem, 3.5vw, 3.2rem)" }}
+            style={{ fontSize: "clamp(1.8rem, 3vw, 2.4rem)" }}
           >
             {findUsHeading}
           </h3>

@@ -144,6 +144,15 @@
     "eyebrow": "Dovanų kuponai",
     "heading": "Dovanų kuponai",
     "intro": "Padovanokite tikrai asmenišką patirtį – individualią tatuiruotę, linorytų spaudą arba popietę seminarų širdyje Vilniuje. Kuponai negaliojimo laiko neturi.",
+    "orderFormHeading": "Užsakyti",
+    "selectVoucher": "Pasirinkite kuponą",
+    "selectContact": "Kaip su jumis susisiekti?",
+    "instagramOption": "Instagram",
+    "emailOption": "El. paštu",
+    "payOnlineOption": "Mokėti internetu",
+    "instagramPlaceholder": "Jūsų Instagram paskyra",
+    "send": "Siųsti",
+    "terms": "Taisyklės ir sąlygos",
     "howItWorks": "Kaip tai veikia",
     "steps": [
       {

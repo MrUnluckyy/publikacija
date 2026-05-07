@@ -53,7 +53,7 @@ export default function Hero({ data }: { data?: HeroData | null }) {
             <div>
               <motion.h1
                 className="text-[#221c14] font-extrabold leading-[1.1em] mb-10"
-                style={{ fontSize: "clamp(3.5rem, 6vw, 6.5rem)" }}
+                style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: ready ? 0 : 30, opacity: ready ? 1 : 0 }}
                 transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1], delay: 0.05 }}
@@ -88,7 +88,7 @@ export default function Hero({ data }: { data?: HeroData | null }) {
               >
                 <span
                   className="font-extrabold leading-none"
-                  style={{ fontSize: "clamp(2.4rem, 4.5vw, 4rem)" }}
+                  style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
                 >
                   {svc.label}
                 </span>

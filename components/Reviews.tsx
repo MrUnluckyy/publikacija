@@ -83,6 +83,10 @@ const PLACEHOLDER_REVIEWS: ReviewData[] = [
   { _id: "p3", author: "Emilija V.", body: "Booked a tattoo consultation and felt completely at ease. Very professional, hygienic, and the artist took time to really refine the design.", rating: 5, date: null },
   { _id: "p4", author: "Tomas A.", body: "Attended a printmaking workshop — one of the best afternoons I've had in Vilnius. Small group, great teacher, and I left with something I made myself.", rating: 5, date: null },
   { _id: "p5", author: "Aistė R.", body: "The gift voucher was the perfect present. My partner used it for a custom tattoo and the whole process from booking to the final piece was seamless.", rating: 5, date: null },
+  { _id: "p6", author: "Rūta S.", body: "Came in for a small fine-line tattoo and left completely in love with it. Clean studio, friendly team, zero pressure. Highly recommend.", rating: 5, date: null },
+  { _id: "p7", author: "Mantas J.", body: "The linocut workshop was such a unique experience. Never thought I'd be carving my own print block, but the guidance made it feel natural. Left feeling genuinely proud.", rating: 5, date: null },
+  { _id: "p8", author: "Viktorija P.", body: "Received a gift voucher from a friend and used it for a tattoo session. The whole experience — from the first message to the finished piece — was exactly how it should be.", rating: 5, date: null },
+  { _id: "p9", author: "Karolis N.", body: "Commissioned a custom linocut print as a gift. The design process was collaborative and thoughtful, and the final print is genuinely a piece of art.", rating: 5, date: null },
 ];
 
 interface ReviewsProps {
@@ -109,12 +113,23 @@ export default function Reviews({ items, eyebrow, heading }: ReviewsProps) {
         </h2>
       </div>
 
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto scrollbar-hide">
         <div className="flex w-max divide-x-2 divide-[#221c14]">
           {reviews.map((r) => (
             <ReviewCard key={r._id} review={r} />
           ))}
         </div>
+      </div>
+
+      <div className="border-t-2 border-[#221c14] px-5 md:px-10 py-5 flex justify-end">
+        <a
+          href="https://www.google.com/maps/place/?q=place_id:ChIJORCGdQGV3UYRPr8ybynp0YA"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[#221c14]/40 font-bold text-[13px] tracking-[2px] uppercase hover:text-[#221c14] transition-colors duration-200"
+        >
+          Visi atsiliepimai Google ↗
+        </a>
       </div>
     </section>
   );

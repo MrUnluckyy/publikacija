@@ -8,6 +8,7 @@
   --muted:       #585858;
   --line:        #000000;
   --footer-dark: #211c15;
+  --bar-h:       0px; /* set to 36px by layout when announcement bar is enabled */
 }
 
 /* ─── Base ───────────────────────────────────────────── */
@@ -27,9 +28,12 @@ body {
 }
 
 /* ─── Scrollbar ──────────────────────────────────────── */
-::-webkit-scrollbar       { width: 3px; }
+::-webkit-scrollbar       { width: 3px; height: 0; }
 ::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb { background: var(--text); }
+
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
 
 /* ─── Selection ──────────────────────────────────────── */
 ::selection {
@@ -49,6 +53,9 @@ body {
 
 .marquee-left  { animation: scroll-left  18s linear infinite; }
 .marquee-right { animation: scroll-right 18s linear infinite; }
+
+/* ─── Announcement bar marquee ───────────────────────── */
+.announcement-marquee { animation: scroll-left 28s linear infinite; }
 
 /* ─── Gallery row scroll ─────────────────────────────── */
 .gallery-left  { animation: scroll-left  90s linear infinite; }

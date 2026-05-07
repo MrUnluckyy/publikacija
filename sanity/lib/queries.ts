@@ -5,6 +5,12 @@ import { groq } from "next-sanity";
 // coalesce(field[$locale], field.lt) means: try the requested locale,
 // fall back to Lithuanian (the primary language) if not set.
 
+// ── Announcement Bar ─────────────────────────────────────────────────────────
+export const announcementBarQuery = groq`*[_type == "announcementBar" && _id == "announcement-bar-singleton"][0] {
+  enabled,
+  "items": items[]{ "text": coalesce(@[$locale], @.lt) }
+}`;
+
 // ── Hero ──────────────────────────────────────────────────────────────────────
 export const heroQuery = groq`*[_type == "hero" && _id == "hero-singleton"][0] {
   "title1": coalesce(title1[$locale], title1.lt),
@@ -161,6 +167,16 @@ export const termsQuery = groq`*[_type == "termsPage"][0] {
     "heading": coalesce(heading[$locale], heading.lt),
     "body":    coalesce(body[$locale], body.lt)
   }
+}`;
+
+// ── News Posts ────────────────────────────────────────────────────────────────
+export const newsPostsQuery = groq`*[_type == "newsPost"] | order(date desc) {
+  _id,
+  "title":   coalesce(title[$locale], title.lt),
+  "excerpt": coalesce(excerpt[$locale], excerpt.lt),
+  date,
+  coverImage,
+  "slug": slug.current
 }`;
 
 // ── Gift Vouchers Page ────────────────────────────────────────────────────────

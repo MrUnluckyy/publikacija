@@ -144,6 +144,15 @@
     "eyebrow": "Gift Vouchers",
     "heading": "Gift Vouchers",
     "intro": "Give someone the gift of a truly personal experience — a custom tattoo, a linocut print, or an afternoon workshop in the heart of Vilnius. Vouchers never expire.",
+    "orderFormHeading": "Place an order",
+    "selectVoucher": "Select a voucher",
+    "selectContact": "How would you like to be contacted?",
+    "instagramOption": "Instagram",
+    "emailOption": "Email",
+    "payOnlineOption": "Pay online",
+    "instagramPlaceholder": "Your Instagram handle",
+    "send": "Send",
+    "terms": "Terms & Conditions",
     "howItWorks": "How it works",
     "steps": [
       {

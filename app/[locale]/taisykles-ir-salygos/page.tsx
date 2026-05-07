@@ -43,7 +43,7 @@ export default async function TermsPage({
   return (
     <>
       <Navigation />
-      <main style={{ paddingTop: 72 }}>
+      <main style={{ paddingTop: "calc(72px + var(--bar-h, 0px))" }}>
         <BackToHome />
 
         {/* Page header */}
@@ -59,7 +59,7 @@ export default async function TermsPage({
           )}
           <h1
             className="text-[#221c14] font-extrabold leading-[1.1em]"
-            style={{ fontSize: "clamp(2.4rem, 5vw, 4rem)" }}
+            style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
           >
             {heading}
           </h1>

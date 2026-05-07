@@ -43,7 +43,7 @@ export default async function AboutPage({
   return (
     <>
       <Navigation />
-      <main style={{ paddingTop: 72 }}>
+      <main style={{ paddingTop: "calc(72px + var(--bar-h, 0px))" }}>
         <BackToHome />
         <About data={data} />
 
@@ -55,7 +55,7 @@ export default async function AboutPage({
             </p>
             <h2
               className="text-[#221c14] font-extrabold leading-[1.1em]"
-              style={{ fontSize: "clamp(2.2rem, 3.5vw, 3.2rem)" }}
+              style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
             >
               {isLt ? "Tatuiruotės priežiūros instrukcija" : "Tattoo Aftercare Guide"}
             </h2>

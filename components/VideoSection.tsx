@@ -47,7 +47,7 @@ export default function VideoSection({ video, content, label }: Props) {
         {/* Left: video — border on static wrapper */}
         <div className="border-b-2 md:border-b-0 md:border-r-2 border-[#221c14]">
         <div className="flex flex-col">
-          <div className="relative aspect-[4/3] bg-[#221c14] overflow-hidden">
+          <div className="relative aspect-[4/3] overflow-hidden">
             <MuxPlayer
               ref={playerRef}
               playbackId={video.playbackId}
@@ -63,6 +63,8 @@ export default function VideoSection({ video, content, label }: Props) {
                 width: "100%",
                 height: "100%",
                 "--controls": "none",
+                "--media-object-fit": "cover",
+                "--media-object-position": "center",
               } as React.CSSProperties & Record<`--${string}`, string>}
             />
           </div>
@@ -114,7 +116,7 @@ export default function VideoSection({ video, content, label }: Props) {
             </p>
             <h2
               className="text-[#221c14] font-extrabold leading-[1.1em] mb-8"
-              style={{ fontSize: "clamp(2rem, 4vw, 3.2rem)" }}
+              style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
             >
               {heading}
             </h2>

@@ -168,7 +168,7 @@ export default function ProcessPage() {
             </p>
             <h1
               className="text-[#e5e4d2] font-extrabold leading-[1.0em] mb-8"
-              style={{ fontSize: "clamp(4.5rem, 12vw, 10rem)" }}
+              style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
             >
               The<br />Process
             </h1>
@@ -315,7 +315,7 @@ export default function ProcessPage() {
             </p>
             <h2
               className="text-[#e5e4d2] font-extrabold leading-[1.0em]"
-              style={{ fontSize: "clamp(3.5rem, 7.5vw, 6.5rem)" }}
+              style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
             >
               Begin your<br />own story.
             </h2>

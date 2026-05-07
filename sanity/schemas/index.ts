@@ -13,6 +13,8 @@ import videoSection from "./videoSection";
 import bookPage from "./bookPage";
 import giftVouchersPage from "./giftVouchersPage";
 import termsPage from "./termsPage";
+import announcementBar from "./announcementBar";
+import newsPost from "./newsPost";
 
 export const schemaTypes = [
   // Shared locale types (must be registered for field references to work)
@@ -21,6 +23,7 @@ export const schemaTypes = [
   localeBlock,
 
   // Singletons
+  announcementBar,
   hero,
   siteSettings,
   videoSection,
@@ -30,6 +33,7 @@ export const schemaTypes = [
   termsPage,
 
   // Collections
+  newsPost,
   service,
   portfolioItem,
   studioVideo,

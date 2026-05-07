@@ -43,7 +43,7 @@ export default function BookingCTA() {
             Ready to Start?
           </p>
 
-          <h2 className="text-[clamp(3.5rem,9vw,8rem)] font-bold uppercase tracking-tight text-white leading-[0.85] mb-14">
+          <h2 className="text-[clamp(3rem,5.5vw,5rem)] font-bold uppercase tracking-tight text-white leading-[0.85] mb-14">
             Let&apos;s make
             <br />
             something

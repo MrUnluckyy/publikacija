@@ -155,7 +155,7 @@ export default function BookingClient({ labels, voucherHref }: Props) {
                   <div>
                     <h3
                       className="text-[#221c14] font-extrabold leading-[1.1em] mb-6"
-                      style={{ fontSize: "clamp(2rem, 3.5vw, 2.8rem)" }}
+                      style={{ fontSize: "clamp(1.8rem, 3vw, 2.4rem)" }}
                     >
                       {labels.workshopHeading}
                     </h3>
