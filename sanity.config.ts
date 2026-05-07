@@ -18,6 +18,13 @@ export default defineConfig({
         S.list()
           .title("Content")
           .items([
+            // ── Global UI ────────────────────────────────────────────
+            S.listItem()
+              .title("Announcement Bar")
+              .child(S.document().schemaType("announcementBar").documentId("announcement-bar-singleton")),
+
+            S.divider(),
+
             // ── Landing page ─────────────────────────────────────────
             S.listItem()
               .title("Hero Section")
@@ -26,6 +33,7 @@ export default defineConfig({
               .title("Video Section")
               .child(S.document().schemaType("videoSection").documentId("video-section-singleton")),
             S.documentTypeListItem("service").title("Services"),
+            S.documentTypeListItem("newsPost").title("News Posts"),
 
             S.divider(),
 
