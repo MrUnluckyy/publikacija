@@ -44,7 +44,7 @@ export default function Hero({ data }: { data?: HeroData | null }) {
         {/* border-r starts at section y=0, always aligned with the nav divider */}
         <div className="border-b-2 md:border-b-0 md:border-r-2 border-[#221c14]">
           <motion.div
-            className="flex flex-col justify-between px-5 md:px-10 pb-12 md:pb-16 h-full"
+            className="flex flex-col justify-between px-5 md:px-10 pb-12 md:pb-16 md:h-full"
             style={{ paddingTop: NAV_H + 48 }} // nav height + content breathing room
             initial={{ opacity: 0 }}
             animate={{ opacity: ready ? 1 : 0 }}
@@ -87,7 +87,7 @@ export default function Hero({ data }: { data?: HeroData | null }) {
                 transition={{ duration: 0.5, delay: 0.1 + i * 0.08 }}
               >
                 <span
-                  className="font-extrabold leading-none"
+                  className="font-normal leading-none"
                   style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
                 >
                   {svc.label}

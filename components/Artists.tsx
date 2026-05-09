@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useMemo } from "react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import type { ArtistData, PortfolioItemData } from "@/sanity/types";
 import { urlFor } from "@/sanity/lib/image";
 import Lightbox from "./Lightbox";
@@ -39,15 +39,15 @@ function WorkCard({ item, onClick }: { item: PortfolioItemData; onClick: () => v
   return (
     <button
       onClick={onClick}
-      className="flex-none w-[180px] md:w-[220px] aspect-[2/3] relative overflow-hidden cursor-pointer group focus:outline-none"
+      className="flex-none w-[210px] md:w-[260px] aspect-[2/3] relative overflow-hidden cursor-pointer group focus:outline-none"
     >
       {item.image && (
         <Image
-          src={urlFor(item.image).width(440).height(660).auto("format").url()}
+          src={urlFor(item.image).width(520).height(780).auto("format").url()}
           alt={item.title}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-700"
-          sizes="220px"
+          sizes="260px"
         />
       )}
       <div className="absolute inset-0 bg-[#221c14]/0 group-hover:bg-[#221c14]/40 transition-colors duration-300" />
@@ -56,8 +56,18 @@ function WorkCard({ item, onClick }: { item: PortfolioItemData; onClick: () => v
 }
 
 export default function Artists({ items, eyebrow, heading, portfolioItems }: Props) {
-  const t  = useTranslations("artists");
-  const tg = useTranslations("gallery");
+  const t      = useTranslations("artists");
+  const tg     = useTranslations("gallery");
+  const locale = useLocale();
+
+  const [expandedBios, setExpandedBios] = useState<Set<string>>(new Set());
+  function toggleBio(id: string) {
+    setExpandedBios((prev) => {
+      const next = new Set(prev);
+      next.has(id) ? next.delete(id) : next.add(id);
+      return next;
+    });
+  }
 
   const fallbackBios: Record<string, string> = {
     lukas:    t("lukasBio"),
@@ -149,9 +159,9 @@ export default function Artists({ items, eyebrow, heading, portfolioItems }: Pro
               <div key={artist._id} className="border-b-2 border-[#221c14] last:border-b-0">
 
                 {/* Bio row */}
-                <div className={`grid grid-cols-1 md:grid-cols-2 ${work.length > 0 ? "border-b-2 border-[#221c14]" : ""}`}>
-                  {/* Left: name + role */}
-                  <div className="border-b-2 md:border-b-0 md:border-r-2 border-[#221c14] px-5 md:px-10 py-12 md:py-16 flex flex-col justify-center">
+                <div className={`grid grid-cols-1 md:grid-cols-2 ${work.length > 0 ? "md:border-b-2 md:border-[#221c14]" : ""}`}>
+                  {/* Left: name + role + instagram handle */}
+                  <div className="md:border-r-2 border-[#221c14] px-5 md:px-10 pt-10 pb-3 md:py-16 flex flex-col justify-center">
                     <h3
                       className="text-[#221c14] font-extrabold leading-[1.05em] mb-2"
                       style={{ fontSize: "clamp(2.4rem, 4.5vw, 4rem)" }}
@@ -163,27 +173,57 @@ export default function Artists({ items, eyebrow, heading, portfolioItems }: Pro
                         {artist.role}
                       </p>
                     )}
-                  </div>
-
-                  {/* Right: bio + instagram */}
-                  <div className="px-5 md:px-10 py-12 md:py-16 flex flex-col justify-between">
-                    {artist.bio && (
-                      <p className="text-[#221c14] font-bold text-[20px] leading-[1.65em] mb-8 max-w-[480px]">
-                        {artist.bio}
-                      </p>
-                    )}
-                    {artist.instagramUrl && (
+                    {artist.instagramHandle && artist.instagramUrl && (
                       <a
                         href={artist.instagramUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 text-[#221c14] font-bold text-[15px] tracking-[2px] uppercase border-b-2 border-[#221c14] pb-1 w-fit hover:opacity-50 transition-opacity"
+                        className="text-[#221c14]/40 font-bold text-[13px] tracking-[2px] uppercase mt-3 hover:text-[#221c14] transition-colors w-fit"
                       >
-                        Instagram{" "}
-                        {artist.instagramHandle && (
-                          <span className="text-[#221c14]/50">{artist.instagramHandle}</span>
-                        )}
+                        Instagram {artist.instagramHandle}
                       </a>
+                    )}
+                  </div>
+
+                  {/* Right: bio only */}
+                  <div className="px-5 md:px-10 pt-3 pb-10 md:py-16 flex flex-col justify-center">
+                    {artist.bio && (
+                      <>
+                        {/* Mobile: inline truncation */}
+                        {!expandedBios.has(artist._id) ? (
+                          <p className="md:hidden text-[#221c14] font-bold text-[20px] leading-[1.65em]">
+                            {artist.bio.length > 180
+                              ? artist.bio.slice(0, artist.bio.lastIndexOf(" ", 180))
+                              : artist.bio}
+                            {artist.bio.length > 180 && (
+                              <>
+                                {"… "}
+                                <button
+                                  className="inline italic text-[#221c14]/50 hover:text-[#221c14] transition-colors"
+                                  onClick={() => toggleBio(artist._id)}
+                                >
+                                  {locale === "lt" ? "Rodyti daugiau" : "Show more"}
+                                </button>
+                              </>
+                            )}
+                          </p>
+                        ) : (
+                          <p className="md:hidden text-[#221c14] font-bold text-[20px] leading-[1.65em] mb-3">
+                            {artist.bio}
+                            {" "}
+                            <button
+                              className="inline italic text-[#221c14]/50 hover:text-[#221c14] transition-colors"
+                              onClick={() => toggleBio(artist._id)}
+                            >
+                              {locale === "lt" ? "Rodyti mažiau ↑" : "Show less ↑"}
+                            </button>
+                          </p>
+                        )}
+                        {/* Desktop: full bio */}
+                        <p className="hidden md:block text-[#221c14] font-bold text-[20px] leading-[1.65em]">
+                          {artist.bio}
+                        </p>
+                      </>
                     )}
                   </div>
                 </div>

@@ -23,20 +23,31 @@ export default async function LocaleLayout({ children, params }: Props) {
   ]);
 
   const barEnabled = bar?.enabled === true;
-  const barItems = barEnabled
-    ? (bar!.items ?? []).map((i) => i.text).filter((t): t is string => Boolean(t))
-    : [];
+  const barType = bar?.barType ?? "marquee";
+  const barItems = (bar?.items ?? []).map((i) => i.text).filter((t): t is string => Boolean(t));
+  const isMarquee = barType === "marquee";
+  const isCta     = barType === "cta";
+  const barVisible = barEnabled && (
+    (isMarquee && barItems.length > 0) ||
+    (isCta && Boolean(bar?.ctaMessage || bar?.ctaLinkLabel))
+  );
 
   return (
     <>
       {/* Inject CSS variable server-side so nav and page offsets are correct on first paint */}
-      {barEnabled && barItems.length > 0 && (
+      {barVisible && (
         <style>{`:root { --bar-h: 36px; }`}</style>
       )}
       <NextIntlClientProvider messages={messages}>
         <PreloaderWrapper>
-          {barEnabled && barItems.length > 0 && (
-            <AnnouncementBarBanner items={barItems} />
+          {barVisible && (
+            <AnnouncementBarBanner
+              barType={barType}
+              items={barItems}
+              ctaMessage={bar?.ctaMessage}
+              ctaLinkLabel={bar?.ctaLinkLabel}
+              ctaLinkHref={bar?.ctaLinkHref}
+            />
           )}
           {children}
         </PreloaderWrapper>

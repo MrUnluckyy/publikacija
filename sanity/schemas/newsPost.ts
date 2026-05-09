@@ -31,6 +31,12 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "body",
+      title: "Article Body",
+      type: "localeBlock",
+      description: "Full article content",
+    }),
+    defineField({
       name: "slug",
       title: "Slug",
       type: "slug",

@@ -45,71 +45,71 @@ export default function VideoSection({ video, content, label }: Props) {
       <div className="grid md:grid-cols-2">
 
         {/* Left: video — border on static wrapper */}
-        <div className="border-b-2 md:border-b-0 md:border-r-2 border-[#221c14]">
-        <div className="flex flex-col">
-          <div className="relative aspect-[4/3] overflow-hidden">
-            <MuxPlayer
-              ref={playerRef}
-              playbackId={video.playbackId}
-              streamType="on-demand"
-              autoPlay="muted"
-              muted
-              loop
-              playsInline
-              nohotkeys
-              style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                "--controls": "none",
-                "--media-object-fit": "cover",
-                "--media-object-position": "center",
-              } as React.CSSProperties & Record<`--${string}`, string>}
-            />
-          </div>
+        <div className="md:border-r-2 border-[#221c14]">
+          <div className="flex flex-col">
+            <div className="relative aspect-[4/3] overflow-hidden">
+              <MuxPlayer
+                ref={playerRef}
+                playbackId={video.playbackId}
+                streamType="on-demand"
+                autoPlay="muted"
+                muted
+                loop
+                playsInline
+                nohotkeys
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  "--controls": "none",
+                  "--media-object-fit": "cover",
+                  "--media-object-position": "center",
+                } as React.CSSProperties & Record<`--${string}`, string>}
+              />
+            </div>
 
-          {/* Controls bar */}
-          <div className="border-t-2 border-[#221c14] px-5 md:px-8 py-4 flex items-center justify-between">
-            <button
-              onClick={togglePlay}
-              className="font-bold text-[13px] tracking-[2px] uppercase text-[#221c14] hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-2"
-            >
-              {playing ? (
-                <>
-                  <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor">
-                    <rect x="0" y="0" width="3" height="12" /><rect x="7" y="0" width="3" height="12" />
-                  </svg>
-                  Pause
-                </>
-              ) : (
-                <>
-                  <svg width="10" height="12" viewBox="0 0 24 24" fill="currentColor">
-                    <polygon points="6,3 20,12 6,21" />
-                  </svg>
-                  Play
-                </>
-              )}
-            </button>
-            <div className="flex items-center gap-5">
-              {label && (
-                <span className="text-[#221c14]/40 font-bold text-[12px] tracking-[1px] hidden md:block truncate max-w-[180px]">
-                  {label}
-                </span>
-              )}
+            {/* Controls bar — desktop only */}
+            <div className="hidden md:flex border-t-2 border-[#221c14] px-8 py-4 items-center justify-between">
               <button
-                onClick={toggleMute}
-                className="font-bold text-[13px] tracking-[2px] uppercase text-[#221c14] hover:opacity-50 transition-opacity cursor-pointer"
+                onClick={togglePlay}
+                className="font-bold text-[13px] tracking-[2px] uppercase text-[#221c14] hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-2"
               >
-                {muted ? "Unmute" : "Mute"}
+                {playing ? (
+                  <>
+                    <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor">
+                      <rect x="0" y="0" width="3" height="12" /><rect x="7" y="0" width="3" height="12" />
+                    </svg>
+                    Pause
+                  </>
+                ) : (
+                  <>
+                    <svg width="10" height="12" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="6,3 20,12 6,21" />
+                    </svg>
+                    Play
+                  </>
+                )}
               </button>
+              <div className="flex items-center gap-5">
+                {label && (
+                  <span className="text-[#221c14]/40 font-bold text-[12px] tracking-[1px] truncate max-w-[180px]">
+                    {label}
+                  </span>
+                )}
+                <button
+                  onClick={toggleMute}
+                  className="font-bold text-[13px] tracking-[2px] uppercase text-[#221c14] hover:opacity-50 transition-opacity cursor-pointer"
+                >
+                  {muted ? "Unmute" : "Mute"}
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        </div>
 
-        {/* Right: text */}
-        <div className="px-5 md:px-10 py-12 md:py-16 flex flex-col justify-between">
+        {/* Right: text — desktop only */}
+        <div className="hidden md:flex px-10 py-16 flex-col justify-between">
           <div>
             <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[3px] uppercase mb-4">
               {eyebrow}

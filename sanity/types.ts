@@ -18,7 +18,11 @@ export type MuxVideoAsset = {
 
 export type AnnouncementBarData = {
   enabled: boolean;
+  barType: "marquee" | "cta" | null;
   items: { text: string | null }[] | null;
+  ctaMessage: string | null;
+  ctaLinkLabel: string | null;
+  ctaLinkHref: string | null;
 };
 // All text fields are pre-resolved for the requested locale by GROQ projections.
 // Components receive plain strings — no locale handling needed in components.
@@ -160,6 +164,7 @@ export type NewsPostData = {
   _id: string;
   title: string | null;
   excerpt: string | null;
+  body?: PortableTextBlock[] | null;
   date: string | null;
   coverImage: SanityImage | null;
   slug: string | null;

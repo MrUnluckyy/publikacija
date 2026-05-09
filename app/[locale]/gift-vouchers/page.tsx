@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { client } from "@/sanity/lib/client";
 import { giftVouchersQuery, giftVouchersPageQuery } from "@/sanity/lib/queries";
-import type { GiftVoucherData, GiftVouchersPageData } from "@/sanity/types";
+import type { GiftVoucherData, GiftVouchersPageData, SanityImage } from "@/sanity/types";
 import { urlFor } from "@/sanity/lib/image";
 import Navigation from "@/components/Navigation";
 import FooterWrapper from "@/components/FooterWrapper";
@@ -49,6 +49,28 @@ export default async function GiftVouchersPage({ params }: { params: Promise<{ l
         return { id: v.amount, label: v.label, amount: v.amount, amountCents: cents };
       });
 
+  // Unified card data — same shape for Sanity and fallback paths
+  type CardData = { id: string; label: string; amount: string; description: string | null; coverImage: SanityImage | null };
+  const cards: CardData[] = vouchers
+    ? vouchers.map((v) => {
+        const raw = String(v.amount);
+        const num = parseFloat(raw.replace(/[^0-9.]/g, ""));
+        return {
+          id: v._id,
+          label: v.label ?? "",
+          amount: isNaN(num) ? raw : `€${num}${raw.includes("+") ? "+" : ""}`,
+          description: v.description,
+          coverImage: v.coverImage,
+        };
+      })
+    : fallbackVouchers.map((v) => ({
+        id: v.amount,
+        label: v.label,
+        amount: v.amount,
+        description: v.description,
+        coverImage: null as SanityImage | null,
+      }));
+
   const formLabels = {
     selectVoucher:       t("selectVoucher"),
     selectContact:       t("selectContact"),
@@ -83,66 +105,55 @@ export default async function GiftVouchersPage({ params }: { params: Promise<{ l
           </p>
         </div>
 
-        {/* Voucher showcase */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 border-b-2 border-[#221c14]">
-          {vouchers
-            ? vouchers.map((v) => (
-                <div
-                  key={v._id}
-                  className="border-b-2 lg:border-b-0 lg:border-r-2 border-[#221c14] last:border-r-0 last:border-b-0 flex flex-col"
+        {/* Voucher showcase
+            gap-[2px] + bg-[#221c14]: gives uniform 2px dark lines between all cells
+            without using borders on individual cards, so every card has identical
+            content width → identical image heights → no crookedness.
+            Subgrid (grid-row:span 3 + grid-template-rows:subgrid) aligns label,
+            price and description rows perfectly across all columns in the same row. */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-[2px] bg-[#221c14] border-b-2 border-[#221c14]">
+          {cards.map((card) => (
+            <div
+              key={card.id}
+              className="bg-[#e5e4d2] flex flex-col md:grid md:[grid-row:span_3] md:[grid-template-rows:subgrid]"
+            >
+              {/* Row 1: Image — always rendered so all cards have the same image-section height */}
+              <div className="aspect-[2/3] relative border-b-2 border-[#221c14] overflow-hidden">
+                {card.coverImage ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={urlFor(card.coverImage).width(480).height(720).fit("crop").url()}
+                    alt={card.label}
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="absolute inset-0 bg-[#221c14]/5" />
+                )}
+              </div>
+
+              {/* Row 2: Label + Price */}
+              <div className="px-5 md:px-8 pt-8 pb-4 border-b-2 border-[#221c14]">
+                <p className="text-[#221c14]/50 font-bold text-[15px] tracking-[2px] uppercase mb-2">
+                  {card.label}
+                </p>
+                <p
+                  className="text-[#221c14] font-extrabold leading-none"
+                  style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
                 >
-                  {v.coverImage && (
-                    <div className="aspect-[2/3] border-b-2 border-[#221c14] overflow-hidden">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={urlFor(v.coverImage).width(480).height(720).url()}
-                        alt={v.label ?? ""}
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                  )}
-                  <div className="px-5 md:px-8 py-8 flex flex-col">
-                    <p className="text-[#221c14]/50 font-bold text-[15px] tracking-[2px] uppercase mb-2 min-h-[50px] flex items-start">
-                      {v.label}
-                    </p>
-                    <p
-                      className="text-[#221c14] font-extrabold leading-none mb-4"
-                      style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
-                    >
-                      {(() => {
-                        const raw = String(v.amount);
-                        const num = parseFloat(raw.replace(/[^0-9.]/g, ""));
-                        if (isNaN(num)) return raw;
-                        return `€${num}${raw.includes("+") ? "+" : ""}`;
-                      })()}
-                    </p>
-                    {v.description && (
-                      <p className="text-[#221c14]/60 font-bold text-[17px] leading-[1.6em]">
-                        {v.description}
-                      </p>
-                    )}
-                  </div>
-                </div>
-              ))
-            : fallbackVouchers.map((v) => (
-                <div
-                  key={v.amount}
-                  className="border-b-2 lg:border-b-0 lg:border-r-2 border-[#221c14] last:border-r-0 last:border-b-0 px-5 md:px-8 py-10 flex flex-col"
-                >
-                  <p className="text-[#221c14]/50 font-bold text-[15px] tracking-[2px] uppercase mb-2">
-                    {v.label}
-                  </p>
-                  <p
-                    className="text-[#221c14] font-extrabold leading-none mb-4"
-                    style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
-                  >
-                    {v.amount}
-                  </p>
+                  {card.amount}
+                </p>
+              </div>
+
+              {/* Row 3: Description */}
+              <div className="px-5 md:px-8 py-6">
+                {card.description && (
                   <p className="text-[#221c14]/60 font-bold text-[17px] leading-[1.6em]">
-                    {v.description}
+                    {card.description}
                   </p>
-                </div>
-              ))}
+                )}
+              </div>
+            </div>
+          ))}
         </div>
 
         {/* Order form */}

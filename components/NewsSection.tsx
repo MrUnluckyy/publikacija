@@ -2,7 +2,9 @@
 
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocale } from "next-intl";
 import { urlFor } from "@/sanity/lib/image";
+import { Link } from "@/i18n/navigation";
 import type { NewsPostData } from "@/sanity/types";
 
 interface Props {
@@ -21,6 +23,7 @@ function formatDate(dateStr: string | null, locale: string) {
 }
 
 export default function NewsSection({ items, eyebrow, heading }: Props) {
+  const locale = useLocale();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
 
@@ -121,7 +124,7 @@ export default function NewsSection({ items, eyebrow, heading }: Props) {
             <div>
               {post.date && (
                 <p className="text-[#221c14]/40 font-bold text-[13px] tracking-[3px] uppercase mb-4">
-                  {formatDate(post.date, "lt")}
+                  {formatDate(post.date, locale)}
                 </p>
               )}
               <h3
@@ -131,11 +134,20 @@ export default function NewsSection({ items, eyebrow, heading }: Props) {
                 {post.title}
               </h3>
               {post.excerpt && (
-                <p className="text-[#221c14] font-bold text-[18px] leading-[1.65em] opacity-70">
+                <p className="text-[#221c14] font-bold text-[18px] leading-[1.65em] opacity-70 mb-8">
                   {post.excerpt}
                 </p>
               )}
             </div>
+
+            {post.slug && (
+              <Link
+                href={`/blog/${post.slug}`}
+                className="self-start inline-block border-2 border-[#221c14] text-[#221c14] font-bold text-[13px] tracking-[2px] uppercase px-6 py-3 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
+              >
+                {locale === "lt" ? "Skaityti daugiau" : "Read more"} →
+              </Link>
+            )}
           </motion.div>
         </AnimatePresence>
       </div>

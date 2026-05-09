@@ -8,7 +8,11 @@ import { groq } from "next-sanity";
 // ── Announcement Bar ─────────────────────────────────────────────────────────
 export const announcementBarQuery = groq`*[_type == "announcementBar" && _id == "announcement-bar-singleton"][0] {
   enabled,
-  "items": items[]{ "text": coalesce(@[$locale], @.lt) }
+  barType,
+  "items": items[]{ "text": coalesce(@[$locale], @.lt) },
+  "ctaMessage":   coalesce(ctaMessage[$locale], ctaMessage.lt),
+  "ctaLinkLabel": coalesce(ctaLinkLabel[$locale], ctaLinkLabel.lt),
+  ctaLinkHref
 }`;
 
 // ── Hero ──────────────────────────────────────────────────────────────────────
@@ -174,6 +178,16 @@ export const newsPostsQuery = groq`*[_type == "newsPost"] | order(date desc) {
   _id,
   "title":   coalesce(title[$locale], title.lt),
   "excerpt": coalesce(excerpt[$locale], excerpt.lt),
+  date,
+  coverImage,
+  "slug": slug.current
+}`;
+
+export const newsPostBySlugQuery = groq`*[_type == "newsPost" && slug.current == $slug][0] {
+  _id,
+  "title":   coalesce(title[$locale], title.lt),
+  "excerpt": coalesce(excerpt[$locale], excerpt.lt),
+  "body":    coalesce(body[$locale], body.lt),
   date,
   coverImage,
   "slug": slug.current
