@@ -57,10 +57,7 @@ export default async function TermsPage({
               )}
             </p>
           )}
-          <h1
-            className="text-[#221c14] font-extrabold leading-[1.1em]"
-            style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
-          >
+          <h1 className="text-title text-[#221c14]">
             {heading}
           </h1>
         </div>

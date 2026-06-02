@@ -31,6 +31,12 @@ export default defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "coverVideo",
+      title: "Cover Video (optional)",
+      type: "mux.video",
+      description: "If set, this video plays in the news slider instead of the cover image.",
+    }),
+    defineField({
       name: "body",
       title: "Article Body",
       type: "localeBlock",

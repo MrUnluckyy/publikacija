@@ -25,17 +25,14 @@ export default function Services({ items }: { items?: ServiceData[] | null }) {
           <div className="grid grid-cols-1 md:grid-cols-2">
             {/* Left: heading */}
             <div className="border-b-2 border-[#e5e4d2]/20 md:border-b-0 md:border-r-2 md:border-[#221c14] px-5 md:px-10 pt-10 pb-3 md:py-16 flex items-center">
-              <h2
-                className="text-[#e5e4d2] md:text-[#221c14] font-extrabold leading-[1.1em]"
-                style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
-              >
+              <h2 className="text-title text-[#e5e4d2] md:text-[#221c14]">
                 {svc.heading}
               </h2>
             </div>
 
             {/* Right: body + CTA */}
             <div className="px-5 md:px-10 pt-3 pb-10 md:py-16 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-              <p className="text-[#e5e4d2] md:text-[#221c14] font-bold text-[20px] leading-[1.65em] max-w-[480px]">
+              <p className="text-body text-[#e5e4d2] md:text-[#221c14] max-w-[480px]">
                 {svc.body}
               </p>
               <a

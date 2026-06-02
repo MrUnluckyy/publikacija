@@ -167,6 +167,7 @@ export type NewsPostData = {
   body?: PortableTextBlock[] | null;
   date: string | null;
   coverImage: SanityImage | null;
+  coverVideo: MuxVideoAsset | null;
   slug: string | null;
 };
 

@@ -29,10 +29,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
       {/* Section header */}
       <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-10">
         <p className="text-[#221c14]/50 font-bold text-[15px] tracking-[3px] uppercase mb-2">{eyebrow}</p>
-        <h2
-          className="text-[#221c14] font-extrabold leading-[1.1em]"
-          style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
-        >
+        <h2 className="text-title text-[#221c14]">
           {heading}
         </h2>
       </div>
@@ -42,13 +39,10 @@ export default function ContactSection({ settings }: ContactSectionProps) {
         {/* Left: booking */}
         <div className="border-b-2 md:border-b-0 md:border-r-2 border-[#221c14]">
         <div className="px-5 md:px-10 py-12 md:py-16">
-          <h3
-            className="text-[#221c14] font-extrabold leading-[1.1em] mb-6"
-            style={{ fontSize: "clamp(1.8rem, 3vw, 2.4rem)" }}
-          >
+          <h3 className="text-subtitle text-[#221c14] mb-6">
             {bookHeading}
           </h3>
-          <p className="text-[#221c14] font-bold text-[20px] leading-[1.65em] mb-8 max-w-[400px]">
+          <p className="text-body text-[#221c14] mb-8 max-w-[400px]">
             {bookBody}
           </p>
           <div className="flex flex-col gap-3">
@@ -67,21 +61,18 @@ export default function ContactSection({ settings }: ContactSectionProps) {
 
         {/* Right: studio details */}
         <div className="px-5 md:px-10 py-12 md:py-16">
-          <h3
-            className="text-[#221c14] font-extrabold leading-[1.1em] mb-6"
-            style={{ fontSize: "clamp(1.8rem, 3vw, 2.4rem)" }}
-          >
+          <h3 className="text-subtitle text-[#221c14] mb-6">
             {findUsHeading}
           </h3>
           <div className="space-y-6 text-[#221c14]">
             <div>
               <p className="font-bold text-[15px] tracking-[2px] uppercase text-[#221c14]/50 mb-1">{t("studioLabel")}</p>
-              <p className="font-bold text-[20px] leading-[1.65em]">{studioName}</p>
-              <p className="font-bold text-[20px] leading-[1.65em]">{address}</p>
+              <p className="text-body">{studioName}</p>
+              <p className="text-body">{address}</p>
             </div>
             <div>
               <p className="font-bold text-[15px] tracking-[2px] uppercase text-[#221c14]/50 mb-1">{t("hoursLabel")}</p>
-              <p className="font-bold text-[20px] leading-[1.65em]">{openingHours}</p>
+              <p className="text-body">{openingHours}</p>
             </div>
             <div>
               <p className="font-bold text-[15px] tracking-[2px] uppercase text-[#221c14]/50 mb-1">{t("socialLabel")}</p>
@@ -89,7 +80,7 @@ export default function ContactSection({ settings }: ContactSectionProps) {
                 href={instagramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-bold text-[20px] border-b-2 border-[#221c14]/30 hover:border-[#221c14] transition-colors pb-0.5"
+                className="text-body border-b-2 border-[#221c14]/30 hover:border-[#221c14] transition-colors pb-0.5"
               >
                 {t("instagram")}
               </a>

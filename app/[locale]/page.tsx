@@ -56,7 +56,11 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <Navigation />
       <main>
         <Hero data={hero} />
-        <VideoSection video={hero?.backgroundVideo} content={videoSection} />
+        {newsPosts && newsPosts.length > 0 ? (
+          <NewsSection items={newsPosts} heading="Naujienos" />
+        ) : (
+          <VideoSection video={hero?.backgroundVideo} content={videoSection} />
+        )}
         <Services items={services} />
         <Artists
           items={artists}
@@ -64,7 +68,6 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           heading={settings?.artistsHeading}
           portfolioItems={portfolioItems}
         />
-        <NewsSection items={newsPosts} eyebrow="Naujienos" heading="Naujienos" />
         <Reviews
           items={reviews}
           eyebrow={settings?.reviewsEyebrow}

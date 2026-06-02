@@ -94,13 +94,10 @@ export default async function GiftVouchersPage({ params }: { params: Promise<{ l
           <p className="text-[#221c14]/50 font-bold text-[15px] tracking-[3px] uppercase mb-2">
             {eyebrow}
           </p>
-          <h1
-            className="text-[#221c14] font-extrabold leading-[1.1em] mb-6"
-            style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
-          >
+          <h1 className="text-title text-[#221c14] mb-6">
             {heading}
           </h1>
-          <p className="text-[#221c14] font-bold text-[22px] leading-[1.65em] max-w-[560px]">
+          <p className="text-body text-[#221c14] max-w-[560px]">
             {intro}
           </p>
         </div>
@@ -136,10 +133,7 @@ export default async function GiftVouchersPage({ params }: { params: Promise<{ l
                 <p className="text-[#221c14]/50 font-bold text-[15px] tracking-[2px] uppercase mb-2">
                   {card.label}
                 </p>
-                <p
-                  className="text-[#221c14] font-extrabold leading-none"
-                  style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
-                >
+                <p className="text-subtitle text-[#221c14] leading-none">
                   {card.amount}
                 </p>
               </div>
@@ -147,7 +141,7 @@ export default async function GiftVouchersPage({ params }: { params: Promise<{ l
               {/* Row 3: Description */}
               <div className="px-5 md:px-8 py-6">
                 {card.description && (
-                  <p className="text-[#221c14]/60 font-bold text-[17px] leading-[1.6em]">
+                  <p className="text-body text-[#221c14]/60">
                     {card.description}
                   </p>
                 )}

@@ -7,6 +7,7 @@ import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from "next-sanity";
 import Navigation from "@/components/Navigation";
 import FooterWrapper from "@/components/FooterWrapper";
+import ArrowIcon from "@/components/ui/ArrowIcon";
 import { Link } from "@/i18n/navigation";
 
 export const revalidate = 60;
@@ -66,7 +67,8 @@ export default async function BlogPostPage({
             href="/"
             className="inline-flex items-center gap-2 text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase hover:text-[#221c14] transition-colors"
           >
-            ← {locale === "lt" ? "Grįžti" : "Back"}
+            <ArrowIcon direction="left" size={14} />
+            {locale === "lt" ? "Grįžti" : "Back"}
           </Link>
         </div>
 
@@ -89,14 +91,11 @@ export default async function BlogPostPage({
               {formattedDate}
             </p>
           )}
-          <h1
-            className="text-[#221c14] font-extrabold leading-[1.1em] mb-6 max-w-3xl"
-            style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
-          >
+          <h1 className="text-title text-[#221c14] mb-6 max-w-3xl">
             {post.title}
           </h1>
           {post.excerpt && (
-            <p className="text-[#221c14] font-bold text-[20px] leading-[1.65em] max-w-2xl opacity-70">
+            <p className="text-body text-[#221c14] max-w-2xl opacity-70">
               {post.excerpt}
             </p>
           )}

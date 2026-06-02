@@ -6,6 +6,7 @@ import { useTranslations, useLocale } from "next-intl";
 import type { ArtistData, PortfolioItemData } from "@/sanity/types";
 import { urlFor } from "@/sanity/lib/image";
 import Lightbox from "./Lightbox";
+import ArrowIcon from "./ui/ArrowIcon";
 
 const FALLBACK_ARTISTS: ArtistData[] = [
   {
@@ -39,7 +40,7 @@ function WorkCard({ item, onClick }: { item: PortfolioItemData; onClick: () => v
   return (
     <button
       onClick={onClick}
-      className="flex-none w-[210px] md:w-[260px] aspect-[2/3] relative overflow-hidden cursor-pointer group focus:outline-none"
+      className="flex-none w-[280px] md:w-[260px] aspect-[2/3] relative overflow-hidden cursor-pointer group focus:outline-none snap-start"
     >
       {item.image && (
         <Image
@@ -140,10 +141,7 @@ export default function Artists({ items, eyebrow, heading, portfolioItems }: Pro
           <p className="text-[#221c14]/50 font-bold text-[15px] tracking-[3px] uppercase mb-2">
             {eyebrow ?? t("eyebrow")}
           </p>
-          <h2
-            className="text-[#221c14] font-extrabold leading-[1.1em]"
-            style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
-          >
+          <h2 className="text-title text-[#221c14]">
             {heading ?? t("heading")}
           </h2>
         </div>
@@ -162,10 +160,7 @@ export default function Artists({ items, eyebrow, heading, portfolioItems }: Pro
                 <div className={`grid grid-cols-1 md:grid-cols-2 ${work.length > 0 ? "md:border-b-2 md:border-[#221c14]" : ""}`}>
                   {/* Left: name + role + instagram handle */}
                   <div className="md:border-r-2 border-[#221c14] px-5 md:px-10 pt-10 pb-3 md:py-16 flex flex-col justify-center">
-                    <h3
-                      className="text-[#221c14] font-extrabold leading-[1.05em] mb-2"
-                      style={{ fontSize: "clamp(2.4rem, 4.5vw, 4rem)" }}
-                    >
+                    <h3 className="text-subtitle text-[#221c14] mb-2">
                       {artist.name}
                     </h3>
                     {artist.role && (
@@ -191,7 +186,7 @@ export default function Artists({ items, eyebrow, heading, portfolioItems }: Pro
                       <>
                         {/* Mobile: inline truncation */}
                         {!expandedBios.has(artist._id) ? (
-                          <p className="md:hidden text-[#221c14] font-bold text-[20px] leading-[1.65em]">
+                          <p className="md:hidden text-body text-[#221c14]">
                             {artist.bio.length > 180
                               ? artist.bio.slice(0, artist.bio.lastIndexOf(" ", 180))
                               : artist.bio}
@@ -208,19 +203,22 @@ export default function Artists({ items, eyebrow, heading, portfolioItems }: Pro
                             )}
                           </p>
                         ) : (
-                          <p className="md:hidden text-[#221c14] font-bold text-[20px] leading-[1.65em] mb-3">
+                          <p className="md:hidden text-body text-[#221c14] mb-3">
                             {artist.bio}
                             {" "}
                             <button
                               className="inline italic text-[#221c14]/50 hover:text-[#221c14] transition-colors"
                               onClick={() => toggleBio(artist._id)}
                             >
-                              {locale === "lt" ? "Rodyti mažiau ↑" : "Show less ↑"}
+                              <span className="inline-flex items-center gap-1.5">
+                                {locale === "lt" ? "Rodyti mažiau" : "Show less"}
+                                <ArrowIcon direction="up" size={12} />
+                              </span>
                             </button>
                           </p>
                         )}
                         {/* Desktop: full bio */}
-                        <p className="hidden md:block text-[#221c14] font-bold text-[20px] leading-[1.65em]">
+                        <p className="hidden md:block text-body text-[#221c14]">
                           {artist.bio}
                         </p>
                       </>
@@ -228,10 +226,10 @@ export default function Artists({ items, eyebrow, heading, portfolioItems }: Pro
                   </div>
                 </div>
 
-                {/* Work gallery — scrolls automatically */}
+                {/* Work gallery — auto-marquee on desktop, manual swipe on mobile */}
                 {work.length > 0 && (
-                  <div className="overflow-hidden py-4">
-                    <div className={`flex gap-3 ${animClass} w-max`}>
+                  <div className="overflow-x-auto md:overflow-hidden scrollbar-hide snap-x snap-mandatory md:snap-none py-4">
+                    <div className={`flex gap-3 ${animClass} w-max px-5 md:px-0`}>
                       {doubled.map((item, j) => (
                         <WorkCard
                           key={`${artist._id}-${item._id}-${j}`}
@@ -254,7 +252,7 @@ export default function Artists({ items, eyebrow, heading, portfolioItems }: Pro
             href="/our-work"
             className="inline-flex items-center gap-3 text-[#221c14] font-bold text-[17px] tracking-[2px] uppercase border-b-2 border-[#221c14] pb-1 hover:opacity-60 transition-opacity"
           >
-            {tg("viewAll")} <span>→</span>
+            {tg("viewAll")} <ArrowIcon direction="right" size={14} />
           </a>
         </div>
 

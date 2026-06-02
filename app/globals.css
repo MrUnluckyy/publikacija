@@ -11,6 +11,26 @@
   --bar-h:       0px; /* set to 36px by layout when announcement bar is enabled */
 }
 
+/* ─── Typography scale ───────────────────────────────── */
+/* One source of truth for headline sizes. Use as Tailwind */
+/* utilities: text-title, text-subtitle, text-body.        */
+@theme {
+  /* Largest — section headings, service items */
+  --text-title: clamp(3rem, 5.5vw, 5rem);
+  --text-title--line-height: 1.1;
+  --text-title--font-weight: 800;
+
+  /* Mid — artist names, sub-section headings */
+  --text-subtitle: clamp(1.8rem, 3vw, 2.4rem);
+  --text-subtitle--line-height: 1.2;
+  --text-subtitle--font-weight: 800;
+
+  /* Body copy */
+  --text-body: 18px;
+  --text-body--line-height: 1.65;
+  --text-body--font-weight: 700;
+}
+
 /* ─── Base ───────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
@@ -64,6 +84,14 @@ body {
 .gallery-left:hover,
 .gallery-right:hover {
   animation-play-state: paused;
+}
+
+/* On mobile the auto-marquee is replaced by manual horizontal scroll */
+@media (max-width: 767px) {
+  .gallery-left,
+  .gallery-right {
+    animation: none;
+  }
 }
 
 /* ─── Fade-in ────────────────────────────────────────── */

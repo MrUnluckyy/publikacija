@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import type { ReviewData } from "@/sanity/types";
+import ArrowIcon from "./ui/ArrowIcon";
 
 const TRUNCATE_AT = 120; // characters before "Read more" appears
 
@@ -38,7 +39,7 @@ function ReviewCard({ review }: { review: ReviewData }) {
           {expanded ? (
             <motion.p
               key="full"
-              className="text-[#221c14] font-bold text-[18px] leading-[1.65em]"
+              className="text-body text-[#221c14]"
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
@@ -49,7 +50,7 @@ function ReviewCard({ review }: { review: ReviewData }) {
           ) : (
             <motion.p
               key="preview"
-              className="text-[#221c14] font-bold text-[18px] leading-[1.65em]"
+              className="text-body text-[#221c14]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -63,9 +64,10 @@ function ReviewCard({ review }: { review: ReviewData }) {
         {needsTruncation && (
           <button
             onClick={() => setExpanded((v) => !v)}
-            className="mt-3 text-[#221c14]/50 font-bold text-[14px] tracking-[2px] uppercase hover:text-[#221c14] transition-colors cursor-pointer"
+            className="mt-3 inline-flex items-center gap-2 text-[#221c14]/50 font-bold text-[14px] tracking-[2px] uppercase hover:text-[#221c14] transition-colors cursor-pointer"
           >
-            {expanded ? "Show less ↑" : "Read more ↓"}
+            {expanded ? "Show less" : "Read more"}
+            <ArrowIcon direction={expanded ? "up" : "down"} size={12} strokeWidth={2.5} />
           </button>
         )}
       </div>
@@ -105,10 +107,7 @@ export default function Reviews({ items, eyebrow, heading }: ReviewsProps) {
     <section style={{ backgroundColor: "#e5e4d2" }} className="border-b-2 border-[#221c14]">
       <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-10">
         <p className="text-[#221c14]/50 font-bold text-[14px] tracking-[3px] uppercase mb-2">{displayEyebrow}</p>
-        <h2
-          className="text-[#221c14] font-extrabold leading-[1.1em]"
-          style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
-        >
+        <h2 className="text-title text-[#221c14]">
           {displayHeading}
         </h2>
       </div>
@@ -121,14 +120,15 @@ export default function Reviews({ items, eyebrow, heading }: ReviewsProps) {
         </div>
       </div>
 
-      <div className="border-t-2 border-[#221c14] px-5 md:px-10 py-5 flex justify-end">
+      <div className="border-t-2 border-[#221c14] flex md:justify-end">
         <a
           href="https://www.google.com/maps/place/?q=place_id:ChIJORCGdQGV3UYRPr8ybynp0YA"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-[#221c14]/40 font-bold text-[13px] tracking-[2px] uppercase hover:text-[#221c14] transition-colors duration-200"
+          className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-5 md:px-10 py-5 text-[#221c14]/40 font-bold text-[13px] tracking-[2px] uppercase hover:text-[#221c14] transition-colors duration-200"
         >
-          Visi atsiliepimai Google ↗
+          {t("viewAllOnGoogle")}
+          <ArrowIcon direction="up-right" size={12} strokeWidth={2.5} />
         </a>
       </div>
     </section>

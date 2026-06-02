@@ -1,4 +1,5 @@
 import { Link } from "@/i18n/navigation";
+import ArrowIcon from "./ui/ArrowIcon";
 
 export default function BackToHome() {
   return (
@@ -7,7 +8,8 @@ export default function BackToHome() {
         href="/"
         className="inline-flex items-center gap-2 text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase hover:text-[#221c14] transition-colors"
       >
-        ← Home
+        <ArrowIcon direction="left" size={14} />
+        Home
       </Link>
     </div>
   );

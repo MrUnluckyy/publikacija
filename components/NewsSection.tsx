@@ -3,9 +3,11 @@
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocale } from "next-intl";
+import MuxPlayer from "@mux/mux-player-react";
 import { urlFor } from "@/sanity/lib/image";
 import { Link } from "@/i18n/navigation";
 import type { NewsPostData } from "@/sanity/types";
+import ArrowIcon from "./ui/ArrowIcon";
 
 interface Props {
   items?: NewsPostData[] | null;
@@ -48,40 +50,27 @@ export default function NewsSection({ items, eyebrow, heading }: Props) {
 
   return (
     <section className="border-b-2 border-[#221c14]">
-      {/* Header row */}
-      <div className="flex items-center justify-between border-b-2 border-[#221c14] px-5 md:px-10 py-6">
-        <div>
-          {eyebrow && (
-            <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[3px] uppercase mb-1">
-              {eyebrow}
-            </p>
-          )}
-          <h2
-            className="text-[#221c14] font-extrabold leading-none"
-            style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
-          >
-            {heading ?? "Naujienos"}
-          </h2>
-        </div>
+      {/* Compact header: single label + plain chevrons */}
+      <div className="flex items-center justify-between border-b-2 border-[#221c14] px-5 md:px-10 py-4">
+        <p className="text-[#221c14] font-bold text-[16px]">
+          {heading ?? eyebrow ?? "Naujienos"}
+        </p>
 
         {posts.length > 1 && (
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-5">
             <button
               onClick={() => go(-1)}
-              className="w-11 h-11 border-2 border-[#221c14] flex items-center justify-center font-bold text-[#221c14] hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
               aria-label="Previous post"
+              className="text-[#221c14] hover:opacity-50 transition-opacity cursor-pointer"
             >
-              ←
+              <ArrowIcon direction="left" size={22} strokeWidth={1.5} />
             </button>
-            <span className="font-bold text-[13px] text-[#221c14]/40 tabular-nums">
-              {index + 1} / {posts.length}
-            </span>
             <button
               onClick={() => go(1)}
-              className="w-11 h-11 border-2 border-[#221c14] flex items-center justify-center font-bold text-[#221c14] hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
               aria-label="Next post"
+              className="text-[#221c14] hover:opacity-50 transition-opacity cursor-pointer"
             >
-              →
+              <ArrowIcon direction="right" size={22} strokeWidth={1.5} />
             </button>
           </div>
         )}
@@ -89,10 +78,40 @@ export default function NewsSection({ items, eyebrow, heading }: Props) {
 
       {/* Slide area */}
       <div className="grid md:grid-cols-2">
-        {/* Image */}
+        {/* Cover — video takes priority over image */}
         <div className="border-b-2 md:border-b-0 md:border-r-2 border-[#221c14] overflow-hidden relative aspect-[4/3] md:aspect-auto md:min-h-[480px]">
           <AnimatePresence mode="wait" custom={direction}>
-            {post.coverImage && (
+            {post.coverVideo?.playbackId ? (
+              <motion.div
+                key={post._id + "-video"}
+                className="absolute inset-0 w-full h-full"
+                custom={direction}
+                variants={variants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
+              >
+                <MuxPlayer
+                  playbackId={post.coverVideo.playbackId}
+                  streamType="on-demand"
+                  autoPlay="muted"
+                  muted
+                  loop
+                  playsInline
+                  nohotkeys
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    "--controls": "none",
+                    "--media-object-fit": "cover",
+                    "--media-object-position": "center",
+                  } as React.CSSProperties & Record<`--${string}`, string>}
+                />
+              </motion.div>
+            ) : post.coverImage ? (
               <motion.img
                 key={post._id + "-img"}
                 src={urlFor(post.coverImage).width(900).height(700).url()}
@@ -105,7 +124,7 @@ export default function NewsSection({ items, eyebrow, heading }: Props) {
                 exit="exit"
                 transition={{ duration: 0.45, ease: [0.25, 0.46, 0.45, 0.94] }}
               />
-            )}
+            ) : null}
           </AnimatePresence>
         </div>
 
@@ -127,14 +146,11 @@ export default function NewsSection({ items, eyebrow, heading }: Props) {
                   {formatDate(post.date, locale)}
                 </p>
               )}
-              <h3
-                className="text-[#221c14] font-extrabold leading-[1.1em] mb-6"
-                style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
-              >
+              <h3 className="text-subtitle text-[#221c14] mb-6">
                 {post.title}
               </h3>
               {post.excerpt && (
-                <p className="text-[#221c14] font-bold text-[18px] leading-[1.65em] opacity-70 mb-8">
+                <p className="text-body text-[#221c14] opacity-70 mb-8">
                   {post.excerpt}
                 </p>
               )}
@@ -143,9 +159,10 @@ export default function NewsSection({ items, eyebrow, heading }: Props) {
             {post.slug && (
               <Link
                 href={`/blog/${post.slug}`}
-                className="self-start inline-block border-2 border-[#221c14] text-[#221c14] font-bold text-[13px] tracking-[2px] uppercase px-6 py-3 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
+                className="self-start inline-flex items-center gap-2 border-2 border-[#221c14] text-[#221c14] font-bold text-[13px] tracking-[2px] uppercase px-6 py-3 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
               >
-                {locale === "lt" ? "Skaityti daugiau" : "Read more"} →
+                {locale === "lt" ? "Skaityti daugiau" : "Read more"}
+                <ArrowIcon direction="right" size={14} />
               </Link>
             )}
           </motion.div>

@@ -32,10 +32,7 @@ export default async function OurWorkPage() {
           <p className="text-[#221c14]/50 font-bold text-[14px] tracking-[3px] uppercase mb-2">
             {t("eyebrow")}
           </p>
-          <h1
-            className="text-[#221c14] font-extrabold leading-[1.1em]"
-            style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
-          >
+          <h1 className="text-title text-[#221c14]">
             {t("heading")}
           </h1>
         </div>

@@ -6,6 +6,7 @@ import Navigation from "@/components/Navigation";
 import About from "@/components/About";
 import FooterWrapper from "@/components/FooterWrapper";
 import BackToHome from "@/components/BackToHome";
+import ArrowIcon from "@/components/ui/ArrowIcon";
 
 export const revalidate = 60;
 
@@ -53,10 +54,7 @@ export default async function AboutPage({
             <p className="text-[#221c14]/50 font-bold text-[14px] tracking-[3px] uppercase mb-2">
               {isLt ? "Priežiūra" : "Aftercare"}
             </p>
-            <h2
-              className="text-[#221c14] font-extrabold leading-[1.1em]"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
-            >
+            <h2 className="text-title text-[#221c14]">
               {isLt ? "Tatuiruotės priežiūros instrukcija" : "Tattoo Aftercare Guide"}
             </h2>
           </div>
@@ -68,16 +66,17 @@ export default async function AboutPage({
                 <p className="text-[#221c14]/50 font-bold text-[14px] tracking-[2px] uppercase mb-3">
                   Lietuvių kalba
                 </p>
-                <p className="text-[#221c14] font-bold text-[18px] leading-[1.65em]">
+                <p className="text-body text-[#221c14]">
                   Kaip tinkamai prižiūrėti naują tatuiruotę — instrukcija lietuvių kalba.
                 </p>
               </div>
               <a
                 href="/assets/tattoo-care/TATUIRUOTESGYDYMAS-scaled.jpg"
                 download="Tatuiruotes-prieziura.jpg"
-                className="self-start border-2 border-[#221c14] text-[#221c14] font-bold text-[14px] tracking-[2px] uppercase px-6 py-3 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
+                className="self-start inline-flex items-center gap-2 border-2 border-[#221c14] text-[#221c14] font-bold text-[14px] tracking-[2px] uppercase px-6 py-3 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
               >
-                ↓ Atsisiųsti
+                <ArrowIcon direction="down" size={14} />
+                Atsisiųsti
               </a>
             </div>
 
@@ -87,16 +86,17 @@ export default async function AboutPage({
                 <p className="text-[#221c14]/50 font-bold text-[14px] tracking-[2px] uppercase mb-3">
                   English
                 </p>
-                <p className="text-[#221c14] font-bold text-[18px] leading-[1.65em]">
+                <p className="text-body text-[#221c14]">
                   How to properly care for your new tattoo — instructions in English.
                 </p>
               </div>
               <a
                 href="/assets/tattoo-care/tattooaftercareEN-scaled.jpg"
                 download="Tattoo-aftercare.jpg"
-                className="self-start border-2 border-[#221c14] text-[#221c14] font-bold text-[14px] tracking-[2px] uppercase px-6 py-3 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
+                className="self-start inline-flex items-center gap-2 border-2 border-[#221c14] text-[#221c14] font-bold text-[14px] tracking-[2px] uppercase px-6 py-3 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
               >
-                ↓ Download
+                <ArrowIcon direction="down" size={14} />
+                Download
               </a>
             </div>
           </div>

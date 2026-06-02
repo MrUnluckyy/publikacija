@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import ArrowIcon from "./ui/ArrowIcon";
 
 const SESSION_KEY = "announcement:dismissed";
 const BAR_HEIGHT = "36px";
@@ -127,9 +128,10 @@ function CtaBar({
       {linkLabel && linkHref && (
         <a
           href={linkHref}
-          className="text-[#e5e4d2] font-bold text-[11px] tracking-[3px] uppercase whitespace-nowrap border-b border-[#e5e4d2]/40 hover:border-[#e5e4d2] transition-colors duration-150"
+          className="inline-flex items-center gap-1.5 text-[#e5e4d2] font-bold text-[11px] tracking-[3px] uppercase whitespace-nowrap border-b border-[#e5e4d2]/40 hover:border-[#e5e4d2] transition-colors duration-150"
         >
-          {linkLabel} →
+          {linkLabel}
+          <ArrowIcon direction="right" size={10} />
         </a>
       )}
     </div>

@@ -180,6 +180,7 @@ export const newsPostsQuery = groq`*[_type == "newsPost"] | order(date desc) {
   "excerpt": coalesce(excerpt[$locale], excerpt.lt),
   date,
   coverImage,
+  "coverVideo": coverVideo.asset->{ playbackId, status },
   "slug": slug.current
 }`;
 
@@ -190,6 +191,7 @@ export const newsPostBySlugQuery = groq`*[_type == "newsPost" && slug.current ==
   "body":    coalesce(body[$locale], body.lt),
   date,
   coverImage,
+  "coverVideo": coverVideo.asset->{ playbackId, status },
   "slug": slug.current
 }`;
 

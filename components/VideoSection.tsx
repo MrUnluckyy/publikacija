@@ -114,13 +114,10 @@ export default function VideoSection({ video, content, label }: Props) {
             <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[3px] uppercase mb-4">
               {eyebrow}
             </p>
-            <h2
-              className="text-[#221c14] font-extrabold leading-[1.1em] mb-8"
-              style={{ fontSize: "clamp(2rem, 3.5vw, 3rem)" }}
-            >
+            <h2 className="text-title text-[#221c14] mb-8">
               {heading}
             </h2>
-            <p className="text-[#221c14] font-bold text-[18px] leading-[1.65em] max-w-[480px]">
+            <p className="text-body text-[#221c14] max-w-[480px]">
               {body}
             </p>
           </div>

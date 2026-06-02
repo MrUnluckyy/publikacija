@@ -2,6 +2,7 @@
 
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
+import ArrowIcon from "./ui/ArrowIcon";
 
 export default function Footer({ instagramUrl }: { instagramUrl?: string | null }) {
   const t = useTranslations("footer");
@@ -98,7 +99,9 @@ export default function Footer({ instagramUrl }: { instagramUrl?: string | null 
             <a key={l.label} href={l.href}
               className="border-b-2 border-white/10 px-5 py-5 text-white font-bold text-[18px] hover:opacity-60 transition-opacity flex items-center justify-between">
               {l.label}
-              <span className="text-white/30">→</span>
+              <span className="text-white/30">
+                <ArrowIcon direction="right" size={16} />
+              </span>
             </a>
           ))}
         </nav>

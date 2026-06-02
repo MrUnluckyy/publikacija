@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
+import ArrowIcon from "./ui/ArrowIcon";
 
 export default function Navigation() {
   const t = useTranslations("nav");
@@ -186,7 +187,9 @@ export default function Navigation() {
                       onClick={() => setMenuOpen(false)}
                     >
                       {l.label}
-                      <span className="text-white/30 text-2xl">→</span>
+                      <span className="text-white/30">
+                        <ArrowIcon direction="right" size={28} />
+                      </span>
                     </Link>
                   </motion.div>
                 </div>

@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import ArrowIcon from "./ui/ArrowIcon";
 
 export interface LightboxImage {
   src: string;
@@ -76,18 +77,20 @@ export default function Lightbox({ images, index, onClose, onNext, onPrev }: Lig
           {images.length > 1 && (
             <button
               onClick={(e) => { e.stopPropagation(); onPrev(); }}
-              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-[#e5e4d2] font-bold text-2xl hover:opacity-60 transition-opacity px-3 py-4 cursor-pointer"
+              aria-label="Previous image"
+              className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 text-[#e5e4d2] hover:opacity-60 transition-opacity px-3 py-4 cursor-pointer"
             >
-              ←
+              <ArrowIcon direction="left" size={28} />
             </button>
           )}
 
           {images.length > 1 && (
             <button
               onClick={(e) => { e.stopPropagation(); onNext(); }}
-              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-[#e5e4d2] font-bold text-2xl hover:opacity-60 transition-opacity px-3 py-4 cursor-pointer"
+              aria-label="Next image"
+              className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 text-[#e5e4d2] hover:opacity-60 transition-opacity px-3 py-4 cursor-pointer"
             >
-              →
+              <ArrowIcon direction="right" size={28} />
             </button>
           )}
 

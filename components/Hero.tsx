@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import type { HeroData } from "@/sanity/types";
+import ArrowIcon from "./ui/ArrowIcon";
 
 const NAV_H = 72;
 
@@ -52,8 +53,7 @@ export default function Hero({ data }: { data?: HeroData | null }) {
           >
             <div>
               <motion.h1
-                className="text-[#221c14] font-extrabold leading-[1.1em] mb-10"
-                style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
+                className="text-title text-[#221c14] mb-10"
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: ready ? 0 : 30, opacity: ready ? 1 : 0 }}
                 transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1], delay: 0.05 }}
@@ -62,8 +62,7 @@ export default function Hero({ data }: { data?: HeroData | null }) {
               </motion.h1>
 
               <motion.p
-                className="text-[#221c14] font-bold leading-[1.65em] max-w-[540px]"
-                style={{ fontSize: "20px" }}
+                className="text-body text-[#221c14] max-w-[540px]"
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: ready ? 1 : 0, y: ready ? 0 : 16 }}
                 transition={{ duration: 0.5, delay: 0.15 }}
@@ -75,24 +74,23 @@ export default function Hero({ data }: { data?: HeroData | null }) {
         </div>
 
         {/* ── Right: service links ──────────────────────────────────────────── */}
-        {/* paddingTop pushes visible content below the nav bar */}
-        <div className="flex flex-col md:pt-[72px]">
+        {/* paddingTop clears nav + announcement bar so all 3 buttons get equal visible height */}
+        <div className="flex flex-col md:pt-[calc(72px_+_var(--bar-h,0px))]">
           {SERVICES.map((svc, i) => (
             <div key={svc.label} className="flex-1 border-b-2 border-[#221c14] last:border-b-0">
               <motion.a
                 href={svc.href}
-                className="w-full h-full flex items-center px-5 md:px-10 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200 group"
+                className="w-full h-full flex items-center px-5 md:px-10 py-2 md:py-0 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200 group"
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: ready ? 1 : 0, x: ready ? 0 : 20 }}
                 transition={{ duration: 0.5, delay: 0.1 + i * 0.08 }}
               >
-                <span
-                  className="font-normal leading-none"
-                  style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
-                >
+                <span className="text-title font-light md:font-extrabold leading-none">
                   {svc.label}
                 </span>
-                <span className="ml-auto text-2xl opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                <span className="ml-auto opacity-0 group-hover:opacity-100 transition-opacity">
+                  <ArrowIcon direction="right" size={32} strokeWidth={1.5} />
+                </span>
               </motion.a>
             </div>
           ))}

@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import type { PortfolioItemData } from "@/sanity/types";
 import { urlFor } from "@/sanity/lib/image";
 import Lightbox from "./Lightbox";
+import ArrowIcon from "./ui/ArrowIcon";
 
 interface Props {
   items?: PortfolioItemData[] | null;
@@ -37,7 +38,7 @@ function SanityCard({
   return (
     <button
       onClick={onClick}
-      className="flex-none w-[180px] md:w-[220px] aspect-[2/3] relative overflow-hidden cursor-pointer group focus:outline-none"
+      className="flex-none w-[260px] md:w-[220px] aspect-[2/3] relative overflow-hidden cursor-pointer group focus:outline-none snap-start"
     >
       {item.image && (
         <Image
@@ -129,10 +130,7 @@ export default function Gallery({ items, eyebrow, heading }: Props) {
         {/* Header */}
         <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-10">
           <p className="text-[#221c14]/50 font-bold text-[14px] tracking-[3px] uppercase mb-2">{displayEyebrow}</p>
-          <h2
-            className="text-[#221c14] font-extrabold leading-[1.1em]"
-            style={{ fontSize: "clamp(3rem, 5.5vw, 5rem)" }}
-          >
+          <h2 className="text-title text-[#221c14]">
             {displayHeading}
           </h2>
         </div>
@@ -150,14 +148,16 @@ export default function Gallery({ items, eyebrow, heading }: Props) {
                     {group.name}
                   </span>
                 </div>
-                <div className={`flex gap-3 ${animClass} w-max pb-6`}>
-                  {doubled.map((item, i) => (
-                    <SanityCard
-                      key={`g${gi}-${item._id}-${i}`}
-                      item={item}
-                      onClick={() => openLightbox(item)}
-                    />
-                  ))}
+                <div className="overflow-x-auto md:overflow-hidden scrollbar-hide snap-x snap-mandatory md:snap-none pb-6">
+                  <div className={`flex gap-3 ${animClass} w-max px-5 md:px-0`}>
+                    {doubled.map((item, i) => (
+                      <SanityCard
+                        key={`g${gi}-${item._id}-${i}`}
+                        item={item}
+                        onClick={() => openLightbox(item)}
+                      />
+                    ))}
+                  </div>
                 </div>
               </div>
             );
@@ -167,28 +167,36 @@ export default function Gallery({ items, eyebrow, heading }: Props) {
           <>
             {items && items.length > 0 ? (
               <>
-                <div className="flex gap-3 gallery-left w-max mb-3 pl-3 pt-8">
-                  {[...items, ...items].slice(0, 16).map((item, i) => (
-                    <SanityCard key={`r1-${item._id}-${i}`} item={item} onClick={() => openLightbox(item)} />
-                  ))}
+                <div className="overflow-x-auto md:overflow-hidden scrollbar-hide snap-x snap-mandatory md:snap-none mb-3 pt-8">
+                  <div className="flex gap-3 gallery-left w-max pl-3">
+                    {[...items, ...items].slice(0, 16).map((item, i) => (
+                      <SanityCard key={`r1-${item._id}-${i}`} item={item} onClick={() => openLightbox(item)} />
+                    ))}
+                  </div>
                 </div>
-                <div className="flex gap-3 gallery-right w-max pl-3">
-                  {[...items, ...items].slice(0, 16).reverse().map((item, i) => (
-                    <SanityCard key={`r2-${item._id}-${i}`} item={item} onClick={() => openLightbox(item)} />
-                  ))}
+                <div className="overflow-x-auto md:overflow-hidden scrollbar-hide snap-x snap-mandatory md:snap-none">
+                  <div className="flex gap-3 gallery-right w-max pl-3">
+                    {[...items, ...items].slice(0, 16).reverse().map((item, i) => (
+                      <SanityCard key={`r2-${item._id}-${i}`} item={item} onClick={() => openLightbox(item)} />
+                    ))}
+                  </div>
                 </div>
               </>
             ) : (
               <>
-                <div className="flex gap-3 gallery-left w-max mb-3 pl-3 pt-8">
-                  {ph1.map((aspect, i) => (
-                    <PlaceholderCard key={i} aspect={aspect} color={PLACEHOLDER_COLORS[i % PLACEHOLDER_COLORS.length]} />
-                  ))}
+                <div className="overflow-x-auto md:overflow-hidden scrollbar-hide mb-3 pt-8">
+                  <div className="flex gap-3 gallery-left w-max pl-3">
+                    {ph1.map((aspect, i) => (
+                      <PlaceholderCard key={i} aspect={aspect} color={PLACEHOLDER_COLORS[i % PLACEHOLDER_COLORS.length]} />
+                    ))}
+                  </div>
                 </div>
-                <div className="flex gap-3 gallery-right w-max pl-3">
-                  {ph2.map((aspect, i) => (
-                    <PlaceholderCard key={i} aspect={aspect} color={PLACEHOLDER_COLORS[(i + 4) % PLACEHOLDER_COLORS.length]} />
-                  ))}
+                <div className="overflow-x-auto md:overflow-hidden scrollbar-hide">
+                  <div className="flex gap-3 gallery-right w-max pl-3">
+                    {ph2.map((aspect, i) => (
+                      <PlaceholderCard key={i} aspect={aspect} color={PLACEHOLDER_COLORS[(i + 4) % PLACEHOLDER_COLORS.length]} />
+                    ))}
+                  </div>
                 </div>
               </>
             )}
@@ -201,7 +209,7 @@ export default function Gallery({ items, eyebrow, heading }: Props) {
             href="/our-work"
             className="inline-flex items-center gap-3 text-[#221c14] font-bold text-[17px] tracking-[2px] uppercase border-b-2 border-[#221c14] pb-1 hover:opacity-60 transition-opacity"
           >
-            {t("viewAll")} <span>→</span>
+            {t("viewAll")} <ArrowIcon direction="right" size={14} />
           </a>
         </div>
 
