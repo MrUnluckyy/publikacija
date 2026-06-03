@@ -24,7 +24,7 @@ export default function Hero({ data }: { data?: HeroData | null }) {
 
   const title1 = data?.title1 ?? t("title1");
   const title2 = data?.title2 ?? t("title2");
-  const body   = data?.body   ?? t("body");
+  const body = data?.body ?? t("body");
 
   const SERVICES = [
     { label: data?.service1 ?? t("service1"), href: "/our-work" },
@@ -39,8 +39,7 @@ export default function Hero({ data }: { data?: HeroData | null }) {
       className="border-b-2 border-[#221c14]"
       style={{ backgroundColor: "#e5e4d2" }}
     >
-      <div className="grid md:grid-cols-2 min-h-screen">
-
+      <div className="grid md:grid-cols-2 ">
         {/* ── Left ──────────────────────────────────────────────────────────── */}
         {/* border-r starts at section y=0, always aligned with the nav divider */}
         <div className="border-b-2 md:border-b-0 md:border-r-2 border-[#221c14]">
@@ -56,9 +55,15 @@ export default function Hero({ data }: { data?: HeroData | null }) {
                 className="text-title text-[#221c14] mb-10"
                 initial={{ y: 30, opacity: 0 }}
                 animate={{ y: ready ? 0 : 30, opacity: ready ? 1 : 0 }}
-                transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1], delay: 0.05 }}
+                transition={{
+                  duration: 0.6,
+                  ease: [0.76, 0, 0.24, 1],
+                  delay: 0.05,
+                }}
               >
-                {title1}<br />{title2}
+                {title1}
+                <br />
+                {title2}
               </motion.h1>
 
               <motion.p
@@ -77,7 +82,10 @@ export default function Hero({ data }: { data?: HeroData | null }) {
         {/* paddingTop clears nav + announcement bar so all 3 buttons get equal visible height */}
         <div className="flex flex-col md:pt-[calc(72px_+_var(--bar-h,0px))]">
           {SERVICES.map((svc, i) => (
-            <div key={svc.label} className="flex-1 border-b-2 border-[#221c14] last:border-b-0">
+            <div
+              key={svc.label}
+              className="flex-1 border-b-2 border-[#221c14] last:border-b-0"
+            >
               <motion.a
                 href={svc.href}
                 className="w-full h-full flex items-center px-5 md:px-10 py-2 md:py-0 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200 group"
@@ -95,7 +103,6 @@ export default function Hero({ data }: { data?: HeroData | null }) {
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );
