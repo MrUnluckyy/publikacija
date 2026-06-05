@@ -3,7 +3,9 @@
     "booking": "Booking",
     "ourWork": "Our Works",
     "giftVouchers": "Gift Vouchers",
-    "about": "About"
+    "about": "About",
+    "linocut": "Linocut",
+    "blog": "Journal"
   },
   "hero": {
     "title1": "Publikacija",
@@ -131,7 +133,19 @@
     "workshopHeading": "Join a workshop",
     "workshopBody": "Our workshops run as group sessions with limited spots. Browse the event details and reserve your place directly on Luma.",
     "workshopCta": "Register on Luma",
-    "back": "Back"
+    "back": "Back",
+    "selectService": "What would you like to book?",
+    "contactLabel": "How should we contact you?",
+    "instagramOption": "Instagram",
+    "emailOption": "Email",
+    "instagramPlaceholder": "Your Instagram handle",
+    "artistLabel": "Preferred artist",
+    "artistAny": "Any artist",
+    "datesLabel": "Preferred dates",
+    "datesPlaceholder": "e.g. weekends, next month…",
+    "referenceLabel": "Reference images",
+    "referenceButton": "Add photos",
+    "referenceHint": "up to 6 images"
   },
   "ourWork": {
     "eyebrow": "Selected Work",
@@ -233,5 +247,42 @@
     "required": "*",
     "successHeading": "Thank you!",
     "successBody": "Your request has been received. We will contact you shortly about your gift voucher."
+  },
+  "blog": {
+    "eyebrow": "Journal",
+    "heading": "News & stories",
+    "intro": "Studio news, moments from our workshops, and thoughts on tattooing and linocut printmaking.",
+    "empty": "No posts yet. Check back soon.",
+    "readMore": "Read more",
+    "back": "Back to journal"
+  },
+  "linocut": {
+    "eyebrow": "Linocut",
+    "heading": "What is linocut?",
+    "intro": "Linocut is a relief printing technique: a design is carved into a sheet of linoleum, rolled with ink, and pressed onto paper. Every print is made by hand and entirely unique.",
+    "bodyHeading": "Handmade prints",
+    "body": "Each piece starts as a sketch, which we transfer onto linoleum and carve entirely by hand. When pressed onto paper, the texture, ink and small imperfections make every print one of a kind. We work on limited-edition series as well as custom commissions.",
+    "processLabel": "The process",
+    "steps": [
+      {
+        "num": "01",
+        "title": "Carving",
+        "body": "We cut the design into a linoleum block with sharp gouges; whatever stays raised is what prints."
+      },
+      {
+        "num": "02",
+        "title": "Inking",
+        "body": "The block is evenly coated with printing ink using a roller."
+      },
+      {
+        "num": "03",
+        "title": "Printing",
+        "body": "Paper is pressed against the block and peeled back to reveal the print."
+      }
+    ],
+    "ctaHeading": "Want to try it yourself?",
+    "ctaBody": "Join a linocut workshop or take home an original print.",
+    "ctaWorkshop": "Register for a workshop",
+    "ctaPrints": "Buy prints"
   }
 }

@@ -8,6 +8,7 @@ export default defineType({
     // ── Page header ────────────────────────────────────────────────────────────
     defineField({ name: "eyebrow", title: "Eyebrow Label", type: "localeString" }),
     defineField({ name: "heading", title: "Page Heading", type: "localeString" }),
+    defineField({ name: "intro", title: "Intro Paragraph", type: "localeText" }),
 
     // ── Service cards ──────────────────────────────────────────────────────────
     defineField({ name: "tattooTitle", title: "Tattoo — Card Title", type: "localeString" }),

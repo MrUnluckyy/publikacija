@@ -179,6 +179,7 @@ export const artistsQuery = groq`*[_type == "artist"] | order(order asc) {
 export const bookPageQuery = groq`*[_type == "bookPage" && _id == "book-page-singleton"][0] {
   "eyebrow":         coalesce(eyebrow[$locale], eyebrow.lt),
   "heading":         coalesce(heading[$locale], heading.lt),
+  "intro":           coalesce(intro[$locale], intro.lt),
   "tattooTitle":     coalesce(tattooTitle[$locale], tattooTitle.lt),
   "tattooDesc":      coalesce(tattooDesc[$locale], tattooDesc.lt),
   "printTitle":      coalesce(printTitle[$locale], printTitle.lt),

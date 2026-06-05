@@ -20,7 +20,9 @@ export default function Navigation() {
   const NAV_LINKS = [
     { label: t("booking"),      href: "/book" },
     { label: t("ourWork"),      href: "/our-work" },
+    { label: t("linocut"),      href: "/linocut" },
     { label: t("giftVouchers"), href: "/gift-vouchers" },
+    { label: t("blog"),         href: "/blog" },
     { label: t("about"),        href: "/apie-mus" },
   ];
 

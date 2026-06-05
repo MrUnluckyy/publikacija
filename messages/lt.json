@@ -3,7 +3,9 @@
     "booking": "Registracija",
     "ourWork": "Mūsų darbai",
     "giftVouchers": "Dovanų kuponai",
-    "about": "Apie mus"
+    "about": "Apie mus",
+    "linocut": "Linorytas",
+    "blog": "Naujienos"
   },
   "hero": {
     "title1": "Publikacija",
@@ -131,7 +133,19 @@
     "workshopHeading": "Prisijunkite prie seminaro",
     "workshopBody": "Mūsų seminarai vyksta grupėmis su ribotu vietų skaičiumi. Peržiūrėkite renginio informaciją ir rezervuokite vietą tiesiogiai per Luma.",
     "workshopCta": "Registruotis per Luma",
-    "back": "Atgal"
+    "back": "Atgal",
+    "selectService": "Ką norėtumėte rezervuoti?",
+    "contactLabel": "Kaip su jumis susisiekti?",
+    "instagramOption": "Instagram",
+    "emailOption": "El. paštu",
+    "instagramPlaceholder": "Jūsų Instagram paskyra",
+    "artistLabel": "Pageidaujamas meistras",
+    "artistAny": "Bet kuris meistras",
+    "datesLabel": "Pageidaujamos datos",
+    "datesPlaceholder": "pvz. savaitgaliais, kitą mėnesį…",
+    "referenceLabel": "Pavyzdžiai / nuorodos",
+    "referenceButton": "Pridėti nuotraukų",
+    "referenceHint": "iki 6 nuotraukų"
   },
   "ourWork": {
     "eyebrow": "Pasirinkti darbai",
@@ -233,5 +247,42 @@
     "required": "*",
     "successHeading": "Ačiū!",
     "successBody": "Jūsų užklausa gauta. Netrukus su jumis susisieksime dėl dovanų kupono."
+  },
+  "blog": {
+    "eyebrow": "Naujienos",
+    "heading": "Naujienos ir istorijos",
+    "intro": "Naujienos iš studijos, seminarų akimirkos ir mintys apie tatuiruotes bei linoraižybą.",
+    "empty": "Naujienų kol kas nėra. Užsukite vėliau.",
+    "readMore": "Skaityti daugiau",
+    "back": "Atgal į naujienas"
+  },
+  "linocut": {
+    "eyebrow": "Linorytas",
+    "heading": "Kas yra linorytas?",
+    "intro": "Linorytas – tai reljefinės spaudos technika, kai raštas išraižomas linoleumo plokštėje, padengiamas dažais ir atspaudžiamas ant popieriaus. Kiekvienas atspaudas yra rankų darbo ir savitas.",
+    "bodyHeading": "Rankų darbo spauda",
+    "body": "Kiekvienas darbas pradedamas nuo eskizo, kurį perkeliame ant linoleumo ir kruopščiai išraižome ranka. Atspaudžiant popierių, tekstūra, dažų sluoksnis ir nedideli netobulumai paverčia kiekvieną atspaudą unikaliu. Dirbame su riboto tiražo serijomis ir individualiais užsakymais.",
+    "processLabel": "Procesas",
+    "steps": [
+      {
+        "num": "01",
+        "title": "Raižymas",
+        "body": "Raštą aštriais kaltais išpjauname linoleumo plokštėje – iškilusios vietos bus atspaustos."
+      },
+      {
+        "num": "02",
+        "title": "Dažymas",
+        "body": "Plokštę voleliu tolygiai padengiame spaudos dažais."
+      },
+      {
+        "num": "03",
+        "title": "Spauda",
+        "body": "Prispaudžiame popierių prie plokštės ir atsargiai nuimame – taip gimsta atspaudas."
+      }
+    ],
+    "ctaHeading": "Norite išbandyti patys?",
+    "ctaBody": "Prisijunkite prie linoraižybos seminaro arba įsigykite originalų atspaudą.",
+    "ctaWorkshop": "Registruotis į seminarą",
+    "ctaPrints": "Įsigyti spaudų"
   }
 }

@@ -18,29 +18,62 @@ export default defineType({
       validation: (Rule) => Rule.required().email(),
     }),
     defineField({
-      name: "phone",
-      title: "Phone",
-      type: "string",
-    }),
-    defineField({
       name: "service",
       title: "Service",
       type: "string",
       options: {
         list: [
           { title: "Tattoo", value: "Tattoo" },
-          { title: "Linocut / Print", value: "Print" },
           { title: "Workshop", value: "Workshop" },
+          { title: "Print", value: "Print" },
           { title: "Gift Voucher", value: "Gift Voucher" },
         ],
       },
+    }),
+    defineField({
+      name: "preferredArtist",
+      title: "Preferred Artist",
+      type: "reference",
+      to: [{ type: "artist" }],
+    }),
+    defineField({
+      name: "contactMethod",
+      title: "Preferred Contact",
+      type: "string",
+      options: {
+        list: [
+          { title: "Instagram", value: "instagram" },
+          { title: "Email", value: "email" },
+        ],
+      },
+    }),
+    defineField({
+      name: "instagramHandle",
+      title: "Instagram Handle",
+      type: "string",
+      hidden: ({ parent }) => parent?.contactMethod !== "instagram",
+    }),
+    defineField({
+      name: "preferredDates",
+      title: "Preferred Dates",
+      type: "string",
     }),
     defineField({
       name: "message",
       title: "Message / Idea",
       type: "text",
       rows: 5,
-      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "referenceImages",
+      title: "Reference Images",
+      type: "array",
+      of: [{ type: "image" }],
+    }),
+    defineField({
+      name: "phone",
+      title: "Phone",
+      type: "string",
     }),
     defineField({
       name: "submittedAt",

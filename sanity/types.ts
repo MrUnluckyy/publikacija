@@ -168,6 +168,7 @@ export type ArtistData = {
 export type BookPageData = {
   eyebrow: string | null;
   heading: string | null;
+  intro: string | null;
   tattooTitle: string | null;
   tattooDesc: string | null;
   printTitle: string | null;

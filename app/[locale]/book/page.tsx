@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { client } from "@/sanity/lib/client";
-import { siteSettingsQuery, bookPageQuery } from "@/sanity/lib/queries";
-import type { SiteSettingsData, BookPageData } from "@/sanity/types";
+import { siteSettingsQuery, bookPageQuery, artistsQuery } from "@/sanity/lib/queries";
+import type { SiteSettingsData, BookPageData, ArtistData } from "@/sanity/types";
 import Navigation from "@/components/Navigation";
 import FooterWrapper from "@/components/FooterWrapper";
 import BackToHome from "@/components/BackToHome";
-import BookingClient from "./BookingClient";
+import BookingForm from "./BookingForm";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
@@ -17,33 +17,24 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function BookPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const [t, settings, bookContent] = await Promise.all([
+  const [t, settings, bookContent, artists] = await Promise.all([
     getTranslations("book"),
     client.fetch<SiteSettingsData>(siteSettingsQuery, { locale }).catch(() => null),
     client.fetch<BookPageData>(bookPageQuery, { locale }).catch(() => null),
+    client.fetch<ArtistData[]>(artistsQuery, { locale }).catch(() => null),
   ]);
 
-  // Sanity content takes priority; i18n is the fallback
-  const labels = {
-    tattooTitle:     bookContent?.tattooTitle     ?? t("tattooTitle"),
-    tattooDesc:      bookContent?.tattooDesc      ?? t("tattooDesc"),
-    printTitle:      bookContent?.printTitle      ?? t("printTitle"),
-    printDesc:       bookContent?.printDesc       ?? t("printDesc"),
-    workshopTitle:   bookContent?.workshopTitle   ?? t("workshopTitle"),
-    workshopDesc:    bookContent?.workshopDesc    ?? t("workshopDesc"),
-    voucherTitle:    bookContent?.voucherTitle    ?? t("voucherTitle"),
-    voucherDesc:     bookContent?.voucherDesc     ?? t("voucherDesc"),
-    calHeading:      bookContent?.calHeading      ?? t("calHeading"),
-    workshopHeading: bookContent?.workshopHeading ?? t("workshopHeading"),
-    workshopBody:    bookContent?.workshopBody    ?? t("workshopBody"),
-    workshopCta:     bookContent?.workshopCtaLabel ?? t("workshopCta"),
-    back: t("back"),
-  };
+  // Service options — Sanity content takes priority, i18n is the fallback
+  const services = [
+    { value: "Tattoo", label: bookContent?.tattooTitle ?? t("tattooTitle") },
+    { value: "Workshop", label: bookContent?.workshopTitle ?? t("workshopTitle") },
+  ];
 
-  const voucherHref = locale === "en" ? "/en/gift-vouchers" : "/gift-vouchers";
+  const artistOptions = (artists ?? []).map((a) => ({ id: a._id, name: a.name }));
 
   const eyebrow = bookContent?.eyebrow ?? t("eyebrow");
   const heading = bookContent?.heading ?? t("heading");
+  const intro = bookContent?.intro ?? t("intro");
 
   return (
     <>
@@ -56,13 +47,16 @@ export default async function BookPage({ params }: { params: Promise<{ locale: s
           <p className="text-[#221c14]/50 font-bold text-[14px] tracking-[3px] uppercase mb-2">
             {eyebrow}
           </p>
-          <h1 className="text-title text-[#221c14]">
+          <h1 className="text-title text-[#221c14] mb-6">
             {heading}
           </h1>
+          <p className="text-body text-[#221c14] max-w-[560px]">
+            {intro}
+          </p>
         </div>
 
-        {/* Service selector + Cal embed */}
-        <BookingClient labels={labels} voucherHref={voucherHref} />
+        {/* Booking request form */}
+        <BookingForm services={services} artists={artistOptions} />
 
         {/* Studio info strip */}
         <div className="border-t-2 border-b-2 border-[#221c14] grid md:grid-cols-3">

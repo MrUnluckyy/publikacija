@@ -64,11 +64,11 @@ export default async function BlogPostPage({
         {/* Back link */}
         <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-4">
           <Link
-            href="/"
+            href="/blog"
             className="inline-flex items-center gap-2 text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase hover:text-[#221c14] transition-colors"
           >
             <ArrowIcon direction="left" size={14} />
-            {locale === "lt" ? "Grįžti" : "Back"}
+            {locale === "lt" ? "Grįžti į naujienas" : "Back to journal"}
           </Link>
         </div>
 

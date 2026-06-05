@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  experimental: {
+    // Booking form uploads reference images via a Server Action.
+    serverActions: { bodySizeLimit: "25mb" },
+  },
 };
 
 export default withNextIntl(nextConfig);

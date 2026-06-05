@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import localFont from "next/font/local";
+import ConsentScripts from "@/components/ConsentScripts";
 import "./globals.css";
 
 const switzer = localFont({
@@ -11,10 +12,6 @@ const switzer = localFont({
   variable: "--font-switzer",
   display: "swap",
 });
-
-// ── Analytics IDs — replace placeholders before going live ────────────────
-const FB_PIXEL_ID = "1618064772761145";   // e.g. "1234567890123456"
-const GA4_ID      = "GTM-MJ6723JD";  // e.g. "G-XXXXXXXXXX"
 
 export const metadata: Metadata = {
   icons: {
@@ -51,35 +48,8 @@ export default function RootLayout({
       <body className="antialiased">
         {children}
 
-        {/* ── Google Analytics 4 ──────────────────────────────────────── */}
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="ga4" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA4_ID}');
-          `}
-        </Script>
-
-        {/* ── Meta Pixel ──────────────────────────────────────────────── */}
-        <Script id="meta-pixel" strategy="afterInteractive">
-          {`
-            !function(f,b,e,v,n,t,s){
-              if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-              n.queue=[];t=b.createElement(e);t.async=!0;
-              t.src=v;s=b.getElementsByTagName(e)[0];
-              s.parentNode.insertBefore(t,s)
-            }(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-            fbq('init', '${FB_PIXEL_ID}');
-            fbq('track', 'PageView');
-          `}
-        </Script>
+        {/* Analytics / Pixel — loaded only after CookieYes consent */}
+        <ConsentScripts />
       </body>
     </html>
   );

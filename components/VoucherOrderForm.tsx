@@ -172,12 +172,25 @@ export default function VoucherOrderForm({ designs, labels }: Props) {
 
       {/* Terms */}
       <label className="flex items-start gap-3 cursor-pointer">
-        <input
-          type="checkbox"
-          name="terms"
-          required
-          className="mt-1 w-5 h-5 flex-shrink-0 accent-[#221c14] cursor-pointer"
-        />
+        <span className="relative mt-0.5 flex-shrink-0">
+          <input
+            type="checkbox"
+            name="terms"
+            required
+            className="peer appearance-none w-5 h-5 border-2 border-[#221c14]/30 bg-transparent checked:bg-[#221c14] checked:border-[#221c14] hover:border-[#221c14]/50 cursor-pointer transition-colors"
+          />
+          <svg
+            viewBox="0 0 24 24"
+            className="pointer-events-none absolute inset-0 m-auto hidden h-3.5 w-3.5 peer-checked:block"
+            fill="none"
+            stroke="#e5e4d2"
+            strokeWidth="3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </span>
         <span className="text-[#221c14] text-[15px] leading-snug">
           {labels.termsAgree}{" "}
           <Link href="/taisykles-ir-salygos" className="underline hover:opacity-60">
