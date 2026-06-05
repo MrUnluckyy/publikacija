@@ -218,6 +218,20 @@
           "Any occasion"
         ]
       }
-    ]
+    ],
+    "nameLabel": "Your name",
+    "namePlaceholder": "Full name",
+    "emailLabel": "Your email",
+    "emailPlaceholder": "you@email.com",
+    "recipientLabel": "Recipient",
+    "recipientPlaceholder": "Who the gift is for",
+    "amountLabel": "Amount",
+    "amountPlaceholder": "e.g. €100",
+    "selectDesign": "Choose a gift card design",
+    "termsAgree": "I agree to the",
+    "sending": "Sending…",
+    "required": "*",
+    "successHeading": "Thank you!",
+    "successBody": "Your request has been received. We will contact you shortly about your gift voucher."
   }
 }

@@ -218,6 +218,20 @@
           "Bet kokia proga"
         ]
       }
-    ]
+    ],
+    "nameLabel": "Jūsų vardas",
+    "namePlaceholder": "Vardas Pavardė",
+    "emailLabel": "Jūsų el. paštas",
+    "emailPlaceholder": "vardas@pastas.lt",
+    "recipientLabel": "Gavėjas",
+    "recipientPlaceholder": "Kam skirta dovana",
+    "amountLabel": "Suma",
+    "amountPlaceholder": "pvz. 100 €",
+    "selectDesign": "Pasirinkite kupono dizainą",
+    "termsAgree": "Sutinku su",
+    "sending": "Siunčiama…",
+    "required": "*",
+    "successHeading": "Ačiū!",
+    "successBody": "Jūsų užklausa gauta. Netrukus su jumis susisieksime dėl dovanų kupono."
   }
 }

@@ -70,6 +70,7 @@ export default defineConfig({
 
             // ── Operations ───────────────────────────────────────────
             S.documentTypeListItem("bookingRequest").title("Booking Requests"),
+            S.documentTypeListItem("voucherOrder").title("Voucher Orders"),
           ]),
     }),
     visionTool({ defaultApiVersion: apiVersion }),

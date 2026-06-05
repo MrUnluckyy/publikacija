@@ -5,9 +5,9 @@ export default defineType({
   title: "Gift Voucher",
   type: "document",
   fields: [
-    defineField({ name: "label", title: "Label", type: "localeString", validation: (R) => R.required() }),
-    defineField({ name: "amount", title: "Price (e.g. €50 or Individuali/Custom)", type: "string", validation: (R) => R.required() }),
-    defineField({ name: "description", title: "Description", type: "localeText" }),
+    defineField({ name: "label", title: "Design name", type: "localeString", validation: (R) => R.required() }),
+    defineField({ name: "amount", title: "Price (optional — not shown on site)", type: "string" }),
+    defineField({ name: "description", title: "Description (optional — not shown on site)", type: "localeText" }),
     defineField({
       name: "idealLt",
       title: "Ideal for — Lietuvių (LT) ★",

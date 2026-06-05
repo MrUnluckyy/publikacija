@@ -230,6 +230,11 @@ export const giftVouchersPageQuery = groq`*[_type == "giftVouchersPage" && _id =
   "eyebrow":          coalesce(eyebrow[$locale], eyebrow.lt),
   "heading":          coalesce(heading[$locale], heading.lt),
   "intro":            coalesce(intro[$locale], intro.lt),
+  "videoEyebrow":     coalesce(videoEyebrow[$locale], videoEyebrow.lt),
+  "videoHeading":     coalesce(videoHeading[$locale], videoHeading.lt),
+  "videoBody":        coalesce(videoBody[$locale], videoBody.lt),
+  "video": video.asset->{ playbackId, status },
+  videoLabel,
   "howItWorksLabel":  coalesce(howItWorksLabel[$locale], howItWorksLabel.lt),
   "steps": steps[]{
     stepNumber,

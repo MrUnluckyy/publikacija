@@ -40,6 +40,14 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="lt" className={switzer.variable}>
+      <head>
+        {/* ── CookieYes consent banner — must load before other tracking ── */}
+        <Script
+          id="cookieyes"
+          src="https://cdn-cookieyes.com/client_data/c4dd56ea1f33ff99bda3a647c2738aa1/script.js"
+          strategy="beforeInteractive"
+        />
+      </head>
       <body className="antialiased">
         {children}
 

@@ -1,0 +1,123 @@
+"use client";
+
+import { useRef, useState } from "react";
+import MuxPlayer from "@mux/mux-player-react";
+import type { MuxPlayerRefAttributes } from "@mux/mux-player-react";
+import type { MuxVideoAsset } from "@/sanity/types";
+
+interface Props {
+  video: MuxVideoAsset | null | undefined;
+  eyebrow?: string | null;
+  heading?: string | null;
+  body?: string | null;
+  label?: string | null;
+}
+
+export default function VideoBlock({ video, eyebrow, heading, body, label }: Props) {
+  const playerRef = useRef<MuxPlayerRefAttributes>(null);
+  const [playing, setPlaying] = useState(true);
+  const [muted, setMuted] = useState(true);
+
+  if (!video?.playbackId) return null;
+
+  const hasText = eyebrow || heading || body;
+
+  function togglePlay() {
+    const el = playerRef.current;
+    if (!el) return;
+    if (playing) { el.pause(); setPlaying(false); }
+    else { el.play(); setPlaying(true); }
+  }
+
+  function toggleMute() {
+    const el = playerRef.current;
+    if (!el) return;
+    el.muted = !el.muted;
+    setMuted(el.muted);
+  }
+
+  return (
+    <section className="border-b-2 border-[#221c14]" style={{ backgroundColor: "#e5e4d2" }}>
+      <div className={hasText ? "grid md:grid-cols-2" : ""}>
+
+        {/* Video */}
+        <div className={hasText ? "md:border-r-2 border-[#221c14]" : ""}>
+          <div className="flex flex-col">
+            <div className="relative aspect-[4/3] overflow-hidden">
+              <MuxPlayer
+                ref={playerRef}
+                playbackId={video.playbackId}
+                streamType="on-demand"
+                autoPlay="muted"
+                muted
+                loop
+                playsInline
+                nohotkeys
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  "--controls": "none",
+                  "--media-object-fit": "cover",
+                  "--media-object-position": "center",
+                } as React.CSSProperties & Record<`--${string}`, string>}
+              />
+            </div>
+
+            {/* Controls bar — desktop only */}
+            <div className="hidden md:flex border-t-2 border-[#221c14] px-8 py-4 items-center justify-between">
+              <button
+                onClick={togglePlay}
+                className="font-bold text-[13px] tracking-[2px] uppercase text-[#221c14] hover:opacity-50 transition-opacity cursor-pointer flex items-center gap-2"
+              >
+                {playing ? (
+                  <>
+                    <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor">
+                      <rect x="0" y="0" width="3" height="12" /><rect x="7" y="0" width="3" height="12" />
+                    </svg>
+                    Pause
+                  </>
+                ) : (
+                  <>
+                    <svg width="10" height="12" viewBox="0 0 24 24" fill="currentColor">
+                      <polygon points="6,3 20,12 6,21" />
+                    </svg>
+                    Play
+                  </>
+                )}
+              </button>
+              <div className="flex items-center gap-5">
+                {label && (
+                  <span className="text-[#221c14]/40 font-bold text-[12px] tracking-[1px] truncate max-w-[180px]">
+                    {label}
+                  </span>
+                )}
+                <button
+                  onClick={toggleMute}
+                  className="font-bold text-[13px] tracking-[2px] uppercase text-[#221c14] hover:opacity-50 transition-opacity cursor-pointer"
+                >
+                  {muted ? "Unmute" : "Mute"}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Text — desktop only */}
+        {hasText && (
+          <div className="hidden md:flex px-10 py-16 flex-col justify-center">
+            {eyebrow && (
+              <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[3px] uppercase mb-4">
+                {eyebrow}
+              </p>
+            )}
+            {heading && <h2 className="text-title text-[#221c14] mb-8">{heading}</h2>}
+            {body && <p className="text-body text-[#221c14] max-w-[480px]">{body}</p>}
+          </div>
+        )}
+
+      </div>
+    </section>
+  );
+}

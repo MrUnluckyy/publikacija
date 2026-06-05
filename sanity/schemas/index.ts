@@ -8,6 +8,7 @@ import siteSettings from "./siteSettings";
 import review from "./review";
 import bookingRequest from "./bookingRequest";
 import giftVoucher from "./giftVoucher";
+import voucherOrder from "./voucherOrder";
 import artist from "./artist";
 import videoSection from "./videoSection";
 import bookPage from "./bookPage";
@@ -40,5 +41,6 @@ export const schemaTypes = [
   review,
   bookingRequest,
   giftVoucher,
+  voucherOrder,
   artist,
 ];

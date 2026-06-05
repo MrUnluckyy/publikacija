@@ -10,6 +10,23 @@ export default defineType({
     defineField({ name: "heading", title: "Page Heading", type: "localeString" }),
     defineField({ name: "intro", title: "Intro Paragraph", type: "localeText" }),
 
+    // ── Video ──────────────────────────────────────────────────────────────────
+    defineField({ name: "videoEyebrow", title: "Video — Eyebrow Label", type: "localeString" }),
+    defineField({ name: "videoHeading", title: "Video — Heading", type: "localeString" }),
+    defineField({ name: "videoBody", title: "Video — Body Text", type: "localeText" }),
+    defineField({
+      name: "video",
+      title: "Video File",
+      type: "mux.video",
+      description: "Optional video shown on the page. Leave empty to hide the video section.",
+    }),
+    defineField({
+      name: "videoLabel",
+      title: "Video Label",
+      type: "string",
+      description: "Shown in the controls bar, e.g. a short caption",
+    }),
+
     // ── How it works ───────────────────────────────────────────────────────────
     defineField({ name: "howItWorksLabel", title: '"How it works" Section Label', type: "localeString" }),
     defineField({

@@ -206,6 +206,11 @@ export type GiftVouchersPageData = {
   eyebrow: string | null;
   heading: string | null;
   intro: string | null;
+  videoEyebrow: string | null;
+  videoHeading: string | null;
+  videoBody: string | null;
+  video: MuxVideoAsset | null;
+  videoLabel: string | null;
   howItWorksLabel: string | null;
   steps: { stepNumber: string; title: string; body: string }[] | null;
   readyHeading: string | null;
