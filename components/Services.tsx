@@ -6,6 +6,7 @@ import Link from "next/link";
 
 export default function Services({ items }: { items?: ServiceData[] | null }) {
   const t = useTranslations("services");
+  const tl = useTranslations("linocut");
 
   const FALLBACK = [
     {
@@ -73,6 +74,19 @@ export default function Services({ items }: { items?: ServiceData[] | null }) {
           </div>
         </div>
       ))}
+
+      {/* Linocut explainer CTA */}
+      <div className="border-t-2 border-[#e5e4d2]/20 md:border-[#221c14] px-5 md:px-10 py-10 md:py-12 flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+        <p className="text-body text-[#e5e4d2] md:text-[#221c14]">
+          {tl("homeCtaText")}
+        </p>
+        <Link
+          href="/linocut"
+          className="shrink-0 self-start border-2 border-[#e5e4d2] text-[#e5e4d2] md:border-[#221c14] md:text-[#221c14] font-bold text-[15px] tracking-[2px] uppercase px-6 py-3 hover:bg-[#e5e4d2] hover:text-[#221c14] md:hover:bg-[#221c14] md:hover:text-[#e5e4d2] transition-colors duration-200"
+        >
+          {tl("homeCtaButton")}
+        </Link>
+      </div>
     </section>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLocale } from "next-intl";
 import MuxPlayer from "@mux/mux-player-react";
@@ -34,13 +34,10 @@ export default function NewsSection({ items, eyebrow, heading }: Props) {
 
   const post = posts[index];
 
-  const go = useCallback(
-    (dir: 1 | -1) => {
-      setDirection(dir);
-      setIndex((i) => (i + dir + posts.length) % posts.length);
-    },
-    [posts.length]
-  );
+  function go(dir: 1 | -1) {
+    setDirection(dir);
+    setIndex((i) => (i + dir + posts.length) % posts.length);
+  }
 
   const variants = {
     enter: (d: number) => ({ opacity: 0, x: d * 40 }),
@@ -56,24 +53,33 @@ export default function NewsSection({ items, eyebrow, heading }: Props) {
           {heading ?? eyebrow ?? "Naujienos"}
         </p>
 
-        {posts.length > 1 && (
-          <div className="flex items-center gap-5">
-            <button
-              onClick={() => go(-1)}
-              aria-label="Previous post"
-              className="text-[#221c14] hover:opacity-50 transition-opacity cursor-pointer"
-            >
-              <ArrowIcon direction="left" size={22} strokeWidth={1.5} />
-            </button>
-            <button
-              onClick={() => go(1)}
-              aria-label="Next post"
-              className="text-[#221c14] hover:opacity-50 transition-opacity cursor-pointer"
-            >
-              <ArrowIcon direction="right" size={22} strokeWidth={1.5} />
-            </button>
-          </div>
-        )}
+        <div className="flex items-center gap-6">
+          <Link
+            href="/blog"
+            className="text-[#221c14]/50 font-bold text-[12px] tracking-[2px] uppercase hover:text-[#221c14] transition-colors"
+          >
+            {locale === "lt" ? "Visos naujienos" : "View all"}
+          </Link>
+
+          {posts.length > 1 && (
+            <div className="flex items-center gap-5">
+              <button
+                onClick={() => go(-1)}
+                aria-label="Previous post"
+                className="text-[#221c14] hover:opacity-50 transition-opacity cursor-pointer"
+              >
+                <ArrowIcon direction="left" size={22} strokeWidth={1.5} />
+              </button>
+              <button
+                onClick={() => go(1)}
+                aria-label="Next post"
+                className="text-[#221c14] hover:opacity-50 transition-opacity cursor-pointer"
+              >
+                <ArrowIcon direction="right" size={22} strokeWidth={1.5} />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Slide area */}

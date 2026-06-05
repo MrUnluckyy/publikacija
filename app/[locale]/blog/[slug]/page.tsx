@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { client } from "@/sanity/lib/client";
-import { newsPostBySlugQuery, newsPostsQuery } from "@/sanity/lib/queries";
+import { newsPostBySlugQuery } from "@/sanity/lib/queries";
 import type { NewsPostData } from "@/sanity/types";
 import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from "next-sanity";
@@ -13,15 +13,6 @@ import { Link } from "@/i18n/navigation";
 export const revalidate = 60;
 
 type Params = { locale: string; slug: string };
-
-export async function generateStaticParams() {
-  const posts = await client
-    .fetch<NewsPostData[]>(newsPostsQuery, { locale: "lt" })
-    .catch(() => []);
-  return posts
-    .filter((p) => p.slug)
-    .map((p) => ({ slug: p.slug as string }));
-}
 
 export async function generateMetadata({
   params,
