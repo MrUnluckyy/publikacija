@@ -70,13 +70,44 @@ export type VideoData = {
   featured: boolean;
 };
 
+export type AboutFaqItem = {
+  question: string | null;
+  answer: string | null;
+};
+
+export type AboutAftercareItem = {
+  language: string | null;
+  description: string | null;
+  buttonLabel: string | null;
+  fileUrl: string | null;
+  fileName: string | null;
+};
+
 export type AboutData = {
+  eyebrow: string | null;
   heading: string | null;
   accentWord: string | null;
+  headingLine3: string | null;
   body: PortableTextBlock[] | null;
   portrait: SanityImage | null;
   stats: { value: string; label: string }[] | null;
   established: string | null;
+  // Video
+  videoEyebrow: string | null;
+  videoHeading: string | null;
+  videoBody: string | null;
+  video: MuxVideoAsset | null;
+  videoLabel: string | null;
+  videoCtaLabel: string | null;
+  videoCtaUrl: string | null;
+  // FAQ
+  faqEyebrow: string | null;
+  faqHeading: string | null;
+  faqItems: AboutFaqItem[] | null;
+  // Aftercare
+  aftercareEyebrow: string | null;
+  aftercareHeading: string | null;
+  aftercareItems: AboutAftercareItem[] | null;
 };
 
 export type ReviewData = {

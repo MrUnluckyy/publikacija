@@ -62,8 +62,10 @@ function StudioPortrait({ portrait }: { portrait: AboutData["portrait"] }) {
 // ─── Section ───────────────────────────────────────────────────────────────────
 
 export default function About({ data }: { data?: AboutData | null }) {
+  const eyebrow = data?.eyebrow ?? "About the Studio";
   const heading = data?.heading ?? "Art in";
   const accentWord = data?.accentWord ?? "every";
+  const headingLine3 = data?.headingLine3 ?? "detail.";
   const stats = data?.stats?.length ? data.stats : DEFAULT_STATS;
   const established = data?.established ?? "2019";
 
@@ -81,7 +83,7 @@ export default function About({ data }: { data?: AboutData | null }) {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              About the Studio
+              {eyebrow}
             </motion.p>
 
             <div className="overflow-hidden mb-8">
@@ -98,7 +100,7 @@ export default function About({ data }: { data?: AboutData | null }) {
                   {accentWord}
                 </span>
                 <br />
-                detail.
+                {headingLine3}
               </motion.h2>
             </div>
 

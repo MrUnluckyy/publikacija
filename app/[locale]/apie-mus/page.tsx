@@ -4,9 +4,11 @@ import { aboutQuery } from "@/sanity/lib/queries";
 import type { AboutData } from "@/sanity/types";
 import Navigation from "@/components/Navigation";
 import About from "@/components/About";
+import AboutVideo from "@/components/AboutVideo";
+import AboutFaq from "@/components/AboutFaq";
+import AboutAftercare from "@/components/AboutAftercare";
 import FooterWrapper from "@/components/FooterWrapper";
 import BackToHome from "@/components/BackToHome";
-import ArrowIcon from "@/components/ui/ArrowIcon";
 
 export const revalidate = 60;
 
@@ -47,61 +49,9 @@ export default async function AboutPage({
       <main style={{ paddingTop: "calc(72px + var(--bar-h, 0px))" }}>
         <BackToHome />
         <About data={data} />
-
-        {/* Tattoo care downloads */}
-        <div className="border-b-2 border-[#221c14]">
-          <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-10">
-            <p className="text-[#221c14]/50 font-bold text-[14px] tracking-[3px] uppercase mb-2">
-              {isLt ? "Priežiūra" : "Aftercare"}
-            </p>
-            <h2 className="text-title text-[#221c14]">
-              {isLt ? "Tatuiruotės priežiūros instrukcija" : "Tattoo Aftercare Guide"}
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-2">
-            {/* LT download */}
-            <div className="border-b-2 md:border-b-0 md:border-r-2 border-[#221c14] px-5 md:px-10 py-12 flex flex-col gap-6">
-              <div>
-                <p className="text-[#221c14]/50 font-bold text-[14px] tracking-[2px] uppercase mb-3">
-                  Lietuvių kalba
-                </p>
-                <p className="text-body text-[#221c14]">
-                  Kaip tinkamai prižiūrėti naują tatuiruotę — instrukcija lietuvių kalba.
-                </p>
-              </div>
-              <a
-                href="/assets/tattoo-care/TATUIRUOTESGYDYMAS-scaled.jpg"
-                download="Tatuiruotes-prieziura.jpg"
-                className="self-start inline-flex items-center gap-2 border-2 border-[#221c14] text-[#221c14] font-bold text-[14px] tracking-[2px] uppercase px-6 py-3 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
-              >
-                <ArrowIcon direction="down" size={14} />
-                Atsisiųsti
-              </a>
-            </div>
-
-            {/* EN download */}
-            <div className="px-5 md:px-10 py-12 flex flex-col gap-6">
-              <div>
-                <p className="text-[#221c14]/50 font-bold text-[14px] tracking-[2px] uppercase mb-3">
-                  English
-                </p>
-                <p className="text-body text-[#221c14]">
-                  How to properly care for your new tattoo — instructions in English.
-                </p>
-              </div>
-              <a
-                href="/assets/tattoo-care/tattooaftercareEN-scaled.jpg"
-                download="Tattoo-aftercare.jpg"
-                className="self-start inline-flex items-center gap-2 border-2 border-[#221c14] text-[#221c14] font-bold text-[14px] tracking-[2px] uppercase px-6 py-3 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200"
-              >
-                <ArrowIcon direction="down" size={14} />
-                Download
-              </a>
-            </div>
-          </div>
-        </div>
-
+        <AboutVideo data={data} />
+        <AboutFaq data={data} />
+        <AboutAftercare data={data} isLt={isLt} />
       </main>
       <FooterWrapper />
     </>

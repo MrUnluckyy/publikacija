@@ -65,12 +65,42 @@ export const videosQuery = groq`*[_type == "studioVideo"] | order(order asc) {
 
 // ── About ─────────────────────────────────────────────────────────────────────
 export const aboutQuery = groq`*[_type == "about" && _id == "about-singleton"][0] {
-  "heading":     coalesce(heading[$locale], heading.lt),
-  "accentWord":  coalesce(accentWord[$locale], accentWord.lt),
-  "body":        coalesce(body[$locale], body.lt),
+  "eyebrow":      coalesce(eyebrow[$locale], eyebrow.lt),
+  "heading":      coalesce(heading[$locale], heading.lt),
+  "accentWord":   coalesce(accentWord[$locale], accentWord.lt),
+  "headingLine3": coalesce(headingLine3[$locale], headingLine3.lt),
+  "body":         coalesce(body[$locale], body.lt),
   portrait,
   "stats": stats[]{ value, "label": coalesce(label[$locale], label.lt) },
-  established
+  established,
+
+  // Video
+  "videoEyebrow":  coalesce(videoEyebrow[$locale], videoEyebrow.lt),
+  "videoHeading":  coalesce(videoHeading[$locale], videoHeading.lt),
+  "videoBody":     coalesce(videoBody[$locale], videoBody.lt),
+  "video": video.asset->{ playbackId, status },
+  videoLabel,
+  "videoCtaLabel": coalesce(videoCtaLabel[$locale], videoCtaLabel.lt),
+  videoCtaUrl,
+
+  // FAQ
+  "faqEyebrow": coalesce(faqEyebrow[$locale], faqEyebrow.lt),
+  "faqHeading": coalesce(faqHeading[$locale], faqHeading.lt),
+  "faqItems": faqItems[]{
+    "question": coalesce(question[$locale], question.lt),
+    "answer":   coalesce(answer[$locale], answer.lt)
+  },
+
+  // Aftercare
+  "aftercareEyebrow": coalesce(aftercareEyebrow[$locale], aftercareEyebrow.lt),
+  "aftercareHeading": coalesce(aftercareHeading[$locale], aftercareHeading.lt),
+  "aftercareItems": aftercareItems[]{
+    "language":    coalesce(language[$locale], language.lt),
+    "description": coalesce(description[$locale], description.lt),
+    "buttonLabel": coalesce(buttonLabel[$locale], buttonLabel.lt),
+    "fileUrl":     file.asset->url,
+    "fileName":    file.asset->originalFilename
+  }
 }`;
 
 // ── Featured video ────────────────────────────────────────────────────────────
