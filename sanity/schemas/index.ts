@@ -1,4 +1,11 @@
 import { localeString, localeText, localeBlock } from "./locale";
+import {
+  articleImage,
+  articleGallery,
+  articleVideo,
+  articleQuote,
+  localeArticle,
+} from "./articleContent";
 import hero from "./hero";
 import service from "./service";
 import portfolioItem from "./portfolioItem";
@@ -22,6 +29,13 @@ export const schemaTypes = [
   localeString,
   localeText,
   localeBlock,
+
+  // Article content blocks (used by the blog body)
+  articleImage,
+  articleGallery,
+  articleVideo,
+  articleQuote,
+  localeArticle,
 
   // Singletons
   announcementBar,

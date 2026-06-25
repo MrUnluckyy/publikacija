@@ -192,11 +192,50 @@ export type TermsPageData = {
   }[] | null;
 };
 
+export type ArticleImageBlock = {
+  _type: "articleImage";
+  _key: string;
+  image: SanityImage;
+  alt?: string;
+  caption?: string;
+  fullWidth?: boolean;
+};
+
+export type GalleryImage = SanityImage & { _key: string; alt?: string; caption?: string };
+
+export type ArticleGalleryBlock = {
+  _type: "articleGallery";
+  _key: string;
+  images: GalleryImage[];
+  caption?: string;
+};
+
+export type ArticleVideoBlock = {
+  _type: "articleVideo";
+  _key: string;
+  video: MuxVideoAsset | null;
+  caption?: string;
+};
+
+export type ArticleQuoteBlock = {
+  _type: "articleQuote";
+  _key: string;
+  text: string;
+  attribution?: string;
+};
+
+export type ArticleBlock =
+  | PortableTextBlock
+  | ArticleImageBlock
+  | ArticleGalleryBlock
+  | ArticleVideoBlock
+  | ArticleQuoteBlock;
+
 export type NewsPostData = {
   _id: string;
   title: string | null;
   excerpt: string | null;
-  body?: PortableTextBlock[] | null;
+  body?: ArticleBlock[] | null;
   date: string | null;
   coverImage: SanityImage | null;
   coverVideo: MuxVideoAsset | null;

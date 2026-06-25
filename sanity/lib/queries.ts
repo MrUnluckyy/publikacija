@@ -219,7 +219,13 @@ export const newsPostBySlugQuery = groq`*[_type == "newsPost" && slug.current ==
   _id,
   "title":   coalesce(title[$locale], title.lt),
   "excerpt": coalesce(excerpt[$locale], excerpt.lt),
-  "body":    coalesce(body[$locale], body.lt),
+  "body": coalesce(body[$locale], body.lt)[]{
+    ...,
+    _type == "articleVideo" => {
+      ...,
+      "video": video.asset->{ playbackId, status }
+    }
+  },
   date,
   coverImage,
   "coverVideo": coverVideo.asset->{ playbackId, status },

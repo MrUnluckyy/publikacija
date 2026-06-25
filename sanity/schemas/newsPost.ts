@@ -38,9 +38,10 @@ export default defineType({
     }),
     defineField({
       name: "body",
-      title: "Article Body",
-      type: "localeBlock",
-      description: "Full article content",
+      title: "Article Content",
+      type: "localeArticle",
+      description:
+        "Build the article from sections — text, images, galleries, video and pull quotes.",
     }),
     defineField({
       name: "slug",

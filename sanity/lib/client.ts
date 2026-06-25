@@ -12,6 +12,10 @@ export const client = createClient({
   ...base,
   useCdn: process.env.NODE_ENV === "production",
   token: process.env.SANITY_API_READ_TOKEN,
+  // Only ever serve published documents on the public site.
+  // Without this, a read token returns raw documents (drafts + published),
+  // which surfaced duplicate/unpublished content.
+  perspective: "published",
 });
 
 // Write client — used only in Server Actions (never sent to the browser)
@@ -19,4 +23,5 @@ export const writeClient = createClient({
   ...base,
   useCdn: false,
   token: process.env.SANITY_API_WRITE_TOKEN ?? process.env.SANITY_API_READ_TOKEN,
+  perspective: "published",
 });

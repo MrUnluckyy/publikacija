@@ -4,9 +4,9 @@ import { client } from "@/sanity/lib/client";
 import { newsPostBySlugQuery } from "@/sanity/lib/queries";
 import type { NewsPostData } from "@/sanity/types";
 import { urlFor } from "@/sanity/lib/image";
-import { PortableText } from "next-sanity";
 import Navigation from "@/components/Navigation";
 import FooterWrapper from "@/components/FooterWrapper";
+import ArticleBody from "@/components/ArticleBody";
 import ArrowIcon from "@/components/ui/ArrowIcon";
 import { Link } from "@/i18n/navigation";
 
@@ -42,16 +42,19 @@ export default async function BlogPostPage({
   if (!post) notFound();
 
   const formattedDate = post.date
-    ? new Date(post.date).toLocaleDateString(
-        locale === "lt" ? "lt-LT" : "en-GB",
-        { year: "numeric", month: "long", day: "numeric" }
-      )
+    ? new Date(post.date).toLocaleDateString(locale === "lt" ? "lt-LT" : "en-GB", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
     : null;
+
+  const hasBody = (post.body?.length ?? 0) > 0 || !!post.excerpt;
 
   return (
     <>
       <Navigation />
-      <main style={{ paddingTop: "calc(72px + var(--bar-h, 0px))" }}>
+      <main style={{ backgroundColor: "#e5e4d2", paddingTop: "calc(72px + var(--bar-h, 0px))" }}>
         {/* Back link */}
         <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-4">
           <Link
@@ -63,41 +66,43 @@ export default async function BlogPostPage({
           </Link>
         </div>
 
-        {/* Cover image */}
-        {post.coverImage && (
-          <div className="border-b-2 border-[#221c14] overflow-hidden max-h-[60vh]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={urlFor(post.coverImage).width(1600).height(900).url()}
-              alt={post.title ?? ""}
-              className="w-full object-cover"
-            />
-          </div>
-        )}
-
-        {/* Header */}
-        <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-10 md:py-16">
+        {/* Header — date + title, then photo below (per layout) */}
+        <header className="border-b-2 border-[#221c14] px-5 md:px-10 py-12 md:py-20">
           {formattedDate && (
-            <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[3px] uppercase mb-4">
+            <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[3px] uppercase mb-5">
               {formattedDate}
             </p>
           )}
-          <h1 className="text-title text-[#221c14] mb-6 max-w-3xl">
+          <h1 className="text-[#221c14] font-bold uppercase tracking-tight leading-[0.95] text-[clamp(2.75rem,7vw,6rem)] max-w-[16ch]">
             {post.title}
           </h1>
-          {post.excerpt && (
-            <p className="text-body text-[#221c14] max-w-2xl opacity-70">
-              {post.excerpt}
-            </p>
-          )}
-        </div>
+        </header>
 
-        {/* Body */}
-        {post.body && (
-          <div className="px-5 md:px-10 py-12 md:py-20 max-w-3xl">
-            <div className="text-[#221c14] text-[18px] leading-[1.8em] font-normal [&_h2]:font-extrabold [&_h2]:text-[1.6em] [&_h2]:leading-[1.2em] [&_h2]:mt-10 [&_h2]:mb-4 [&_h3]:font-extrabold [&_h3]:text-[1.3em] [&_h3]:leading-[1.2em] [&_h3]:mt-8 [&_h3]:mb-3 [&_p]:mb-5 [&_ul]:list-disc [&_ul]:pl-6 [&_ul]:mb-5 [&_ol]:list-decimal [&_ol]:pl-6 [&_ol]:mb-5 [&_li]:mb-2 [&_strong]:font-bold [&_a]:underline [&_a]:underline-offset-2">
-              <PortableText value={post.body} />
-            </div>
+        {/* Cover image / video */}
+        {post.coverVideo?.playbackId ? (
+          <div className="border-b-2 border-[#221c14] overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={`https://image.mux.com/${post.coverVideo.playbackId}/thumbnail.jpg?width=1800&height=1000&fit_mode=crop`}
+              alt={post.title ?? ""}
+              className="w-full max-h-[72vh] object-cover"
+            />
+          </div>
+        ) : post.coverImage ? (
+          <div className="border-b-2 border-[#221c14] overflow-hidden">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={urlFor(post.coverImage).width(1800).height(1000).fit("crop").auto("format").url()}
+              alt={post.title ?? ""}
+              className="w-full max-h-[72vh] object-cover"
+            />
+          </div>
+        ) : null}
+
+        {/* Body — sections, pushed right on desktop */}
+        {hasBody && (
+          <div className="border-b-2 border-[#221c14]">
+            <ArticleBody value={post.body ?? []} lead={post.excerpt} />
           </div>
         )}
       </main>
