@@ -73,7 +73,7 @@ export default async function BlogPostPage({
               {formattedDate}
             </p>
           )}
-          <h1 className="text-[#221c14] font-bold uppercase tracking-tight leading-[0.95] text-[clamp(2.75rem,7vw,6rem)] max-w-[16ch]">
+          <h1 className="text-title text-[#221c14] max-w-[16ch]">
             {post.title}
           </h1>
         </header>

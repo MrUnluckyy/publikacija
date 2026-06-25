@@ -221,7 +221,11 @@ export const newsPostBySlugQuery = groq`*[_type == "newsPost" && slug.current ==
   "excerpt": coalesce(excerpt[$locale], excerpt.lt),
   "body": coalesce(body[$locale], body.lt)[]{
     ...,
-    _type == "articleVideo" => {
+    _type == "sectionVideo" => {
+      ...,
+      "video": video.asset->{ playbackId, status }
+    },
+    _type == "sectionMediaText" => {
       ...,
       "video": video.asset->{ playbackId, status }
     }

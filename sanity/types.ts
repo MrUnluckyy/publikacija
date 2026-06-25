@@ -192,8 +192,16 @@ export type TermsPageData = {
   }[] | null;
 };
 
-export type ArticleImageBlock = {
-  _type: "articleImage";
+export type GalleryImage = SanityImage & { _key: string; alt?: string; caption?: string };
+
+export type SectionText = {
+  _type: "sectionText";
+  _key: string;
+  content: PortableTextBlock[];
+};
+
+export type SectionImage = {
+  _type: "sectionImage";
   _key: string;
   image: SanityImage;
   alt?: string;
@@ -201,41 +209,51 @@ export type ArticleImageBlock = {
   fullWidth?: boolean;
 };
 
-export type GalleryImage = SanityImage & { _key: string; alt?: string; caption?: string };
-
-export type ArticleGalleryBlock = {
-  _type: "articleGallery";
+export type SectionGallery = {
+  _type: "sectionGallery";
   _key: string;
   images: GalleryImage[];
   caption?: string;
 };
 
-export type ArticleVideoBlock = {
-  _type: "articleVideo";
+export type SectionVideo = {
+  _type: "sectionVideo";
   _key: string;
   video: MuxVideoAsset | null;
   caption?: string;
 };
 
-export type ArticleQuoteBlock = {
-  _type: "articleQuote";
+export type SectionQuote = {
+  _type: "sectionQuote";
   _key: string;
   text: string;
   attribution?: string;
 };
 
-export type ArticleBlock =
-  | PortableTextBlock
-  | ArticleImageBlock
-  | ArticleGalleryBlock
-  | ArticleVideoBlock
-  | ArticleQuoteBlock;
+export type SectionMediaText = {
+  _type: "sectionMediaText";
+  _key: string;
+  mediaType: "image" | "video";
+  image?: SanityImage | null;
+  video?: MuxVideoAsset | null;
+  alt?: string;
+  text: PortableTextBlock[];
+  mediaPosition?: "left" | "right";
+};
+
+export type ArticleSection =
+  | SectionText
+  | SectionImage
+  | SectionGallery
+  | SectionVideo
+  | SectionQuote
+  | SectionMediaText;
 
 export type NewsPostData = {
   _id: string;
   title: string | null;
   excerpt: string | null;
-  body?: ArticleBlock[] | null;
+  body?: ArticleSection[] | null;
   date: string | null;
   coverImage: SanityImage | null;
   coverVideo: MuxVideoAsset | null;

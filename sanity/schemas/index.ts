@@ -1,10 +1,12 @@
 import { localeString, localeText, localeBlock } from "./locale";
 import {
-  articleImage,
-  articleGallery,
-  articleVideo,
-  articleQuote,
-  localeArticle,
+  sectionText,
+  sectionImage,
+  sectionGallery,
+  sectionVideo,
+  sectionQuote,
+  sectionMediaText,
+  localeSections,
 } from "./articleContent";
 import hero from "./hero";
 import service from "./service";
@@ -30,12 +32,14 @@ export const schemaTypes = [
   localeText,
   localeBlock,
 
-  // Article content blocks (used by the blog body)
-  articleImage,
-  articleGallery,
-  articleVideo,
-  articleQuote,
-  localeArticle,
+  // Blog content sections (used by the blog body)
+  sectionText,
+  sectionImage,
+  sectionGallery,
+  sectionVideo,
+  sectionQuote,
+  sectionMediaText,
+  localeSections,
 
   // Singletons
   announcementBar,
