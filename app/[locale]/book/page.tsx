@@ -56,7 +56,17 @@ export default async function BookPage({ params }: { params: Promise<{ locale: s
         </div>
 
         {/* Booking request form */}
-        <BookingForm services={services} artists={artistOptions} />
+        <BookingForm
+          services={services}
+          artists={artistOptions}
+          locale={locale}
+          instagramUrl={settings?.instagramUrl}
+          workshop={{
+            heading: bookContent?.workshopHeading ?? t("workshopHeading"),
+            body: bookContent?.workshopBody ?? t("workshopBody"),
+            facts: bookContent?.workshopFacts ?? [],
+          }}
+        />
 
         {/* Studio info strip */}
         <div className="border-t-2 border-b-2 border-[#221c14] grid md:grid-cols-3">

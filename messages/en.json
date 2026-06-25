@@ -130,8 +130,8 @@
     "voucherTitle": "Gift Voucher",
     "voucherDesc": "Purchase a gift voucher for any amount — valid for all services.",
     "calHeading": "Pick a date & time",
-    "workshopHeading": "Join a workshop",
-    "workshopBody": "Our workshops run as group sessions with limited spots. Browse the event details and reserve your place directly on Luma.",
+    "workshopHeading": "Linocut workshop",
+    "workshopBody": "Learn to transfer a design onto linoleum, carve it, and print it. In a couple of hours you will walk away with a print you made yourself — a great way to try something hands-on.",
     "workshopCta": "Register on Luma",
     "back": "Back",
     "selectService": "What would you like to book?",
@@ -145,7 +145,14 @@
     "datesPlaceholder": "e.g. weekends, next month…",
     "referenceLabel": "Reference images",
     "referenceButton": "Add photos",
-    "referenceHint": "up to 6 images"
+    "referenceHint": "up to 6 images",
+    "participantsLabel": "Number of participants",
+    "participantsPlaceholder": "e.g. 2",
+    "workshopDatesLabel": "Preferred date / session",
+    "workshopDatesPlaceholder": "e.g. a weekend, in March",
+    "workshopMessageLabel": "Message / questions",
+    "workshopMessagePlaceholder": "Any questions about the workshop, preferences…",
+    "instagramCta": "Message us on Instagram"
   },
   "ourWork": {
     "eyebrow": "Selected Work",

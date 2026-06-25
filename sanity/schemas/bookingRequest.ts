@@ -55,8 +55,13 @@ export default defineType({
     }),
     defineField({
       name: "preferredDates",
-      title: "Preferred Dates",
+      title: "Preferred Dates / Session",
       type: "string",
+    }),
+    defineField({
+      name: "participants",
+      title: "Participants (workshop)",
+      type: "number",
     }),
     defineField({
       name: "message",

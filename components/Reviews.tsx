@@ -122,7 +122,7 @@ export default function Reviews({ items, eyebrow, heading }: ReviewsProps) {
 
       <div className="border-t-2 border-[#221c14] flex md:justify-end">
         <a
-          href="https://www.google.com/maps/place/?q=place_id:ChIJORCGdQGV3UYRPr8ybynp0YA"
+          href="https://www.google.com/maps/search/?api=1&query=Publikacija%20Tattoo&query_place_id=ChIJORCGdQGV3UYRPr8ybynp0YA"
           target="_blank"
           rel="noopener noreferrer"
           className="w-full md:w-auto inline-flex items-center justify-center gap-2 px-5 md:px-10 py-5 text-[#221c14]/40 font-bold text-[13px] tracking-[2px] uppercase hover:text-[#221c14] transition-colors duration-200"

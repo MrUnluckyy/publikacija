@@ -180,7 +180,7 @@ export type BookPageData = {
   calHeading: string | null;
   workshopHeading: string | null;
   workshopBody: string | null;
-  workshopCtaLabel: string | null;
+  workshopFacts: { label: string | null; value: string | null }[] | null;
 };
 
 export type TermsPageData = {

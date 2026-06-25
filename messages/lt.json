@@ -130,8 +130,8 @@
     "voucherTitle": "Dovanų kuponas",
     "voucherDesc": "Įsigykite dovanų kuponą bet kokiai sumai – tinka visoms paslaugoms.",
     "calHeading": "Pasirinkite datą ir laiką",
-    "workshopHeading": "Prisijunkite prie seminaro",
-    "workshopBody": "Mūsų seminarai vyksta grupėmis su ribotu vietų skaičiumi. Peržiūrėkite renginio informaciją ir rezervuokite vietą tiesiogiai per Luma.",
+    "workshopHeading": "Linoraižybos seminaras",
+    "workshopBody": "Išmokite perkelti piešinį ant linoleumo, jį išraižyti ir atspausti. Per kelias valandas išsinešite savo pačių sukurtą atspaudą — puiki proga pabandyti ką nors rankomis.",
     "workshopCta": "Registruotis per Luma",
     "back": "Atgal",
     "selectService": "Ką norėtumėte rezervuoti?",
@@ -145,7 +145,14 @@
     "datesPlaceholder": "pvz. savaitgaliais, kitą mėnesį…",
     "referenceLabel": "Pavyzdžiai / nuorodos",
     "referenceButton": "Pridėti nuotraukų",
-    "referenceHint": "iki 6 nuotraukų"
+    "referenceHint": "iki 6 nuotraukų",
+    "participantsLabel": "Dalyvių skaičius",
+    "participantsPlaceholder": "pvz. 2",
+    "workshopDatesLabel": "Pageidaujama data / sesija",
+    "workshopDatesPlaceholder": "pvz. savaitgalį, kovo mėn.",
+    "workshopMessageLabel": "Žinutė / klausimai",
+    "workshopMessagePlaceholder": "Klausimai apie seminarą, pageidavimai…",
+    "instagramCta": "Rašykite mums Instagram"
   },
   "ourWork": {
     "eyebrow": "Pasirinkti darbai",

@@ -3,28 +3,40 @@
 import { useActionState, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { submitBooking, type BookingState } from "./actions";
+import ArrowIcon from "@/components/ui/ArrowIcon";
 
 export type ServiceOption = { value: string; label: string };
 export type ArtistOption = { id: string; name: string };
+export type WorkshopContent = {
+  heading?: string | null;
+  body?: string | null;
+  facts: { label: string | null; value: string | null }[];
+};
 
 interface Props {
   services: ServiceOption[];
   artists: ArtistOption[];
+  locale: string;
+  instagramUrl?: string | null;
+  workshop: WorkshopContent;
 }
 
 const initial: BookingState = { status: "idle" };
 
 const fieldClass =
   "bg-transparent border-2 border-[#221c14]/25 px-4 py-3 text-[#221c14] text-[16px] placeholder:text-[#221c14]/30 focus:outline-none focus:border-[#221c14] transition-colors";
+const labelClass = "text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase";
 
-export default function BookingForm({ services, artists }: Props) {
+export default function BookingForm({ services, artists, locale, instagramUrl, workshop }: Props) {
   const t = useTranslations("book");
   const [state, action, pending] = useActionState(submitBooking, initial);
   const formRef = useRef<HTMLFormElement>(null);
 
-  const [service, setService] = useState(services[0]?.value ?? "");
+  const [service, setService] = useState(services[0]?.value ?? "Tattoo");
   const [method, setMethod] = useState<"instagram" | "email">("instagram");
   const [fileNames, setFileNames] = useState<string[]>([]);
+
+  const isWorkshop = service === "Workshop";
 
   useEffect(() => {
     if (state.status === "success") formRef.current?.reset();
@@ -34,7 +46,7 @@ export default function BookingForm({ services, artists }: Props) {
     return (
       <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-16">
         <div className="w-10 h-[4px] bg-[#221c14] mb-6" />
-        <h3 className="text-[#221c14] text-2xl font-bold mb-3">{t("successHeading")}</h3>
+        <h3 className="text-subtitle text-[#221c14] mb-3">{t("successHeading")}</h3>
         <p className="text-body text-[#221c14]/70 max-w-[560px]">{t("successBody")}</p>
       </div>
     );
@@ -46,12 +58,12 @@ export default function BookingForm({ services, artists }: Props) {
       action={action}
       className="border-b-2 border-[#221c14] px-5 md:px-10 py-12 md:py-16 max-w-[640px] flex flex-col gap-10"
     >
-      {/* Service */}
+      <input type="hidden" name="service" value={service} />
+      <input type="hidden" name="locale" value={locale} />
+
+      {/* Service chooser */}
       <div>
-        <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase mb-5">
-          {t("selectService")}
-        </p>
-        <input type="hidden" name="service" value={service} />
+        <p className={`${labelClass} mb-5`}>{t("selectService")}</p>
         <div className="grid grid-cols-2 gap-3">
           {services.map((s) => {
             const active = service === s.value;
@@ -73,79 +85,118 @@ export default function BookingForm({ services, artists }: Props) {
         </div>
       </div>
 
-      {/* Name + Email */}
+      {/* Workshop details panel */}
+      {isWorkshop && (workshop.heading || workshop.body || workshop.facts.length > 0 || instagramUrl) && (
+        <div className="border-2 border-[#221c14] p-6 md:p-8 flex flex-col gap-5">
+          {workshop.heading && <h3 className="text-subtitle text-[#221c14]">{workshop.heading}</h3>}
+          {workshop.body && <p className="text-body text-[#221c14]/80">{workshop.body}</p>}
+          {workshop.facts.length > 0 && (
+            <dl className="grid grid-cols-2 gap-x-6 gap-y-4 border-t-2 border-[#221c14]/15 pt-5">
+              {workshop.facts.map((f, i) => (
+                <div key={i}>
+                  <dt className="text-[#221c14]/50 font-bold text-[12px] tracking-[2px] uppercase mb-1">{f.label}</dt>
+                  <dd className="text-body text-[#221c14]">{f.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )}
+          {instagramUrl && (
+            <a
+              href={instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="self-start inline-flex items-center gap-2 text-[#221c14] font-bold text-[13px] tracking-[2px] uppercase border-b-2 border-[#221c14]/30 hover:border-[#221c14] transition-colors"
+            >
+              {t("instagramCta")}
+              <ArrowIcon direction="up-right" size={12} strokeWidth={2.5} />
+            </a>
+          )}
+        </div>
+      )}
+
+      {/* Name + Email (shared) */}
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-1.5">
-          <label className="text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase">
+          <label className={labelClass}>
             {t("nameLabel")} <span className="text-[#221c14]">{t("required")}</span>
           </label>
           <input name="name" type="text" required autoComplete="name" placeholder={t("namePlaceholder")} className={fieldClass} />
         </div>
         <div className="flex flex-col gap-1.5">
-          <label className="text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase">
+          <label className={labelClass}>
             {t("emailLabel")} <span className="text-[#221c14]">{t("required")}</span>
           </label>
           <input name="email" type="email" required autoComplete="email" placeholder={t("emailPlaceholder")} className={fieldClass} />
         </div>
       </div>
 
-      {/* Preferred artist */}
-      {artists.length > 0 && (
-        <div className="flex flex-col gap-1.5">
-          <label className="text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase">
-            {t("artistLabel")}
-          </label>
-          <select name="artist" defaultValue="" className={`${fieldClass} appearance-none cursor-pointer`}>
-            <option value="">{t("artistAny")}</option>
-            {artists.map((a) => (
-              <option key={a.id} value={a.id}>{a.name}</option>
-            ))}
-          </select>
-        </div>
+      {isWorkshop ? (
+        /* ── Workshop fields ───────────────────────────────────────────── */
+        <>
+          <div className="flex flex-col gap-1.5">
+            <label className={labelClass}>{t("participantsLabel")}</label>
+            <input
+              name="participants"
+              type="number"
+              min={1}
+              placeholder={t("participantsPlaceholder")}
+              className={`${fieldClass} w-full sm:w-[200px]`}
+            />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label className={labelClass}>{t("workshopDatesLabel")}</label>
+            <input name="preferredDates" type="text" placeholder={t("workshopDatesPlaceholder")} className={fieldClass} />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label className={labelClass}>{t("workshopMessageLabel")}</label>
+            <textarea name="message" rows={4} placeholder={t("workshopMessagePlaceholder")} className={`${fieldClass} resize-none`} />
+          </div>
+        </>
+      ) : (
+        /* ── Tattoo fields ─────────────────────────────────────────────── */
+        <>
+          {artists.length > 0 && (
+            <div className="flex flex-col gap-1.5">
+              <label className={labelClass}>{t("artistLabel")}</label>
+              <select name="artist" defaultValue="" className={`${fieldClass} appearance-none cursor-pointer`}>
+                <option value="">{t("artistAny")}</option>
+                {artists.map((a) => (
+                  <option key={a.id} value={a.id}>{a.name}</option>
+                ))}
+              </select>
+            </div>
+          )}
+          <div className="flex flex-col gap-1.5">
+            <label className={labelClass}>{t("datesLabel")}</label>
+            <input name="preferredDates" type="text" placeholder={t("datesPlaceholder")} className={fieldClass} />
+          </div>
+          <div className="flex flex-col gap-1.5">
+            <label className={labelClass}>{t("messageLabel")}</label>
+            <textarea name="message" rows={5} placeholder={t("messagePlaceholder")} className={`${fieldClass} resize-none`} />
+          </div>
+          <div className="flex flex-col gap-2">
+            <label className={labelClass}>{t("referenceLabel")}</label>
+            <label className="self-start border-2 border-[#221c14] text-[#221c14] font-bold text-[13px] tracking-[2px] uppercase px-6 py-3 cursor-pointer hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors">
+              {t("referenceButton")}
+              <input
+                type="file"
+                name="referenceImages"
+                accept="image/*"
+                multiple
+                className="hidden"
+                onChange={(e) => setFileNames(Array.from(e.target.files ?? []).map((f) => f.name))}
+              />
+            </label>
+            <p className="text-[#221c14]/40 text-[13px]">
+              {fileNames.length ? fileNames.join(", ") : t("referenceHint")}
+            </p>
+          </div>
+        </>
       )}
 
-      {/* Preferred dates */}
-      <div className="flex flex-col gap-1.5">
-        <label className="text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase">
-          {t("datesLabel")}
-        </label>
-        <input name="preferredDates" type="text" placeholder={t("datesPlaceholder")} className={fieldClass} />
-      </div>
-
-      {/* Message */}
-      <div className="flex flex-col gap-1.5">
-        <label className="text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase">
-          {t("messageLabel")}
-        </label>
-        <textarea name="message" rows={5} placeholder={t("messagePlaceholder")} className={`${fieldClass} resize-none`} />
-      </div>
-
-      {/* Reference images */}
-      <div className="flex flex-col gap-2">
-        <label className="text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase">
-          {t("referenceLabel")}
-        </label>
-        <label className="self-start border-2 border-[#221c14] text-[#221c14] font-bold text-[13px] tracking-[2px] uppercase px-6 py-3 cursor-pointer hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors">
-          {t("referenceButton")}
-          <input
-            type="file"
-            name="referenceImages"
-            accept="image/*"
-            multiple
-            className="hidden"
-            onChange={(e) => setFileNames(Array.from(e.target.files ?? []).map((f) => f.name))}
-          />
-        </label>
-        <p className="text-[#221c14]/40 text-[13px]">
-          {fileNames.length ? fileNames.join(", ") : t("referenceHint")}
-        </p>
-      </div>
-
-      {/* Preferred contact */}
+      {/* Preferred contact (shared) */}
       <div>
-        <p className="text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase mb-5">
-          {t("contactLabel")}
-        </p>
+        <p className={`${labelClass} mb-5`}>{t("contactLabel")}</p>
         <input type="hidden" name="contactMethod" value={method} />
         <div className="flex flex-wrap gap-6">
           {([
@@ -174,9 +225,7 @@ export default function BookingForm({ services, artists }: Props) {
         )}
       </div>
 
-      {state.status === "error" && (
-        <p className="text-red-700 text-[14px]">{state.message}</p>
-      )}
+      {state.status === "error" && <p className="text-red-700 text-[14px]">{state.message}</p>}
 
       <button
         type="submit"

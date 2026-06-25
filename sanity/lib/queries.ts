@@ -191,7 +191,10 @@ export const bookPageQuery = groq`*[_type == "bookPage" && _id == "book-page-sin
   "calHeading":      coalesce(calHeading[$locale], calHeading.lt),
   "workshopHeading": coalesce(workshopHeading[$locale], workshopHeading.lt),
   "workshopBody":    coalesce(workshopBody[$locale], workshopBody.lt),
-  "workshopCtaLabel": coalesce(workshopCtaLabel[$locale], workshopCtaLabel.lt)
+  "workshopFacts": workshopFacts[]{
+    "label": coalesce(label[$locale], label.lt),
+    "value": coalesce(value[$locale], value.lt)
+  }
 }`;
 
 // ── Terms & Conditions Page ───────────────────────────────────────────────────

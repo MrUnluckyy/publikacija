@@ -26,10 +26,30 @@ export default defineType({
     // ── Calendar / booking ─────────────────────────────────────────────────────
     defineField({ name: "calHeading", title: "Calendar Heading", type: "localeString", description: 'e.g. "Pasirinkite datą ir laiką"' }),
 
-    // ── Workshop special section ───────────────────────────────────────────────
-    defineField({ name: "workshopHeading", title: "Workshop Section Heading", type: "localeString" }),
-    defineField({ name: "workshopBody", title: "Workshop Section Body", type: "localeText" }),
-    defineField({ name: "workshopCtaLabel", title: "Workshop CTA Label", type: "localeString", description: 'e.g. "Registruotis per Luma"' }),
+    // ── Workshop details panel (shown when "Workshop" is selected) ─────────────
+    defineField({ name: "workshopHeading", title: "Workshop — Heading", type: "localeString" }),
+    defineField({ name: "workshopBody", title: "Workshop — Description", type: "localeText" }),
+    defineField({
+      name: "workshopFacts",
+      title: "Workshop — Facts",
+      description: "Short labelled facts shown in the details panel, e.g. Duration · 2 h, Group size · 2–6, Price · 45 €",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            { name: "label", title: "Label (e.g. Duration)", type: "localeString" },
+            { name: "value", title: "Value (e.g. 2 hours)", type: "localeString" },
+          ],
+          preview: {
+            select: { title: "label.lt", subtitle: "value.lt" },
+            prepare({ title, subtitle }) {
+              return { title: title ?? "Fact", subtitle };
+            },
+          },
+        },
+      ],
+    }),
   ],
   preview: {
     prepare() {
