@@ -50,7 +50,7 @@ export default function NewsSection({ items, eyebrow, heading }: Props) {
       {/* Compact header: single label + plain chevrons */}
       <div className="flex items-center justify-between border-b-2 border-[#221c14] px-5 md:px-10 py-4">
         <p className="text-[#221c14] font-bold text-[16px]">
-          {heading ?? eyebrow ?? "Naujienos"}
+          {heading ?? eyebrow ?? (locale === "lt" ? "Naujienos" : "News")}
         </p>
 
         <div className="flex items-center gap-6">

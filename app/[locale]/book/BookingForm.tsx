@@ -44,7 +44,7 @@ export default function BookingForm({ services, artists, locale, instagramUrl, w
 
   if (state.status === "success") {
     return (
-      <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-16">
+      <div className="border-b-2 border-[#221c14] px-5 md:pl-[40%] md:pr-10 py-16">
         <div className="w-10 h-[4px] bg-[#221c14] mb-6" />
         <h3 className="text-subtitle text-[#221c14] mb-3">{t("successHeading")}</h3>
         <p className="text-body text-[#221c14]/70 max-w-[560px]">{t("successBody")}</p>
@@ -56,7 +56,7 @@ export default function BookingForm({ services, artists, locale, instagramUrl, w
     <form
       ref={formRef}
       action={action}
-      className="border-b-2 border-[#221c14] px-5 md:px-10 py-12 md:py-16 max-w-[640px] flex flex-col gap-10"
+      className="border-b-2 border-[#221c14] px-5 md:pl-[40%] md:pr-10 py-12 md:py-16 flex flex-col gap-10"
     >
       <input type="hidden" name="service" value={service} />
       <input type="hidden" name="locale" value={locale} />

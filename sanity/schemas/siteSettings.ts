@@ -31,6 +31,12 @@ export default defineType({
     defineField({ name: "reviewsHeading", title: "Reviews — Heading", type: "localeString" }),
     defineField({ name: "artistsEyebrow", title: "Artists Section — Eyebrow Label", type: "localeString" }),
     defineField({ name: "artistsHeading", title: "Artists Section — Heading", type: "localeString" }),
+    defineField({ name: "newsHeading", title: "News Section — Heading", type: "localeString" }),
+
+    // ── Homepage linocut CTA (below Services) ───────────────────────────────────
+    defineField({ name: "linocutCtaText", title: "Linocut CTA — Text", type: "localeString", description: 'e.g. "Curious about linocut & prints?"' }),
+    defineField({ name: "linocutCtaLabel", title: "Linocut CTA — Button label", type: "localeString", description: 'e.g. "What is linocut?"' }),
+    defineField({ name: "linocutCtaUrl", title: "Linocut CTA — Button link", type: "string", initialValue: "/linocut" }),
 
     // ── Marquee / SEO keywords ─────────────────────────────────────────────────
     defineField({

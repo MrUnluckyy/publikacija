@@ -19,6 +19,15 @@ import type {
 // Text columns are left-aligned with a comfortable reading width.
 const TEXT_COLUMN = "max-w-[760px]";
 
+// Media width is Studio-managed per item: full width on mobile, the chosen
+// percentage on desktop. Left-aligned within the article column.
+function mediaProps(width?: number) {
+  return {
+    className: "w-full md:w-[var(--mw)]",
+    style: { "--mw": `${width ?? 70}%` } as React.CSSProperties,
+  };
+}
+
 // Rich-text rendering shared by Text and Media+text sections.
 const textComponents: PortableTextComponents = {
   block: {
@@ -77,12 +86,14 @@ function TextSection({ section }: { section: SectionText }) {
 }
 
 function ImageSection({ section }: { section: SectionImage }) {
-  const src = urlFor(section.image).width(section.fullWidth ? 2000 : 1400).auto("format").url();
+  // Images span the article column width (full-bleed-to-viewport is avoided so
+  // images don't overflow the sticky-sidebar two-column layout).
+  const src = urlFor(section.image).width(1600).auto("format").url();
   return (
-    <figure className={section.fullWidth ? "md:relative md:left-1/2 md:w-screen md:max-w-none md:-translate-x-1/2" : ""}>
+    <figure {...mediaProps(section.width)}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={src} alt={section.alt ?? section.caption ?? ""} className="w-full object-cover" />
-      <Caption className={section.fullWidth ? "px-5 md:px-10" : ""}>{section.caption}</Caption>
+      <Caption>{section.caption}</Caption>
     </figure>
   );
 }
@@ -98,7 +109,7 @@ function GallerySection({ section }: { section: SectionGallery }) {
   }));
 
   return (
-    <figure>
+    <figure {...mediaProps(section.width)}>
       <div className={`grid gap-2 ${images.length === 1 ? "grid-cols-1" : "grid-cols-2 md:grid-cols-3"}`}>
         {images.map((img, i) => (
           <button
@@ -131,7 +142,7 @@ function GallerySection({ section }: { section: SectionGallery }) {
 function VideoSectionBlock({ section }: { section: SectionVideo }) {
   if (!section.video?.playbackId) return null;
   return (
-    <figure>
+    <figure {...mediaProps(section.width)}>
       <MuxBlock playbackId={section.video.playbackId} />
       <Caption>{section.caption}</Caption>
     </figure>
@@ -204,12 +215,18 @@ function Section({ section }: { section: ArticleSection }) {
 export default function ArticleBody({
   value,
   lead,
+  offset = false,
 }: {
   value: ArticleSection[];
   lead?: string | null;
+  // When there is no sticky sidebar, push the article ~40% from the left on
+  // desktop (centred-right). With a sidebar the column already handles position.
+  offset?: boolean;
 }) {
   return (
-    <div className="px-5 md:px-10 py-12 md:py-20 overflow-x-clip text-[#221c14] text-body">
+    <div
+      className={`px-5 ${offset ? "md:pl-[35%] md:pr-10" : "md:px-10"} py-12 md:py-20 overflow-x-clip text-[#221c14] text-body`}
+    >
       {lead && (
         <p className={`${TEXT_COLUMN} mb-12 text-body opacity-70`}>
           {lead}

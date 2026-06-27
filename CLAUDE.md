@@ -9,10 +9,10 @@ Text size and layout are treated as critical. Two hard rules:
 1. **Use the defined typography tokens** from `app/globals.css` (`@theme`) — they are the single source of truth. Do **not** invent arbitrary content sizes (`text-[18px]`, `text-[21px]`, `text-[clamp(...)]`).
    - `text-title` — page headings (H1). `clamp(3rem,5.5vw,5rem)` / 800
    - `text-subtitle` — section headings, pull quotes. `clamp(1.8rem,3vw,2.4rem)` / 800
-   - `text-body` — all body copy. `18px` / 1.65 / 700
+   - `text-body` — all body copy. `22px` / 1.65 / 700
    - Small eyebrow / caption / helper labels: the established pattern `font-bold text-[13px]`/`text-[14px]` `tracking-[2px|3px]` `uppercase` is allowed.
 
-2. **Content is left-aligned.** Anchor text to the left with a comfortable max reading width (e.g. `max-w-[760px]`, no auto margins). Do **not** center content (`mx-auto`) and do **not** push it right (`md:ml-[33%]`-style offsets). Media (images/galleries/video) may span full width.
+2. **Long-form content is offset ~40% from the left on desktop** (centred-right), full width on mobile. Apply `md:pl-[40%] md:pr-10` on a full-width container (use padding, not `mx-auto`/`ml-[x]`, so full-width dividers are preserved). This applies to the **booking form** and the **blog article when it has no sticky sidebar**. A blog post **with** a sticky sidebar uses the two-column grid instead (sidebar left ~34%, article right). Inside the blog, media width is Studio-managed per item (default 70%).
 
 Brand colors: text/ink `#221c14`, background `#e5e4d2` (see `:root` tokens in `app/globals.css`).
 

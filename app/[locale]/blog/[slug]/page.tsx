@@ -7,6 +7,7 @@ import { urlFor } from "@/sanity/lib/image";
 import Navigation from "@/components/Navigation";
 import FooterWrapper from "@/components/FooterWrapper";
 import ArticleBody from "@/components/ArticleBody";
+import BlogSidebar, { hasSidebarContent } from "@/components/BlogSidebar";
 import ArrowIcon from "@/components/ui/ArrowIcon";
 import { Link } from "@/i18n/navigation";
 
@@ -50,19 +51,21 @@ export default async function BlogPostPage({
     : null;
 
   const hasBody = (post.body?.length ?? 0) > 0 || !!post.excerpt;
+  const showSidebar = hasSidebarContent(post.sidebar);
 
   return (
     <>
       <Navigation />
+    
       <main style={{ backgroundColor: "#e5e4d2", paddingTop: "calc(72px + var(--bar-h, 0px))" }}>
         {/* Back link */}
         <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-4">
           <Link
             href="/blog"
             className="inline-flex items-center gap-2 text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase hover:text-[#221c14] transition-colors"
-          >
+            >
             <ArrowIcon direction="left" size={14} />
-            {locale === "lt" ? "Grįžti į naujienas" : "Back to journal"}
+            {locale === "lt" ? "Grįžti į naujienas" : "Back to news"}
           </Link>
         </div>
 
@@ -73,7 +76,7 @@ export default async function BlogPostPage({
               {formattedDate}
             </p>
           )}
-          <h1 className="text-title text-[#221c14] max-w-[16ch]">
+          <h1 className="text-title text-[#221c14]">
             {post.title}
           </h1>
         </header>
@@ -86,7 +89,7 @@ export default async function BlogPostPage({
               src={`https://image.mux.com/${post.coverVideo.playbackId}/thumbnail.jpg?width=1800&height=1000&fit_mode=crop`}
               alt={post.title ?? ""}
               className="w-full max-h-[72vh] object-cover"
-            />
+              />
           </div>
         ) : post.coverImage ? (
           <div className="border-b-2 border-[#221c14] overflow-hidden">
@@ -94,16 +97,25 @@ export default async function BlogPostPage({
             <img
               src={urlFor(post.coverImage).width(1800).height(1000).fit("crop").auto("format").url()}
               alt={post.title ?? ""}
-              className="w-full max-h-[72vh] object-cover"
-            />
+              className="w-full max-h-[90vh] object-cover"
+              />
           </div>
         ) : null}
 
-        {/* Body — sections, pushed right on desktop */}
+        {/* Body — sticky sidebar (left) + article (right) when a sidebar is set */}
         {hasBody && (
-          <div className="border-b-2 border-[#221c14]">
-            <ArticleBody value={post.body ?? []} lead={post.excerpt} />
-          </div>
+          showSidebar && post.sidebar ? (
+            <div className="border-b-2 border-[#221c14] md:grid md:grid-cols-[34%_minmax(0,1fr)] md:items-start">
+              <BlogSidebar sidebar={post.sidebar} />
+              <div className="min-w-0 border-t-2 md:border-t-0 md:border-l-2 border-[#221c14]">
+                <ArticleBody value={post.body ?? []} lead={post.excerpt} />
+              </div>
+            </div>
+          ) : (
+            <div className="border-b-2 border-[#221c14]">
+              <ArticleBody value={post.body ?? []} lead={post.excerpt} offset />
+            </div>
+          )
         )}
       </main>
       <FooterWrapper />

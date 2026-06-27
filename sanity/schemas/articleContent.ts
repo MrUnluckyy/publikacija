@@ -66,7 +66,14 @@ export const sectionImage = defineType({
     defineField({ name: "image", title: "Image", type: "image", options: { hotspot: true }, validation: (R) => R.required() }),
     defineField({ name: "alt", title: "Alt text", type: "string", description: "For accessibility & SEO" }),
     defineField({ name: "caption", title: "Caption", type: "string" }),
-    defineField({ name: "fullWidth", title: "Full-bleed (edge to edge)", type: "boolean", initialValue: false }),
+    defineField({
+      name: "width",
+      title: "Width (% on desktop)",
+      type: "number",
+      description: "Default 70. Mobile is always full width.",
+      initialValue: 70,
+      validation: (R) => R.min(20).max(100),
+    }),
   ],
   preview: {
     select: { media: "image", title: "caption", alt: "alt" },
@@ -99,6 +106,14 @@ export const sectionGallery = defineType({
       validation: (R) => R.min(1),
     }),
     defineField({ name: "caption", title: "Caption", type: "string" }),
+    defineField({
+      name: "width",
+      title: "Width (% on desktop)",
+      type: "number",
+      description: "Default 70. Mobile is always full width.",
+      initialValue: 70,
+      validation: (R) => R.min(20).max(100),
+    }),
   ],
   preview: {
     select: { images: "images", caption: "caption" },
@@ -117,6 +132,14 @@ export const sectionVideo = defineType({
   fields: [
     defineField({ name: "video", title: "Video file", type: "mux.video", validation: (R) => R.required() }),
     defineField({ name: "caption", title: "Caption", type: "string" }),
+    defineField({
+      name: "width",
+      title: "Width (% on desktop)",
+      type: "number",
+      description: "Default 70. Mobile is always full width.",
+      initialValue: 70,
+      validation: (R) => R.min(20).max(100),
+    }),
   ],
   preview: {
     select: { title: "caption" },

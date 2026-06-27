@@ -136,6 +136,11 @@ export type SiteSettingsData = {
   reviewsHeading: string | null;
   artistsEyebrow: string | null;
   artistsHeading: string | null;
+  newsHeading: string | null;
+  // Homepage linocut CTA
+  linocutCtaText: string | null;
+  linocutCtaLabel: string | null;
+  linocutCtaUrl: string | null;
   marqueeItems: string[] | null;
   // Contact section text
   contactEyebrow: string | null;
@@ -206,7 +211,7 @@ export type SectionImage = {
   image: SanityImage;
   alt?: string;
   caption?: string;
-  fullWidth?: boolean;
+  width?: number;
 };
 
 export type SectionGallery = {
@@ -214,6 +219,7 @@ export type SectionGallery = {
   _key: string;
   images: GalleryImage[];
   caption?: string;
+  width?: number;
 };
 
 export type SectionVideo = {
@@ -221,6 +227,7 @@ export type SectionVideo = {
   _key: string;
   video: MuxVideoAsset | null;
   caption?: string;
+  width?: number;
 };
 
 export type SectionQuote = {
@@ -249,6 +256,15 @@ export type ArticleSection =
   | SectionQuote
   | SectionMediaText;
 
+export type BlogSidebarData = {
+  image: SanityImage | null;
+  imageAlt: string | null;
+  heading: string | null;
+  body: string | null;
+  ctaLabel: string | null;
+  ctaUrl: string | null;
+};
+
 export type NewsPostData = {
   _id: string;
   title: string | null;
@@ -257,6 +273,7 @@ export type NewsPostData = {
   date: string | null;
   coverImage: SanityImage | null;
   coverVideo: MuxVideoAsset | null;
+  sidebar: BlogSidebarData | null;
   slug: string | null;
 };
 

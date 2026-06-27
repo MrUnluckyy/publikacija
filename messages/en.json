@@ -5,7 +5,7 @@
     "giftVouchers": "Gift Vouchers",
     "about": "About",
     "linocut": "Linocut",
-    "blog": "Journal"
+    "blog": "News"
   },
   "hero": {
     "title1": "Publikacija",
@@ -256,12 +256,12 @@
     "successBody": "Your request has been received. We will contact you shortly about your gift voucher."
   },
   "blog": {
-    "eyebrow": "Journal",
+    "eyebrow": "News",
     "heading": "News & stories",
     "intro": "Studio news, moments from our workshops, and thoughts on tattooing and linocut printmaking.",
     "empty": "No posts yet. Check back soon.",
     "readMore": "Read more",
-    "back": "Back to journal"
+    "back": "Back to news"
   },
   "linocut": {
     "eyebrow": "Linocut",

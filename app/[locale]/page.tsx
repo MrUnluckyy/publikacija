@@ -57,11 +57,18 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       <main>
         <Hero data={hero} />
         {newsPosts && newsPosts.length > 0 ? (
-          <NewsSection items={newsPosts} heading="Naujienos" />
+          <NewsSection items={newsPosts} heading={settings?.newsHeading ?? undefined} />
         ) : (
           <VideoSection video={hero?.backgroundVideo} content={videoSection} />
         )}
-        <Services items={services} />
+        <Services
+          items={services}
+          linocutCta={{
+            text: settings?.linocutCtaText,
+            label: settings?.linocutCtaLabel,
+            url: settings?.linocutCtaUrl,
+          }}
+        />
         <Artists
           items={artists}
           eyebrow={settings?.artistsEyebrow}

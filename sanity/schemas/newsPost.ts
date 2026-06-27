@@ -44,6 +44,27 @@ export default defineType({
         "Build the article section by section — add Text, Image, Gallery, Video, Media + text, or Pull quote, and drag to reorder.",
     }),
     defineField({
+      name: "sidebar",
+      title: "Sticky sidebar",
+      type: "object",
+      description:
+        "Optional block shown beside the article and pinned while scrolling (desktop). Add an image and/or a text block with a button.",
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: "image", title: "Image", type: "image", options: { hotspot: true } }),
+        defineField({ name: "imageAlt", title: "Image alt text", type: "string" }),
+        defineField({ name: "heading", title: "Heading", type: "localeString" }),
+        defineField({ name: "body", title: "Text", type: "localeText" }),
+        defineField({ name: "ctaLabel", title: "Button label", type: "localeString" }),
+        defineField({
+          name: "ctaUrl",
+          title: "Button link",
+          type: "string",
+          description: 'Internal path (e.g. "/book") or full URL',
+        }),
+      ],
+    }),
+    defineField({
       name: "slug",
       title: "Slug",
       type: "slug",

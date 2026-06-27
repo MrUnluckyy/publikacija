@@ -145,6 +145,10 @@ export const siteSettingsQuery = groq`*[_type == "siteSettings" && _id == "site-
   "reviewsHeading": coalesce(reviewsHeading[$locale], reviewsHeading.lt),
   "artistsEyebrow": coalesce(artistsEyebrow[$locale], artistsEyebrow.lt),
   "artistsHeading": coalesce(artistsHeading[$locale], artistsHeading.lt),
+  "newsHeading":    coalesce(newsHeading[$locale], newsHeading.lt),
+  "linocutCtaText":  coalesce(linocutCtaText[$locale], linocutCtaText.lt),
+  "linocutCtaLabel": coalesce(linocutCtaLabel[$locale], linocutCtaLabel.lt),
+  linocutCtaUrl,
   "marqueeItems": select(
     $locale == "en" && defined(marqueeItemsEn) && length(marqueeItemsEn) > 0 => marqueeItemsEn,
     marqueeItemsLt
@@ -236,6 +240,14 @@ export const newsPostBySlugQuery = groq`*[_type == "newsPost" && slug.current ==
   date,
   coverImage,
   "coverVideo": coverVideo.asset->{ playbackId, status },
+  "sidebar": sidebar{
+    image,
+    imageAlt,
+    "heading":  coalesce(heading[$locale], heading.lt),
+    "body":     coalesce(body[$locale], body.lt),
+    "ctaLabel": coalesce(ctaLabel[$locale], ctaLabel.lt),
+    ctaUrl
+  },
   "slug": slug.current
 }`;
 
