@@ -153,7 +153,9 @@
     "workshopMessageLabel": "Žinutė / klausimai",
     "workshopMessagePlaceholder": "Klausimai apie seminarą, pageidavimai…",
     "instagramCta": "Rašykite mums Instagram",
-    "participantsHint": "Daugiausiai 5 žmonės"
+    "participantsHint": "Daugiausiai 5 žmonės",
+    "termsAgree": "Sutinku su",
+    "terms": "Taisyklės ir sąlygos"
   },
   "ourWork": {
     "eyebrow": "Pasirinkti darbai",

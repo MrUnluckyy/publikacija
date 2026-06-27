@@ -177,6 +177,9 @@ export async function submitBooking(
   if (!name || !email) {
     return { status: "error", message: "Please fill in your name and email." };
   }
+  if (!formData.get("terms")) {
+    return { status: "error", message: "Please accept the Terms & Conditions." };
+  }
 
   // Workshops are limited to 5 people — clamp to [1, 5] server-side.
   const participants =

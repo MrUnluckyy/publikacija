@@ -4,6 +4,7 @@ import { useActionState, useEffect, useRef, useState } from "react";
 import { useTranslations } from "next-intl";
 import { submitBooking, type BookingState } from "./actions";
 import ArrowIcon from "@/components/ui/ArrowIcon";
+import TermsCheckbox from "@/components/TermsCheckbox";
 
 export type ServiceOption = { value: string; label: string };
 export type ArtistOption = { id: string; name: string };
@@ -35,6 +36,7 @@ export default function BookingForm({ services, artists, locale, instagramUrl, w
   const [service, setService] = useState(services[0]?.value ?? "Tattoo");
   const [method, setMethod] = useState<"instagram" | "email">("instagram");
   const [fileNames, setFileNames] = useState<string[]>([]);
+  const [agreed, setAgreed] = useState(false);
 
   const isWorkshop = service === "Workshop";
 
@@ -44,7 +46,7 @@ export default function BookingForm({ services, artists, locale, instagramUrl, w
 
   if (state.status === "success") {
     return (
-      <div className="border-b-2 border-[#221c14] px-5 md:pl-[40%] md:pr-10 py-16">
+      <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-16">
         <div className="w-10 h-[4px] bg-[#221c14] mb-6" />
         <h3 className="text-subtitle text-[#221c14] mb-3">{t("successHeading")}</h3>
         <p className="text-body text-[#221c14]/70 max-w-[560px]">{t("successBody")}</p>
@@ -56,7 +58,7 @@ export default function BookingForm({ services, artists, locale, instagramUrl, w
     <form
       ref={formRef}
       action={action}
-      className="border-b-2 border-[#221c14] px-5 md:pl-[40%] md:pr-10 py-12 md:py-16 flex flex-col gap-10"
+      className="border-b-2 border-[#221c14] px-5 md:px-10 py-12 md:py-16 flex flex-col gap-10  max-w-[640px]"
     >
       <input type="hidden" name="service" value={service} />
       <input type="hidden" name="locale" value={locale} />
@@ -227,11 +229,19 @@ export default function BookingForm({ services, artists, locale, instagramUrl, w
         )}
       </div>
 
+      {/* Terms */}
+      <TermsCheckbox
+        checked={agreed}
+        onChange={setAgreed}
+        agreeLabel={t("termsAgree")}
+        termsLabel={t("terms")}
+      />
+
       {state.status === "error" && <p className="text-red-700 text-[14px]">{state.message}</p>}
 
       <button
         type="submit"
-        disabled={pending}
+        disabled={pending || !agreed}
         className="self-start border-2 border-[#221c14] text-[#221c14] font-bold text-[15px] tracking-[2px] uppercase px-8 py-4 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
       >
         {pending ? t("submitting") : t("submit")}

@@ -25,10 +25,17 @@
   --text-subtitle--line-height: 1.2;
   --text-subtitle--font-weight: 800;
 
-  /* Body copy */
-  --text-body: 22px;
+  /* Body copy — 18px on mobile, bumped to 22px from md up (see below) */
+  --text-body: 18px;
   --text-body--line-height: 1.65;
   --text-body--font-weight: 700;
+}
+
+/* Body copy grows on larger screens; the `text-body` utility reads this var. */
+@media (min-width: 768px) {
+  :root {
+    --text-body: 22px;
+  }
 }
 
 /* ─── Base ───────────────────────────────────────────── */

@@ -47,17 +47,18 @@ export default function Preloader() {
     <AnimatePresence>
       {visible && (
         <motion.div
-          className="fixed inset-0 z-[100] overflow-hidden"
+          className="fixed inset-0 z-[100] overflow-hidden flex items-center justify-center"
+          style={{ backgroundColor: "#e5e4d2" }}
           exit={{ clipPath: "inset(0 0 100% 0)" }}
           transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
         >
           <video
             ref={videoRef}
-            src="/assets/animacija su fonu.mp4"
+            src="/assets/intro1.mp4"
             autoPlay
             muted
             playsInline
-            className="w-full h-full object-cover"
+            className="w-[85%] md:w-[55%] max-w-[640px] h-auto object-contain"
           />
         </motion.div>
       )}

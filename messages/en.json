@@ -153,7 +153,9 @@
     "workshopMessageLabel": "Message / questions",
     "workshopMessagePlaceholder": "Any questions about the workshop, preferences…",
     "instagramCta": "Message us on Instagram",
-    "participantsHint": "Up to 5 people"
+    "participantsHint": "Up to 5 people",
+    "termsAgree": "I agree to the",
+    "terms": "Terms & Conditions"
   },
   "ourWork": {
     "eyebrow": "Selected Work",

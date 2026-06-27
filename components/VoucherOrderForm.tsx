@@ -1,7 +1,7 @@
 "use client";
 
 import { useActionState, useEffect, useRef, useState } from "react";
-import { Link } from "@/i18n/navigation";
+import TermsCheckbox from "@/components/TermsCheckbox";
 import { submitVoucherOrder, type VoucherOrderState } from "@/app/[locale]/gift-vouchers/actions";
 
 export type VoucherDesign = {
@@ -49,6 +49,7 @@ export default function VoucherOrderForm({ designs, labels }: Props) {
 
   const [design, setDesign] = useState(designs[0]?.label ?? "");
   const [method, setMethod] = useState<"instagram" | "email">("instagram");
+  const [agreed, setAgreed] = useState(false);
 
   useEffect(() => {
     if (state.status === "success") formRef.current?.reset();
@@ -171,33 +172,12 @@ export default function VoucherOrderForm({ designs, labels }: Props) {
       </div>
 
       {/* Terms */}
-      <label className="flex items-start gap-3 cursor-pointer">
-        <span className="relative mt-0.5 flex-shrink-0">
-          <input
-            type="checkbox"
-            name="terms"
-            required
-            className="peer appearance-none w-5 h-5 border-2 border-[#221c14]/30 bg-transparent checked:bg-[#221c14] checked:border-[#221c14] hover:border-[#221c14]/50 cursor-pointer transition-colors"
-          />
-          <svg
-            viewBox="0 0 24 24"
-            className="pointer-events-none absolute inset-0 m-auto hidden h-3.5 w-3.5 peer-checked:block"
-            fill="none"
-            stroke="#e5e4d2"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
-        </span>
-        <span className="text-[#221c14] text-[15px] leading-snug">
-          {labels.termsAgree}{" "}
-          <Link href="/taisykles-ir-salygos" className="underline hover:opacity-60">
-            {labels.terms}
-          </Link>
-        </span>
-      </label>
+      <TermsCheckbox
+        checked={agreed}
+        onChange={setAgreed}
+        agreeLabel={labels.termsAgree}
+        termsLabel={labels.terms}
+      />
 
       {state.status === "error" && (
         <p className="text-red-700 text-[14px]">{state.message}</p>
@@ -205,7 +185,7 @@ export default function VoucherOrderForm({ designs, labels }: Props) {
 
       <button
         type="submit"
-        disabled={pending}
+        disabled={pending || !agreed}
         className="self-start border-2 border-[#221c14] text-[#221c14] font-bold text-[15px] tracking-[2px] uppercase px-8 py-4 hover:bg-[#221c14] hover:text-[#e5e4d2] transition-colors duration-200 disabled:opacity-40 disabled:cursor-not-allowed"
       >
         {pending ? labels.sending : labels.send}
