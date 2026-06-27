@@ -178,8 +178,11 @@ export async function submitBooking(
     return { status: "error", message: "Please fill in your name and email." };
   }
 
+  // Workshops are limited to 5 people — clamp to [1, 5] server-side.
   const participants =
-    participantsRaw && !Number.isNaN(Number(participantsRaw)) ? Number(participantsRaw) : undefined;
+    participantsRaw && !Number.isNaN(Number(participantsRaw))
+      ? Math.min(Math.max(1, Math.round(Number(participantsRaw))), 5)
+      : undefined;
 
   const instagram =
     contactMethod === "instagram" && instagramRaw

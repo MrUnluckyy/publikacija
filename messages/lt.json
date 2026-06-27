@@ -147,12 +147,13 @@
     "referenceButton": "Pridėti nuotraukų",
     "referenceHint": "iki 6 nuotraukų",
     "participantsLabel": "Dalyvių skaičius",
-    "participantsPlaceholder": "pvz. 2",
+    "participantsPlaceholder": "pvz. 2 (daugiausiai 5)",
     "workshopDatesLabel": "Pageidaujama data / sesija",
     "workshopDatesPlaceholder": "pvz. savaitgalį, kovo mėn.",
     "workshopMessageLabel": "Žinutė / klausimai",
     "workshopMessagePlaceholder": "Klausimai apie seminarą, pageidavimai…",
-    "instagramCta": "Rašykite mums Instagram"
+    "instagramCta": "Rašykite mums Instagram",
+    "participantsHint": "Daugiausiai 5 žmonės"
   },
   "ourWork": {
     "eyebrow": "Pasirinkti darbai",

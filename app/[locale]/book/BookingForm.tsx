@@ -139,9 +139,11 @@ export default function BookingForm({ services, artists, locale, instagramUrl, w
               name="participants"
               type="number"
               min={1}
+              max={5}
               placeholder={t("participantsPlaceholder")}
               className={`${fieldClass} w-full sm:w-[200px]`}
             />
+            <p className="text-[#221c14]/40 text-[13px]">{t("participantsHint")}</p>
           </div>
           <div className="flex flex-col gap-1.5">
             <label className={labelClass}>{t("workshopDatesLabel")}</label>

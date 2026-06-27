@@ -60,8 +60,9 @@ export default defineType({
     }),
     defineField({
       name: "participants",
-      title: "Participants (workshop)",
+      title: "Participants (workshop, max 5)",
       type: "number",
+      validation: (Rule) => Rule.min(1).max(5),
     }),
     defineField({
       name: "message",

@@ -147,12 +147,13 @@
     "referenceButton": "Add photos",
     "referenceHint": "up to 6 images",
     "participantsLabel": "Number of participants",
-    "participantsPlaceholder": "e.g. 2",
+    "participantsPlaceholder": "e.g. 2 (max 5)",
     "workshopDatesLabel": "Preferred date / session",
     "workshopDatesPlaceholder": "e.g. a weekend, in March",
     "workshopMessageLabel": "Message / questions",
     "workshopMessagePlaceholder": "Any questions about the workshop, preferences…",
-    "instagramCta": "Message us on Instagram"
+    "instagramCta": "Message us on Instagram",
+    "participantsHint": "Up to 5 people"
   },
   "ourWork": {
     "eyebrow": "Selected Work",
