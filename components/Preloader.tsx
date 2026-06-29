@@ -4,8 +4,9 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import PreloaderLogo from "./PreloaderLogo";
 
-// Time the animated SVG logo is shown before the page is revealed.
-const DURATION_MS = 2600;
+// Time the intro is shown before the page is revealed.
+// Matches the wordmark reveal/close timeline in PreloaderLogo (~2.3s) + a beat.
+const DURATION_MS = 2500;
 
 function dispatchReady() {
   window.dispatchEvent(new CustomEvent("preloader:done"));
@@ -41,8 +42,8 @@ export default function Preloader() {
         <motion.div
           className="fixed inset-0 z-[100] overflow-hidden flex items-center justify-center"
           style={{ backgroundColor: "#e5e4d2" }}
-          exit={{ clipPath: "inset(0 0 100% 0)" }}
-          transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
         >
           <PreloaderLogo />
         </motion.div>

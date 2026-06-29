@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 
-// Vector logo paths extracted from /assets/publikacija_iskaba-web.svg.
-// Animated as a "draw-on then fill" intro.
+// Wordmark paths from /assets/publikacija_iskaba-web.svg.
 const PATHS = [
   "M525.102,320.398l-0.647,0l11.841,-43.501l30.766,-111.533c16.186,-0.844 36.038,-1.267 49.151,-1.267c21.217,0 32.532,12.022 32.532,28.996c0,4.243 -1.414,9.901 -2.122,12.731l-10.31,37.19l-111.212,77.384Zm151.934,-129.426c0,-33.949 -22.631,-54.458 -63.651,-54.458c-13.05,0 -25.747,0.362 -38.589,0.821l37.881,-137.321l-30.411,0l-66.864,242.982l-111.239,77.402l-1.075,0l49.752,-183.884l-30.412,0l-28.542,105.899l-112.075,77.985l-0.768,0l50.151,-183.884l-30.412,0l-66.48,244l0.334,-0.288l-9.53,33.528c-0.706,2.828 -1.414,7.778 -1.414,11.316c0,10.609 5.658,16.974 14.144,16.974c4.951,0 11.316,-2.83 17.681,-7.073l105.338,-72.847l0.764,0l-9.405,34.899l-4.756,16.731c-1.414,4.243 -1.414,7.778 -1.414,11.316c0,10.609 5.658,16.974 14.144,16.974c4.951,0 11.317,-2.83 17.681,-7.073l104.317,-72.139l0.238,0l-8.368,30.412l0.209,-0.138l-5.867,20.648c-1.415,4.243 -1.415,7.778 -1.415,11.316c0,10.609 5.658,16.974 14.146,16.974c4.951,0 11.315,-2.83 17.681,-7.073l142.157,-98.308l32.533,-119.524c2.121,-7.78 3.535,-17.681 3.535,-26.168",
   "M1804.387,0.014l-30.412,0l-28.289,103.967l30.411,0l28.29,-103.967Z",
@@ -24,39 +23,28 @@ const PATHS = [
   "M1428.105,631.322c-3.266,3.008 -7.905,4.511 -13.918,4.511l-16.239,0l0,-33.38l16.625,0c5.755,0 10.265,1.505 13.532,4.511c3.265,3.01 4.897,7.088 4.897,12.244c0,5.071 -1.633,9.109 -4.897,12.115m15.723,-27.387c-2.664,-4.166 -6.466,-7.388 -11.405,-9.666c-4.942,-2.275 -10.848,-3.415 -17.721,-3.415l-31.188,0l0,87.638l14.434,0l0,-31.06l17.012,0c9.966,0 17.934,-2.469 23.906,-7.41c5.971,-4.94 8.957,-11.922 8.957,-20.943c0,-5.929 -1.333,-10.975 -3.996,-15.144",
 ];
 
-const draw = {
-  hidden: { pathLength: 0, fillOpacity: 0 },
-  visible: (i: number) => ({
-    pathLength: 1,
-    fillOpacity: 1,
-    transition: {
-      pathLength: { delay: i * 0.05, duration: 1.0, ease: [0.76, 0, 0.24, 1] as const },
-      fillOpacity: { delay: i * 0.05 + 0.7, duration: 0.45 },
-    },
-  }),
-};
-
+// Intro: reveal the wordmark vertically (open from the centre), hold, then
+// close horizontally to the centre ("4 directions"). Fast in/out, longer hold.
 export default function PreloaderLogo() {
   return (
-    <motion.svg
-      viewBox="0 0 2014 681"
-      className="w-[85%] md:w-[50%] max-w-[620px] h-auto"
-      initial="hidden"
-      animate="visible"
-      fill="none"
+    <motion.div
+      className="w-[85%] md:w-[50%] max-w-[620px]"
+      initial={{ clipPath: "inset(50% 0% 50% 0%)" }}
+      animate={{
+        clipPath: [
+          "inset(50% 0% 50% 0%)", // closed vertically
+          "inset(0% 0% 0% 0%)",   // revealed (opened vertically)
+          "inset(0% 0% 0% 0%)",   // hold
+          "inset(0% 50% 0% 50%)", // closed horizontally
+        ],
+      }}
+      transition={{ duration: 2.3, times: [0, 0.13, 0.87, 1], ease: [0.76, 0, 0.24, 1] }}
     >
-      {PATHS.map((d, i) => (
-        <motion.path
-          key={i}
-          d={d}
-          custom={i}
-          variants={draw}
-          fill="#221c14"
-          stroke="#221c14"
-          strokeWidth={4}
-          strokeLinejoin="round"
-        />
-      ))}
-    </motion.svg>
+      <svg viewBox="0 0 2014 681" className="w-full h-auto" fill="#221c14" aria-hidden>
+        {PATHS.map((d, i) => (
+          <path key={i} d={d} />
+        ))}
+      </svg>
+    </motion.div>
   );
 }
