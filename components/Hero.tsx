@@ -29,7 +29,7 @@ export default function Hero({ data }: { data?: HeroData | null }) {
   const SERVICES = [
     { label: data?.service1 ?? t("service1"), href: "/our-work" },
     { label: data?.service2 ?? t("service2"), href: "/our-work" },
-    { label: data?.service3 ?? t("service3"), href: "/book" },
+    { label: data?.service3 ?? t("service3"), href: "/book?service=workshop" },
   ];
 
   return (

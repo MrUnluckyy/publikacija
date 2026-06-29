@@ -73,7 +73,7 @@ export default function WorkGallery({ items }: { items: PortfolioItemData[] }) {
           <button
             key={f.key}
             onClick={() => setActiveCategory(f.key)}
-            className={`font-bold text-[13px] tracking-[2px] uppercase px-6 md:px-10 py-5 border-r-2 border-[#221c14] last:border-r-0 transition-colors duration-200 cursor-pointer ${
+            className={`font-bold text-[13px] tracking-[2px] uppercase px-6 md:px-10 py-5 border-r-2 border-[#221c14] transition-colors duration-200 cursor-pointer ${
               activeCategory === f.key
                 ? "bg-[#221c14] text-[#e5e4d2]"
                 : "text-[#221c14] hover:bg-[#221c14] hover:text-[#e5e4d2]"
@@ -104,7 +104,7 @@ export default function WorkGallery({ items }: { items: PortfolioItemData[] }) {
       )}
 
       {/* Grid */}
-      <motion.div layout className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <motion.div layout className="grid grid-cols-2 md:grid-cols-3">
         <AnimatePresence mode="popLayout">
           {filtered.length > 0
             ? filtered.map((item, i) => (
@@ -116,15 +116,15 @@ export default function WorkGallery({ items }: { items: PortfolioItemData[] }) {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.3, delay: i * 0.03 }}
                   onClick={() => openLightbox(i)}
-                  className="aspect-[2/3] relative overflow-hidden group border-b-2 border-r-2 border-[#221c14] [&:nth-child(2n)]:md:border-r-2 [&:nth-child(3n)]:md:border-r-0 [&:nth-child(4n)]:lg:border-r-0 [&:nth-child(3n)]:lg:border-r-2 cursor-pointer focus:outline-none"
+                  className="aspect-[2/3] relative overflow-hidden group border-b-2 border-r-2 border-[#221c14] [&:nth-child(2n)]:border-r-0 md:[&:nth-child(2n)]:border-r-2 md:[&:nth-child(3n)]:border-r-0 cursor-pointer focus:outline-none"
                 >
                   {item.image ? (
                     <Image
-                      src={urlFor(item.image).width(600).height(900).auto("format").url()}
+                      src={urlFor(item.image).width(800).height(1200).auto("format").url()}
                       alt={item.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      sizes="(max-width: 768px) 50vw, 25vw"
+                      sizes="(max-width: 768px) 50vw, 33vw"
                     />
                   ) : (
                     <div

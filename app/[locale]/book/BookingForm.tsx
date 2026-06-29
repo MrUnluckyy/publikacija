@@ -20,6 +20,7 @@ interface Props {
   locale: string;
   instagramUrl?: string | null;
   workshop: WorkshopContent;
+  initialService?: string;
 }
 
 const initial: BookingState = { status: "idle" };
@@ -28,12 +29,16 @@ const fieldClass =
   "bg-transparent border-2 border-[#221c14]/25 px-4 py-3 text-[#221c14] text-[16px] placeholder:text-[#221c14]/30 focus:outline-none focus:border-[#221c14] transition-colors";
 const labelClass = "text-[#221c14]/50 font-bold text-[13px] tracking-[2px] uppercase";
 
-export default function BookingForm({ services, artists, locale, instagramUrl, workshop }: Props) {
+export default function BookingForm({ services, artists, locale, instagramUrl, workshop, initialService }: Props) {
   const t = useTranslations("book");
   const [state, action, pending] = useActionState(submitBooking, initial);
   const formRef = useRef<HTMLFormElement>(null);
 
-  const [service, setService] = useState(services[0]?.value ?? "Tattoo");
+  const [service, setService] = useState(
+    initialService && services.some((s) => s.value === initialService)
+      ? initialService
+      : services[0]?.value ?? "Tattoo"
+  );
   const [method, setMethod] = useState<"instagram" | "email">("instagram");
   const [fileNames, setFileNames] = useState<string[]>([]);
   const [agreed, setAgreed] = useState(false);
@@ -46,7 +51,7 @@ export default function BookingForm({ services, artists, locale, instagramUrl, w
 
   if (state.status === "success") {
     return (
-      <div className="border-b-2 border-[#221c14] px-5 md:px-10 py-16">
+      <div className="px-5 md:px-10 py-16">
         <div className="w-10 h-[4px] bg-[#221c14] mb-6" />
         <h3 className="text-subtitle text-[#221c14] mb-3">{t("successHeading")}</h3>
         <p className="text-body text-[#221c14]/70 max-w-[560px]">{t("successBody")}</p>
@@ -58,7 +63,7 @@ export default function BookingForm({ services, artists, locale, instagramUrl, w
     <form
       ref={formRef}
       action={action}
-      className="border-b-2 border-[#221c14] px-5 md:px-10 py-12 md:py-16 flex flex-col gap-10  max-w-[640px]"
+      className="px-5 md:px-10 py-12 md:py-16 flex flex-col gap-10 max-w-[640px]"
     >
       <input type="hidden" name="service" value={service} />
       <input type="hidden" name="locale" value={locale} />

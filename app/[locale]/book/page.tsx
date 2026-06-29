@@ -15,8 +15,16 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default async function BookPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function BookPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ service?: string }>;
+}) {
   const { locale } = await params;
+  const { service: serviceParam } = await searchParams;
+  const initialService = serviceParam === "workshop" ? "Workshop" : "Tattoo";
   const [t, settings, bookContent, artists] = await Promise.all([
     getTranslations("book"),
     client.fetch<SiteSettingsData>(siteSettingsQuery, { locale }).catch(() => null),
@@ -60,6 +68,7 @@ export default async function BookPage({ params }: { params: Promise<{ locale: s
           services={services}
           artists={artistOptions}
           locale={locale}
+          initialService={initialService}
           instagramUrl={settings?.instagramUrl}
           workshop={{
             heading: bookContent?.workshopHeading ?? t("workshopHeading"),

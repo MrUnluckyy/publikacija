@@ -83,7 +83,7 @@ export default async function LinocutPage() {
           <p className="text-body opacity-80 max-w-[520px] mb-10">{t("ctaBody")}</p>
           <div className="flex flex-wrap gap-4">
             <Link
-              href="/book"
+              href="/book?service=workshop"
               className="inline-flex items-center gap-2 border-2 border-[#e5e4d2] bg-[#e5e4d2] text-[#221c14] font-bold text-[14px] tracking-[2px] uppercase px-8 py-4 hover:bg-transparent hover:text-[#e5e4d2] transition-colors duration-200"
             >
               {t("ctaWorkshop")}
