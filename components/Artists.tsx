@@ -40,15 +40,15 @@ function WorkCard({ item, onClick }: { item: PortfolioItemData; onClick: () => v
   return (
     <button
       onClick={onClick}
-      className="flex-none w-[280px] md:w-[260px] aspect-[2/3] relative overflow-hidden cursor-pointer group focus:outline-none snap-start"
+      className="flex-none w-[280px] md:w-[380px] aspect-[2/3] relative overflow-hidden cursor-pointer group focus:outline-none snap-start"
     >
       {item.image && (
         <Image
-          src={urlFor(item.image).width(520).height(780).auto("format").url()}
+          src={urlFor(item.image).width(760).height(1140).auto("format").url()}
           alt={item.title}
           fill
           className="object-cover group-hover:scale-105 transition-transform duration-700"
-          sizes="260px"
+          sizes="(max-width: 768px) 280px, 380px"
         />
       )}
       <div className="absolute inset-0 bg-[#221c14]/0 group-hover:bg-[#221c14]/40 transition-colors duration-300" />
