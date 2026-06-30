@@ -8,6 +8,7 @@ import {
   siteSettingsQuery,
   artistsQuery,
   newsPostsQuery,
+  featuredPostQuery,
 } from "@/sanity/lib/queries";
 import type {
   HeroData,
@@ -18,6 +19,7 @@ import type {
   SiteSettingsData,
   ArtistData,
   NewsPostData,
+  FeaturedPostData,
 } from "@/sanity/types";
 import { getGoogleReviews } from "@/lib/googleReviews";
 
@@ -36,7 +38,7 @@ export const revalidate = 60;
 export default async function Home({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
 
-  const [hero, videoSection, services, portfolioItems, sanityReviews, googleReviews, settings, artists, newsPosts] =
+  const [hero, videoSection, services, portfolioItems, sanityReviews, googleReviews, settings, artists, newsPosts, featuredPost] =
     await Promise.all([
       client.fetch<HeroData>(heroQuery, { locale }).catch(() => null),
       client.fetch<VideoSectionData>(videoSectionQuery, { locale }).catch(() => null),
@@ -47,9 +49,11 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
       client.fetch<SiteSettingsData>(siteSettingsQuery, { locale }).catch(() => null),
       client.fetch<ArtistData[]>(artistsQuery, { locale }).catch(() => null),
       client.fetch<NewsPostData[]>(newsPostsQuery, { locale }).catch(() => null),
+      client.fetch<FeaturedPostData>(featuredPostQuery, { locale }).catch(() => null),
     ]);
 
   const reviews = googleReviews.length > 0 ? googleReviews : sanityReviews;
+  const showFeaturedPost = featuredPost?.enabled !== false && Boolean(featuredPost?.post);
 
   return (
     <>
@@ -61,14 +65,14 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         ) : (
           <VideoSection video={hero?.backgroundVideo} content={videoSection} />
         )}
-        <Services
-          items={services}
-          linocutCta={{
-            text: settings?.linocutCtaText,
-            label: settings?.linocutCtaLabel,
-            url: settings?.linocutCtaUrl,
-          }}
-        />
+        <Services items={services} />
+        {showFeaturedPost && (
+          <NewsSection
+            items={[featuredPost!.post!]}
+            heading={featuredPost!.label ?? undefined}
+            featured
+          />
+        )}
         <Artists
           items={artists}
           eyebrow={settings?.artistsEyebrow}

@@ -23,6 +23,8 @@ import videoSection from "./videoSection";
 import bookPage from "./bookPage";
 import giftVouchersPage from "./giftVouchersPage";
 import termsPage from "./termsPage";
+import cookiePage from "./cookiePage";
+import featuredPost from "./featuredPost";
 import announcementBar from "./announcementBar";
 import newsPost from "./newsPost";
 
@@ -46,10 +48,12 @@ export const schemaTypes = [
   hero,
   siteSettings,
   videoSection,
+  featuredPost,
   bookPage,
   giftVouchersPage,
   about,
   termsPage,
+  cookiePage,
 
   // Collections
   newsPost,

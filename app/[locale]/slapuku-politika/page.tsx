@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { client } from "@/sanity/lib/client";
-import { termsQuery } from "@/sanity/lib/queries";
-import type { TermsPageData } from "@/sanity/types";
+import { cookieQuery } from "@/sanity/lib/queries";
+import type { CookiePageData } from "@/sanity/types";
 import { PortableText } from "next-sanity";
 import Navigation from "@/components/Navigation";
 import FooterWrapper from "@/components/FooterWrapper";
@@ -17,28 +17,28 @@ export async function generateMetadata({
   const { locale } = await params;
   return locale === "lt"
     ? {
-        title: "Taisyklės ir sąlygos — Publikacija",
-        description: "Publikacija tatuiruočių studijos paslaugų teikimo taisyklės ir sąlygos.",
+        title: "Slapukų politika — Publikacija",
+        description: "Kaip Publikacija tatuiruočių studija naudoja slapukus svetainėje.",
       }
     : {
-        title: "Terms & Conditions — Publikacija",
-        description: "Terms and conditions for services provided by Publikacija tattoo studio.",
+        title: "Cookie Policy — Publikacija",
+        description: "How Publikacija tattoo studio uses cookies on this website.",
       };
 }
 
-export default async function TermsPage({
+export default async function CookiePolicyPage({
   params,
 }: {
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
   const data = await client
-    .fetch<TermsPageData>(termsQuery, { locale })
+    .fetch<CookiePageData>(cookieQuery, { locale })
     .catch(() => null);
 
   const heading =
     data?.heading ??
-    (locale === "lt" ? "Taisyklės ir sąlygos" : "Terms & Conditions");
+    (locale === "lt" ? "Slapukų politika" : "Cookie Policy");
 
   return (
     <>

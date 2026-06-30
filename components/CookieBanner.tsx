@@ -73,7 +73,7 @@ export default function CookieBanner() {
             </h2>
             <p className="text-[#221c14]/80 text-[15px] leading-relaxed mb-5 max-w-[640px]">
               {t("body")}{" "}
-              <Link href="/taisykles-ir-salygos" className="underline hover:opacity-60">
+              <Link href="/slapuku-politika" className="underline hover:opacity-60">
                 {t("learnMore")}
               </Link>
             </p>

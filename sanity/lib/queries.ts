@@ -146,13 +146,26 @@ export const siteSettingsQuery = groq`*[_type == "siteSettings" && _id == "site-
   "artistsEyebrow": coalesce(artistsEyebrow[$locale], artistsEyebrow.lt),
   "artistsHeading": coalesce(artistsHeading[$locale], artistsHeading.lt),
   "newsHeading":    coalesce(newsHeading[$locale], newsHeading.lt),
-  "linocutCtaText":  coalesce(linocutCtaText[$locale], linocutCtaText.lt),
-  "linocutCtaLabel": coalesce(linocutCtaLabel[$locale], linocutCtaLabel.lt),
-  linocutCtaUrl,
   "marqueeItems": select(
     $locale == "en" && defined(marqueeItemsEn) && length(marqueeItemsEn) > 0 => marqueeItemsEn,
     marqueeItemsLt
   )
+}`;
+
+// ── Featured Blog Post (homepage) ─────────────────────────────────────────────
+// Reuses the same post shape as the news section so the UI is identical.
+export const featuredPostQuery = groq`*[_type == "featuredPost"][0] {
+  enabled,
+  "label": coalesce(label[$locale], label.lt),
+  "post": post->{
+    _id,
+    "title":   coalesce(title[$locale], title.lt),
+    "excerpt": coalesce(excerpt[$locale], excerpt.lt),
+    date,
+    coverImage,
+    "coverVideo": coverVideo.asset->{ playbackId, status },
+    "slug": slug.current
+  }
 }`;
 
 // ── Gift Vouchers ─────────────────────────────────────────────────────────────
@@ -203,6 +216,16 @@ export const bookPageQuery = groq`*[_type == "bookPage" && _id == "book-page-sin
 
 // ── Terms & Conditions Page ───────────────────────────────────────────────────
 export const termsQuery = groq`*[_type == "termsPage"][0] {
+  "heading":     coalesce(heading[$locale], heading.lt),
+  lastUpdated,
+  "sections": sections[]{
+    "heading": coalesce(heading[$locale], heading.lt),
+    "body":    coalesce(body[$locale], body.lt)
+  }
+}`;
+
+// ── Cookie Policy Page ────────────────────────────────────────────────────────
+export const cookieQuery = groq`*[_type == "cookiePage"][0] {
   "heading":     coalesce(heading[$locale], heading.lt),
   lastUpdated,
   "sections": sections[]{

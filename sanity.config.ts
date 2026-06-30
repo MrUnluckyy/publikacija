@@ -33,6 +33,9 @@ export default defineConfig({
               .title("Video Section")
               .child(S.document().schemaType("videoSection").documentId("video-section-singleton")),
             S.documentTypeListItem("service").title("Services"),
+            S.listItem()
+              .title("Featured Blog Post")
+              .child(S.document().schemaType("featuredPost").documentId("featured-post-singleton")),
             S.documentTypeListItem("newsPost").title("News Posts"),
 
             S.divider(),
@@ -50,6 +53,9 @@ export default defineConfig({
             S.listItem()
               .title("Terms & Conditions")
               .child(S.documentTypeList("termsPage").title("Terms & Conditions")),
+            S.listItem()
+              .title("Cookie Policy")
+              .child(S.document().schemaType("cookiePage").documentId("cookie-page-singleton")),
 
             S.divider(),
 

@@ -13,6 +13,9 @@ interface Props {
   items?: NewsPostData[] | null;
   eyebrow?: string | null;
   heading?: string | null;
+  // When true, render a single featured post with no carousel chrome
+  // (no prev/next arrows, no "View all" link) — same card UI otherwise.
+  featured?: boolean;
 }
 
 function formatDate(dateStr: string | null, locale: string) {
@@ -24,7 +27,7 @@ function formatDate(dateStr: string | null, locale: string) {
   });
 }
 
-export default function NewsSection({ items, eyebrow, heading }: Props) {
+export default function NewsSection({ items, eyebrow, heading, featured = false }: Props) {
   const locale = useLocale();
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(1);
@@ -50,18 +53,28 @@ export default function NewsSection({ items, eyebrow, heading }: Props) {
       {/* Compact header: single label + plain chevrons */}
       <div className="flex items-center justify-between border-b-2 border-[#221c14] px-5 md:px-10 py-4">
         <p className="text-[#221c14] font-bold text-[16px]">
-          {heading ?? eyebrow ?? (locale === "lt" ? "Naujienos" : "News")}
+          {heading ??
+            eyebrow ??
+            (featured
+              ? locale === "lt"
+                ? "Rekomenduojame"
+                : "Featured"
+              : locale === "lt"
+                ? "Naujienos"
+                : "News")}
         </p>
 
         <div className="flex items-center gap-6">
-          <Link
-            href="/blog"
-            className="text-[#221c14]/50 font-bold text-[12px] tracking-[2px] uppercase hover:text-[#221c14] transition-colors"
-          >
-            {locale === "lt" ? "Visos naujienos" : "View all"}
-          </Link>
+          {!featured && (
+            <Link
+              href="/blog"
+              className="text-[#221c14]/50 font-bold text-[12px] tracking-[2px] uppercase hover:text-[#221c14] transition-colors"
+            >
+              {locale === "lt" ? "Visos naujienos" : "View all"}
+            </Link>
+          )}
 
-          {posts.length > 1 && (
+          {!featured && posts.length > 1 && (
             <div className="flex items-center gap-5">
               <button
                 onClick={() => go(-1)}

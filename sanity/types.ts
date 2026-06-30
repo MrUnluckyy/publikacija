@@ -137,10 +137,6 @@ export type SiteSettingsData = {
   artistsEyebrow: string | null;
   artistsHeading: string | null;
   newsHeading: string | null;
-  // Homepage linocut CTA
-  linocutCtaText: string | null;
-  linocutCtaLabel: string | null;
-  linocutCtaUrl: string | null;
   marqueeItems: string[] | null;
   // Contact section text
   contactEyebrow: string | null;
@@ -195,6 +191,14 @@ export type TermsPageData = {
     heading: string | null;
     body: PortableTextBlock[] | null;
   }[] | null;
+};
+
+export type CookiePageData = TermsPageData;
+
+export type FeaturedPostData = {
+  enabled: boolean | null;
+  label: string | null;
+  post: NewsPostData | null;
 };
 
 export type GalleryImage = SanityImage & { _key: string; alt?: string; caption?: string };
