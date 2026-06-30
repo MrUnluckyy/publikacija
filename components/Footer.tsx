@@ -3,10 +3,12 @@
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import ArrowIcon from "./ui/ArrowIcon";
+import { openConsentSettings } from "@/lib/consent";
 
 export default function Footer({ instagramUrl }: { instagramUrl?: string | null }) {
   const t = useTranslations("footer");
   const nav = useTranslations("nav");
+  const cookies = useTranslations("cookies");
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -58,6 +60,12 @@ export default function Footer({ instagramUrl }: { instagramUrl?: string | null 
             © {year} Publikacija. {t("rights")}
           </p>
           <div className="flex items-center gap-5">
+            <button
+              onClick={openConsentSettings}
+              className="text-[#221c14]/50 font-bold text-[12px] tracking-[1px] hover:opacity-70 transition-opacity"
+            >
+              {cookies("settingsLink")}
+            </button>
             <Link href="/taisykles-ir-salygos" className="text-[#221c14]/50 font-bold text-[12px] tracking-[1px] hover:opacity-70 transition-opacity">
               Terms
             </Link>
@@ -105,6 +113,14 @@ export default function Footer({ instagramUrl }: { instagramUrl?: string | null 
             </a>
           ))}
         </nav>
+
+        {/* Cookie settings */}
+        <button
+          onClick={openConsentSettings}
+          className="w-full border-b-2 border-white/10 px-5 py-5 text-white/70 font-bold text-[14px] text-left hover:text-white transition-colors"
+        >
+          {cookies("settingsLink")}
+        </button>
 
         {/* Bottom */}
         <div className="px-5 py-6 flex items-center justify-between">

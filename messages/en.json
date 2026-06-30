@@ -296,5 +296,22 @@
     "ctaPrints": "Buy prints",
     "homeCtaText": "Curious about linocut & prints?",
     "homeCtaButton": "What is linocut?"
+  },
+  "cookies": {
+    "title": "Cookies",
+    "body": "We use necessary cookies to make the site work and — only with your consent — analytics and marketing cookies.",
+    "learnMore": "Learn more",
+    "acceptAll": "Accept all",
+    "rejectAll": "Reject non-essential",
+    "customize": "Manage choices",
+    "savePrefs": "Save",
+    "necessaryTitle": "Necessary",
+    "necessaryDesc": "Required for the site to function. Always on.",
+    "analyticsTitle": "Analytics",
+    "analyticsDesc": "Help us understand how visitors use the site (Google Analytics).",
+    "marketingTitle": "Marketing",
+    "marketingDesc": "Used to tailor advertising (Meta Pixel).",
+    "always": "Always",
+    "settingsLink": "Cookie settings"
   }
 }

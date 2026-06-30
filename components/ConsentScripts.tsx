@@ -2,50 +2,29 @@
 
 import Script from "next/script";
 import { useEffect, useState } from "react";
+import { readConsent, CONSENT_EVENT, type ConsentState } from "@/lib/consent";
 
 // ── Analytics IDs ─────────────────────────────────────────────────────────
 const FB_PIXEL_ID = "1618064772761145";
 const GA4_ID = "GTM-MJ6723JD";
-
-// CookieYes stores granted categories in the `cookieyes-consent` cookie,
-// e.g. "...,analytics:yes,advertisement:no,...". It also fires a
-// `cookieyes_consent_update` event when the visitor changes their choice.
-function readConsent() {
-  if (typeof document === "undefined") return { analytics: false, advertisement: false };
-  const match = document.cookie.match(/cookieyes-consent=([^;]+)/);
-  if (!match) return { analytics: false, advertisement: false };
-  const value = decodeURIComponent(match[1]);
-  return {
-    analytics: /(?:^|,)analytics:yes/.test(value),
-    advertisement: /(?:^|,)advertisement:yes/.test(value),
-  };
-}
 
 export default function ConsentScripts() {
   const [analytics, setAnalytics] = useState(false);
   const [advertisement, setAdvertisement] = useState(false);
 
   useEffect(() => {
-    const apply = () => {
-      const c = readConsent();
-      // Only ever flip on — once a script has loaded this session it stays loaded
-      // until the next reload, which is when CookieYes re-enforces blocking.
-      if (c.analytics) setAnalytics(true);
-      if (c.advertisement) setAdvertisement(true);
+    // Only ever flip on — once a script has loaded this session it stays loaded
+    // until the next reload, when blocking is re-enforced from the cookie.
+    const apply = (c: ConsentState | null) => {
+      if (c?.analytics) setAnalytics(true);
+      if (c?.marketing) setAdvertisement(true);
     };
 
-    apply();
+    apply(readConsent());
 
-    const handler = (e: Event) => {
-      const detail = (e as CustomEvent).detail as { accepted?: string[] } | undefined;
-      const accepted = detail?.accepted ?? [];
-      if (accepted.includes("analytics")) setAnalytics(true);
-      if (accepted.includes("advertisement")) setAdvertisement(true);
-      apply();
-    };
-
-    document.addEventListener("cookieyes_consent_update", handler);
-    return () => document.removeEventListener("cookieyes_consent_update", handler);
+    const handler = (e: Event) => apply((e as CustomEvent<ConsentState>).detail);
+    window.addEventListener(CONSENT_EVENT, handler);
+    return () => window.removeEventListener(CONSENT_EVENT, handler);
   }, []);
 
   return (

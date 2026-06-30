@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import PreloaderWrapper from '@/components/PreloaderWrapper';
 import AnnouncementBarBanner from '@/components/AnnouncementBarBanner';
+import CookieBanner from '@/components/CookieBanner';
 import { client } from '@/sanity/lib/client';
 import { announcementBarQuery } from '@/sanity/lib/queries';
 import type { AnnouncementBarData } from '@/sanity/types';
@@ -50,6 +51,7 @@ export default async function LocaleLayout({ children, params }: Props) {
             />
           )}
           {children}
+          <CookieBanner />
         </PreloaderWrapper>
       </NextIntlClientProvider>
     </>

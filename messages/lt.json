@@ -296,5 +296,22 @@
     "ctaPrints": "Įsigyti spaudų",
     "homeCtaText": "Domitės linoraižyba ir spaudomis?",
     "homeCtaButton": "Kas yra linorytas?"
+  },
+  "cookies": {
+    "title": "Slapukai",
+    "body": "Naudojame būtinuosius slapukus, kad svetainė veiktų, ir – tik su jūsų sutikimu – analitikos bei rinkodaros slapukus.",
+    "learnMore": "Sužinoti daugiau",
+    "acceptAll": "Priimti visus",
+    "rejectAll": "Atmesti nebūtinus",
+    "customize": "Tvarkyti pasirinkimus",
+    "savePrefs": "Išsaugoti",
+    "necessaryTitle": "Būtinieji",
+    "necessaryDesc": "Reikalingi svetainės veikimui. Visada įjungti.",
+    "analyticsTitle": "Analitiniai",
+    "analyticsDesc": "Padeda suprasti, kaip lankytojai naudojasi svetaine (Google Analytics).",
+    "marketingTitle": "Rinkodaros",
+    "marketingDesc": "Naudojami reklamai pritaikyti (Meta Pixel).",
+    "always": "Visada",
+    "settingsLink": "Slapukų nustatymai"
   }
 }
